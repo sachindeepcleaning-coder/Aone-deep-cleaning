@@ -590,17 +590,21 @@ footer strong { color: #fff; }
 .reel-showcase { display: grid; gap: 16px; }
 .reel-showcase-item { border: 1px solid #e3ecf3; border-radius: 10px; overflow: hidden; background: #fff; }
 .reel-showcase-label { padding: 10px 14px; font-weight: 600; color: var(--dark); font-size: 14.5px; }
-.ig-reel-frame { width: 100%; border: none; aspect-ratio: 9/16; }
 .sdc-reel-sec { padding: 20px 0; }
-.sdc-reel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.sdc-reel-item { border-radius: 10px; overflow: hidden; background: #000; }
-.sdc-reel-caption-row { display: flex; align-items: center; gap: 8px; }
-.sdc-reel-label { font-weight: 600; color: var(--dark); }
+.sdc-reel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 36px; }
+.sdc-reel-item { border: 1px solid #e3ecf3; border-radius: 10px; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+.sdc-reel-item:hover { box-shadow: var(--shadow-strong); border-color: var(--primary); }
+.sdc-reel-label { display: block; background: var(--primary); color: #fff; font-weight: 600; font-size: 14.5px; padding: 9px 16px; }
+.sdc-ig-card { padding: 12px 12px 4px; }
+.ig-reel-frame { position: relative; width: 100%; aspect-ratio: 16/10; border-radius: 5px; overflow: hidden; background: #000; }
+.ig-reel-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ig-reel-frame iframe { width: 100%; height: 100%; aspect-ratio: 16/10; border: 0; display: block; }
+.sdc-reel-caption-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; padding: 10px 16px 16px; font-size: 14px; color: var(--muted); }
+.sdc-reel-caption-row a { color: var(--primary); font-weight: 600; }
 .sdc-reel-followbtn, .sdc-reel-followcta { background: var(--primary); color: #fff; border-radius: 5px; padding: 10px 20px; font-weight: 600; }
 .sdc-social-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-.sdc-ig-card { border: 1px solid #e3ecf3; border-radius: 10px; padding: 18px; background: #fff; }
 .sdc-yt-btn { display: inline-flex; align-items: center; gap: 8px; background: #ff0000; color: #fff; padding: 11px 22px; border-radius: 5px; font-weight: 600; }
-.yt-thumb { position: relative; border-radius: 10px; overflow: hidden; }
+.yt-thumb { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: none; background: none; cursor: pointer; }
 .yt-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 64px; height: 64px; border-radius: 50%; background: rgba(255,0,0,.9); color: #fff; border: none; font-size: 24px; cursor: pointer; }
 
 /* ---------- Blog ---------- */
