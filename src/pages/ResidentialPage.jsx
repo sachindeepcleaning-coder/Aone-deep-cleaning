@@ -5,7 +5,6 @@ import PricingSection from '../components/PricingSection.jsx';
 import AreasSection from '../components/AreasSection.jsx';
 import FaqSection from '../components/FaqSection.jsx';
 import FinalCta from '../components/FinalCta.jsx';
-import ReelEmbed from '../components/ReelEmbed.jsx';
 import YtShortsSection from '../components/YtShortsSection.jsx';
 import { JsonLd, localBusinessSchema, faqSchema, serviceSchema } from '../lib/schema.jsx';
 
@@ -173,10 +172,6 @@ export default function ResidentialPage({ url }) {
             <p className="section-sub" style={{ margin: '0 auto' }}>Watch a residential deep-cleaning job done by our team in Gurgaon.</p>
           </div>
           <div className="reel-showcase">
-            <div className="reel-showcase-item">
-              <span className="reel-showcase-label">🗂️ Quick Preview</span>
-              <ReelEmbed />
-            </div>
             <div className="reel-showcase-item">
               <span className="reel-showcase-label">📱 Live Instagram Reel</span>
               <div className="sdc-ig-card">

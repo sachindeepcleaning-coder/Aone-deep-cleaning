@@ -8,7 +8,7 @@ import GuaranteeSection from '../components/GuaranteeSection.jsx';
 import ReviewsSection from '../components/ReviewsSection.jsx';
 import HowItWorks from '../components/HowItWorks.jsx';
 import FaqSection from '../components/FaqSection.jsx';
-import ReelSection from '../components/ReelSection.jsx';
+import YtShortsSection from '../components/YtShortsSection.jsx';
 import OfficeReelSection from '../components/OfficeReelSection.jsx';
 import RelatedServices from '../components/RelatedServices.jsx';
 import RelatedGuides from '../components/RelatedGuides.jsx';
@@ -86,7 +86,7 @@ export default function ServicePage({ serviceKey, bhk, url = '' }) {
             '@id': 'https://balajicleaningservice.shop/#business',
             name: 'Balaji Deep Cleaning',
           },
-          contentUrl: 'https://balajicleaningservice.shop/videos/cleaning-1.mp4',
+          contentUrl: 'https://www.youtube.com/shorts/p-ArftUay5I',
           embedUrl: 'https://www.youtube.com/shorts/p-ArftUay5I',
         }}
       />
@@ -297,7 +297,7 @@ export default function ServicePage({ serviceKey, bhk, url = '' }) {
 
       <ReviewsSection reviews={reviews} />
 
-      {serviceKey === 'office' ? <OfficeReelSection /> : <ReelSection />}
+      {serviceKey === 'office' ? <OfficeReelSection /> : <YtShortsSection />}
 
       <GuaranteeSection variant={guaranteeVariant} />
 

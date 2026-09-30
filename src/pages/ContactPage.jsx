@@ -2,7 +2,7 @@ import QuoteForm from '../components/QuoteForm.jsx';
 import TrustBar from '../components/TrustBar.jsx';
 import AreasSection from '../components/AreasSection.jsx';
 import FaqSection from '../components/FaqSection.jsx';
-import ReelSection from '../components/ReelSection.jsx';
+import YtShortsSection from '../components/YtShortsSection.jsx';
 import { JsonLd, localBusinessSchema } from '../lib/schema.jsx';
 import { waMsg } from '../lib/site.js';
 import { phoneCallClick, whatsappClick } from '../lib/landing.js';
@@ -167,7 +167,7 @@ export default function ContactPage({ url }) {
         </div>
       </section>
 
-      <ReelSection />
+      <YtShortsSection />
       <FaqSection faqs={FAQS} />
     </>
   );
