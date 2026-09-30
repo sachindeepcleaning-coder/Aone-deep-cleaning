@@ -86,7 +86,7 @@ export default function ServicePage({ serviceKey, bhk, url = '' }) {
             '@id': 'https://balajicleaningservice.shop/#business',
             name: 'Balaji Deep Cleaning',
           },
-          contentUrl: 'https://www.youtube.com/shorts/p-ArftUay5I',
+          contentUrl: 'https://balajicleaningservice.shop/videos/cleaning-2.mp4',
           embedUrl: 'https://www.youtube.com/shorts/p-ArftUay5I',
         }}
       />

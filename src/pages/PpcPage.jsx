@@ -1,6 +1,7 @@
 import QuoteForm from '../components/QuoteForm.jsx';
 import TrustBar from '../components/TrustBar.jsx';
 import CountdownStrip from '../components/CountdownStrip.jsx';
+import LocalReel from '../components/LocalReel.jsx';
 import FaqSection from '../components/FaqSection.jsx';
 import FinalCta from '../components/FinalCta.jsx';
 import ReviewsSection from '../components/ReviewsSection.jsx';
@@ -123,6 +124,8 @@ export default function PpcPage({ url, file }) {
       <TrustBar />
 
       <CountdownStrip offerText={cfg.offer} />
+
+      <LocalReel />
 
       <section className="section">
         <div className="section-inner">

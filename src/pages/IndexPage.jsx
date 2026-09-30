@@ -1,6 +1,6 @@
 import Hero from '../components/Hero.jsx';
 import TrustBar from '../components/TrustBar.jsx';
-import YtShortsSection from '../components/YtShortsSection.jsx';
+import LocalReel from '../components/LocalReel.jsx';
 import CountdownStrip from '../components/CountdownStrip.jsx';
 import ServiceSection from '../components/ServiceSection.jsx';
 import ChecklistSection from '../components/ChecklistSection.jsx';
@@ -46,7 +46,7 @@ export default function IndexPage({ url }) {
           </div>
         </div>
       </section>
-      <YtShortsSection />
+      <LocalReel />
       <CountdownStrip />
       <ServiceSection />
       <ChecklistSection />
