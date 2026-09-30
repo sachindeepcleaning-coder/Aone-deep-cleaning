@@ -127,6 +127,30 @@ export default function PpcPage({ url, file }) {
       <section className="section">
         <div className="section-inner">
           <div style={{ textAlign: 'center' }} className="fade-up">
+            <div className="section-tag">Real Work</div>
+            <h2 className="section-title">See Our Cleaning in Action</h2>
+            <p className="section-sub" style={{ margin: '0 auto' }}>Real jobs by our Gurgaon team. Tap any video to play — hosted here, no apps, no redirects.</p>
+          </div>
+          <div className="services-grid" style={{ marginTop: '36px' }}>
+            <div className="card fade-up" style={{ padding: '12px' }}>
+              <video controls preload="none" playsInline poster="/images/cleaning-1.webp" style={{ width: '100%', borderRadius: '12px', aspectRatio: '16/9', background: '#000' }} title="Full home deep cleaning in a Gurgaon home">
+                <source src="videos/cleaning-1.mp4" type="video/mp4" />
+              </video>
+              <p style={{ margin: '10px 4px 4px', fontWeight: 700 }}>Real deep-cleaning job in a Gurgaon home 🧼✨</p>
+            </div>
+            <div className="card fade-up" style={{ padding: '12px' }}>
+              <video controls preload="none" playsInline poster="/images/kitchen-deep-cleaning.webp" style={{ width: '100%', borderRadius: '12px', aspectRatio: '16/9', background: '#000' }} title="Kitchen and bathroom deep cleaning in action">
+                <source src="videos/cleaning-4.mp4" type="video/mp4" />
+              </video>
+              <p style={{ margin: '10px 4px 4px', fontWeight: 700 }}>Kitchen &amp; bathroom deep cleaning in action 🧼✨</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section-inner">
+          <div style={{ textAlign: 'center' }} className="fade-up">
             <div className="section-tag">What&rsquo;s Included</div>
             <h2 className="section-title">Every Room, Every Corner</h2>
             <p className="section-sub" style={{ margin: '0 auto' }}>The same 6-area checklist our full-price crews follow — offer bookings get zero shortcuts.</p>
