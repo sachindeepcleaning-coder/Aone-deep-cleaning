@@ -108,7 +108,7 @@ export default function PpcPage({ url, file }) {
               <span className="pill"><span className="pi">✓</span> Pay After Cleaning</span>
               <span className="pill"><span className="pi">✓</span> Police-Verified Team</span>
             </div>
-            <div className="hiw-wrap" style={{ marginTop: '24px' }}>
+            <div className="hiw-wrap ppc-stats" style={{ marginTop: '24px' }}>
               {cfg.stats.map(([num, label]) => (
                 <div key={label} className="hiw-step fade-up">
                   <div className="hiw-num">{num}</div>

@@ -346,6 +346,9 @@ video { height: auto; }
 .why-title { font-weight: 600; color: var(--dark); font-size: 16.5px; margin-bottom: 4px; }
 .why-desc { color: var(--muted); font-size: 14.5px; }
 .hiw-wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+@media (max-width: 640px) {
+  .hiw-wrap.ppc-stats { display: none; }
+}
 .hiw-step { background: #fff; border: 1px solid #e3ecf3; border-radius: 10px; padding: 28px 22px; text-align: center; }
 .hiw-num { width: 50px; height: 50px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; margin: 0 auto 14px; }
 .hiw-title { font-weight: 600; color: var(--dark); margin-bottom: 6px; }
