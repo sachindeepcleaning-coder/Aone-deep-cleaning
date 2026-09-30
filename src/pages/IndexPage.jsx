@@ -24,6 +24,28 @@ export default function IndexPage({ url }) {
 
       <Hero />
       <TrustBar />
+      <section className="section">
+        <div className="section-inner split">
+          <div className="fade-up">
+            <img src="/images/template/about.webp" alt="Balaji Deep Cleaning professional team at work in Gurgaon" className="split-img" loading="lazy" width="570" height="420" />
+          </div>
+          <div className="split-text fade-up">
+            <div className="section-tag">About Balaji Deep Cleaning</div>
+            <h2 className="section-title">Professional Deep Cleaning Services in Gurgaon</h2>
+            <p>Now quality deep cleaning services in Gurgaon are just a phone call away. Polite, friendly and efficient, our staff guarantee a top-quality clean on a timetable that suits you — since 2015.</p>
+            <ul className="split-points">
+              <li>Police-verified &amp; trained cleaning teams</li>
+              <li>Eco-friendly, kid &amp; pet-safe products</li>
+              <li>Fixed BHK prices — pay only after approval</li>
+              <li>Same-day slots across all Gurgaon sectors</li>
+            </ul>
+            <div className="hero-actions">
+              <a href="/about.html" className="btn btn-primary">Know More →</a>
+              <a href="/contact.html" className="btn btn-outline">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </section>
       <ReelSection />
       <CountdownStrip />
       <ServiceSection />

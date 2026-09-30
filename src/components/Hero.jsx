@@ -1,4 +1,6 @@
 import QuoteForm from './QuoteForm.jsx';
+import { PHONE_TEL } from '../lib/site.js';
+import { phoneCallClick } from '../lib/landing.js';
 
 const PILLS = [
   'Same-Day Service',
@@ -18,19 +20,23 @@ const STATS = [
 export default function Hero() {
   return (
     <section className="hero">
-      <div className="hero-grid"></div>
+      <div className="hero-bg" aria-hidden="true"></div>
       <div className="hero-inner">
         <div className="hero-left">
           <div className="hero-eyebrow">
-            <svg width="8" height="8" fill="#4ade80" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" /></svg>
-            Gurgaon's Trusted Deep Cleaning Service · 4.5★ Rated by 148 Customers
+            <svg width="8" height="8" fill="#90c714" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" /></svg>
+            Gurgaon&apos;s Trusted Deep Cleaning Service · 4.5★ Rated by 148 Customers
           </div>
           <h1>
             <span className="hl">Full Home Deep Cleaning in Gurgaon</span> — <span className="hl2">Pay Only After We Finish</span>
           </h1>
-            <p className="hero-sub">
-              Expert deep cleaning for your entire home — bedroom, living room, kitchen, bathrooms, floors, walls & more. Rated among deep cleaning services in Gurgaon for pay-after-satisfaction. Professional, police-verified team. <strong>₹200 OFF today.</strong> Same-day booking available in all Gurgaon areas.
-            </p>
+          <p className="hero-sub">
+            Expert deep cleaning for your entire home — bedroom, living room, kitchen, bathrooms, floors, walls &amp; more. Rated among deep cleaning services in Gurgaon for pay-after-satisfaction. Professional, police-verified team. <strong>₹200 OFF today.</strong> Same-day booking available in all Gurgaon areas.
+          </p>
+          <div className="hero-actions">
+            <a href="#formCard" className="btn btn-primary">Get Free Quote →</a>
+            <a href={PHONE_TEL} className="btn btn-outline" style={{ color: '#fff', borderColor: '#fff' }} onClick={phoneCallClick}>📞 +91 95607-39281</a>
+          </div>
           <div className="hero-pills">
             {PILLS.map((p) => (
               <span key={p} className="pill"><span className="pi">✓</span> {p}</span>

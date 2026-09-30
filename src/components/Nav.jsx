@@ -1,14 +1,29 @@
+import { useState } from 'react';
 import { PHONE_TEL, waMsg } from '../lib/site.js';
 import { phoneCallClick, whatsappClick } from '../lib/landing.js';
 
-// Template sticky nav with WhatsApp + Call CTAs.
+// Template-style white sticky navbar: logo left, links center, CTAs right.
+const LINKS = [
+  ['Home', '/'],
+  ['Deep Cleaning', '/deep-cleaning-services-in-gurgaon.html'],
+  ['House Cleaning', '/house-cleaning-services-in-gurgaon.html'],
+  ['BHK Packages', '/full-home-deep-cleaning-2bhk-gurgaon.html'],
+  ['Blog', '/blog.html'],
+  ['Contact', '/contact.html'],
+];
+
 export default function Nav() {
+  const [open, setOpen] = useState(false);
   return (
     <nav className="nav" id="mainNav">
       <a href="/" className="logo">
-        <img src="/images/app_icon.png" alt="Balaji Deep Cleaning logo" className="logo-icon" width="38" height="38" loading="eager" decoding="async" />
-        <span className="logo-text">Balaji Deep Cleaning</span>
+        <img src="/images/template/logo.webp" alt="Balaji Deep Cleaning logo" className="logo-icon" width="170" height="44" loading="eager" decoding="async" />
       </a>
+      <div className={`nav-links${open ? ' open' : ''}`}>
+        {LINKS.map(([label, href]) => (
+          <a key={href + label} href={href} onClick={() => setOpen(false)}>{label}</a>
+        ))}
+      </div>
       <div className="nav-actions">
         <a
           href={waMsg('Hi I want to book deep cleaning service in Gurgaon.')}
@@ -27,6 +42,7 @@ export default function Nav() {
           <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
           <span className="lbl">+91 95607-39281</span>
         </a>
+        <button className="hamburger" aria-label="Open menu" aria-expanded={open} onClick={() => setOpen(!open)}>☰</button>
       </div>
     </nav>
   );
