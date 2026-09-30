@@ -156,19 +156,21 @@ video { height: auto; }
   cursor: pointer; font-size: 18px; display: grid; place-items: center;
 }
 .theme-toggle:hover { background: var(--primary-soft); }
-.hamburger { display: none; background: none; border: 1px solid var(--border); font-size: 24px; cursor: pointer; color: var(--dark); width: 44px; height: 44px; border-radius: 5px; }
+.hamburger { display: none; background: none; border: 1px solid var(--border); font-size: 24px; cursor: pointer; color: var(--dark); width: 44px; height: 44px; border-radius: 5px; flex-shrink: 0; }
 .hamburger:hover { background: var(--primary-soft); }
+@media (max-width: 600px) {
+  .btn-nav-call .lbl, .btn-nav-wa .lbl { display: none; }
+  .btn-nav-call, .btn-nav-wa { padding: 11px 12px; }
+  .logo-icon { max-width: 150px; }
+}
 
 /* ---------- Hero (template slider look, static) ---------- */
-.hero { position: relative; overflow: hidden; background: #000d26; }
-.hero-bg {
-  position: absolute; inset: 0;
-  background: url('/images/template/home/Balaji-Deep-Cleaning-banner-1.webp') center/cover no-repeat;
-}
-.hero-bg::after {
-  content: ''; position: absolute; inset: 0;
+.hero { position: relative; overflow: hidden; background: #000d26 url('/images/template/home/Balaji-Deep-Cleaning-banner-1.webp') center/cover no-repeat; }
+.hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(135deg, rgba(0,13,38,.78) 0%, rgba(0,13,38,.55) 60%, rgba(0,168,240,.35) 100%);
 }
+.hero-bg { display: none; }
 .hero-grid { display: none; }
 .hero-inner {
   max-width: var(--container); margin: 0 auto;

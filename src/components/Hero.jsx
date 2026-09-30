@@ -20,7 +20,6 @@ const STATS = [
 export default function Hero() {
   return (
     <section className="hero">
-      <div className="hero-bg" aria-hidden="true"></div>
       <div className="hero-inner">
         <div className="hero-left">
           <div className="hero-eyebrow">
