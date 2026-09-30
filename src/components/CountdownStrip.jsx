@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function CountdownStrip() {
+export default function CountdownStrip({ offerText } = {}) {
   const [t, setT] = useState({ h: '00', m: '00', s: '00' });
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function CountdownStrip() {
 
   return (
     <div className="countdown-strip">
-      <span>🔥 <strong>Limited Time:</strong> ₹200 OFF Full Home Deep Cleaning in Gurgaon</span>
+      <span>🔥 <strong>Limited Time:</strong> {offerText || '₹200 OFF Full Home Deep Cleaning in Gurgaon'}</span>
       <div className="countdown-timer">
         <span className="ct-seg">{t.h}</span>
         <span className="ct-colon">:</span>

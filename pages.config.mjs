@@ -310,6 +310,19 @@ export const pages = [
     title: 'Book Cleaning Online in Gurgaon — No App Needed',
     description: 'Book house & deep cleaning online in Gurgaon without any app — 30-second WhatsApp booking, same-day slots, fixed price, pay after walkthrough.',
   },
+  // ── PPC-only ad landing pages (noindex: hidden from search + sitemap) ──
+  {
+    file: 'book-deep-cleaning-services-in-gurgaon', page: 'ppc',
+    title: 'Deep Cleaning Services in Gurgaon | 40% Off Today',
+    description: 'Deep cleaning services in Gurgaon — up to 40% OFF today. 1BHK ₹2,500, 2BHK ₹4,500, 3BHK ₹5,500. Verified team, pay after walkthrough. Book on WhatsApp.',
+    noindex: true,
+  },
+  {
+    file: 'book-house-deep-cleaning-services-in-gurgaon', page: 'ppc',
+    title: 'House Deep Cleaning Services in Gurgaon | 40% Off',
+    description: 'House deep cleaning services in Gurgaon — up to 40% OFF today. Whole-house crews for floors & villas from ₹4,500. Pay after walkthrough. Book now.',
+    noindex: true,
+  },
   {
     file: 'blog/nobroker-cleaning-vs-sachin-deep-cleaning', page: 'article',
     title: "NoBroker Cleaning vs Balaji Deep Cleaning: Gurgaon Rates",

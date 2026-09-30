@@ -14,6 +14,7 @@ const ThankYouPage = lazy(() => import('./pages/ThankYouPage.jsx'));
 const ResidentialPage = lazy(() => import('./pages/ResidentialPage.jsx'));
 const PartnersPage = lazy(() => import('./pages/PartnersPage.jsx'));
 const BookingPage = lazy(() => import('./pages/BookingPage.jsx'));
+const PpcPage = lazy(() => import('./pages/PpcPage.jsx'));
 const AllPagesPage = lazy(() => import('./pages/AllPagesPage.jsx'));
 const AboutPage = lazy(() => import('./pages/AboutPage.jsx'));
 const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage.jsx'));
@@ -31,6 +32,7 @@ export default function App({ page = 'index', file = 'index', serviceKey, bhk })
   else if (page === 'residential') Page = ResidentialPage;
   else if (page === 'partners') Page = PartnersPage;
   else if (page === 'landing') Page = BookingPage;
+  else if (page === 'ppc') Page = PpcPage;
   else if (page === 'allpages') Page = AllPagesPage;
   else if (page === 'about') Page = AboutPage;
   else if (page === 'blog') Page = BlogIndexPage;
@@ -39,7 +41,7 @@ export default function App({ page = 'index', file = 'index', serviceKey, bhk })
 
   return (
     <ThemeProvider>
-      <Layout>
+      <Layout page={page}>
         <Suspense fallback={null}>
           <Page url={pageUrl(file)} file={file} serviceKey={serviceKey} bhk={bhk} />
         </Suspense>

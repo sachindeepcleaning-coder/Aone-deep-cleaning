@@ -5,10 +5,10 @@ import StickyMobileBar from './StickyMobileBar.jsx';
 import SocialProofPopup from './SocialProofPopup.jsx';
 import WaNudge from './WaNudge.jsx';
 
-export default function Layout({ children }) {
+export default function Layout({ children, page }) {
   return (
     <>
-      <UrgencyBar />
+      <UrgencyBar page={page} />
       <Nav />
       <main id="main">{children}</main>
       <Footer />
