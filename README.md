@@ -165,7 +165,7 @@ npm run gen        # regenerate HTML entry shells after editing pages.config.mjs
 - **Facebook:** [Balaji Deep Cleaning](https://www.facebook.com/profile.php?id=61577737535478)
 - **Instagram:** [@cleaning_service_in_gurgaon](https://www.instagram.com/cleaning_service_in_gurgaon)
 - **YouTube:** [@Cleaning_service_in_Gurgaon](https://www.youtube.com/@Cleaning_service_in_Gurgaon)
-- **X:** [@balajideepclean](https://x.com/balajideepclean)
+- **X:** [@sachindeepclean](https://x.com/sachindeepclean)
 - **WhatsApp:** https://wa.me/919560739281
 
 ---

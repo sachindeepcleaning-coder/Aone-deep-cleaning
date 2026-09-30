@@ -37,7 +37,7 @@ export const SOCIAL = {
   facebook: 'https://www.facebook.com/profile.php?id=61577737535478',
   instagram: 'https://www.instagram.com/cleaning_service_in_gurgaon',
   youtube: 'https://www.youtube.com/@Cleaning_service_in_Gurgaon',
-  twitter: 'https://x.com/balajideepclean',
+  twitter: 'https://x.com/sachindeepclean',
   whatsapp: WHATSAPP,
 };
 
