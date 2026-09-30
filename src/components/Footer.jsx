@@ -4,9 +4,9 @@ import { phoneCallClick } from '../lib/landing.js';
 export default function Footer() {
   return (
     <footer>
-      <p><strong>Sachin Deep Cleaning Services</strong> — Professional Deep Cleaning in Gurgaon</p>
+      <p><strong>Balaji Deep Cleaning Services</strong> — Professional Deep Cleaning in Gurgaon</p>
       <p>📍 Serving all of Gurgaon, Haryana &nbsp;|&nbsp; 📞 <a href={PHONE_TEL} onClick={phoneCallClick}>+91 95607-39281</a></p>
-      <p style={{ marginTop: '10px' }}>© {new Date().getFullYear()} Sachin Deep Cleaning. All rights reserved.</p>
+      <p style={{ marginTop: '10px' }}>© {new Date().getFullYear()} Balaji Deep Cleaning. All rights reserved.</p>
       <p style={{ marginTop: '6px' }}>
         <a href="/deep-cleaning-services-in-gurgaon.html" style={{ color: '#8FA4BE', textDecoration: 'none', marginRight: '16px' }}>Deep Cleaning Services in Gurgaon</a>
         <a href="/house-cleaning-services-in-gurgaon.html" style={{ color: '#8FA4BE', textDecoration: 'none', marginRight: '16px' }}>House Cleaning Services</a>
@@ -28,9 +28,9 @@ export default function Footer() {
       <p style={{ marginTop: '6px' }}>
         <span style={{ color: '#8FA4BE', marginRight: '16px' }}>Top Guides:</span>
         <a href="/blog/deep-cleaning-cost-gurgaon-2026.html" style={{ color: '#8FA4BE', textDecoration: 'none', marginRight: '16px' }}>Deep Cleaning Cost Guide</a>
-        <a href="/blog/urban-company-vs-sachin-deep-cleaning.html" style={{ color: '#8FA4BE', textDecoration: 'none', marginRight: '16px' }}>Urban Company vs Sachin</a>
-        <a href="/blog/nobroker-cleaning-vs-sachin-deep-cleaning.html" style={{ color: '#8FA4BE', textDecoration: 'none', marginRight: '16px' }}>NoBroker vs Sachin</a>
-        <a href="/blog/safaiwale-vs-sachin-deep-cleaning.html" style={{ color: '#8FA4BE', textDecoration: 'none', marginRight: '16px' }}>Safaiwale vs Sachin</a>
+        <a href="/blog/urban-company-vs-sachin-deep-cleaning.html" style={{ color: '#8FA4BE', textDecoration: 'none', marginRight: '16px' }}>Urban Company vs Balaji</a>
+        <a href="/blog/nobroker-cleaning-vs-sachin-deep-cleaning.html" style={{ color: '#8FA4BE', textDecoration: 'none', marginRight: '16px' }}>NoBroker vs Balaji</a>
+        <a href="/blog/safaiwale-vs-sachin-deep-cleaning.html" style={{ color: '#8FA4BE', textDecoration: 'none', marginRight: '16px' }}>Safaiwale vs Balaji</a>
         <a href="/blog/diwali-cleaning-gurgaon.html" style={{ color: '#8FA4BE', textDecoration: 'none', marginRight: '16px' }}>Diwali Cleaning Gurgaon</a>
       </p>
       <p style={{ marginTop: '6px' }}>

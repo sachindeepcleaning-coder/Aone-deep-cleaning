@@ -91,7 +91,7 @@ for (const p of pages) {
   // Page-specific OG image + alt + TRUE dimensions (2026-09-20 seo-images
   // audit: tags claimed 1200x630 for files as small as 390px — emit measured).
   let ogImage = OG_IMAGE;
-  let ogAlt = 'Sachin Deep Cleaning — professional deep cleaning services in Gurgaon';
+  let ogAlt = 'Balaji Deep Cleaning — professional deep cleaning services in Gurgaon';
   if (p.page === 'service' && HERO_IMAGES[p.serviceKey]) {
     ogImage = SITE_URL + HERO_IMAGES[p.serviceKey];
     try {
@@ -108,7 +108,7 @@ for (const p of pages) {
   let [ogW, ogH] = imageDims(ogImage.replace(SITE_URL, ''));
   if (ogW < 1000) {
     ogImage = OG_IMAGE;
-    ogAlt = 'Sachin Deep Cleaning — professional deep cleaning services in Gurgaon';
+    ogAlt = 'Balaji Deep Cleaning — professional deep cleaning services in Gurgaon';
     [ogW, ogH] = imageDims(ogImage.replace(SITE_URL, ''));
   }
 

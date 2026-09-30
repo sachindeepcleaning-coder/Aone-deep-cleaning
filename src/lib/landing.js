@@ -71,7 +71,7 @@ export const REVIEWS = [
   ['SG', 'Shivani Gupta', 'Golf Course Road, Gurgaon', 'Booked for post-renovation cleaning. The amount of dust and debris they removed was mind-blowing. House was move-in ready in 4 hours. Highly recommend for anyone who wants genuine deep cleaning.'],
   ['RG', 'Rohit Gupta', 'Sohna Road, Gurgaon', "Best value for money I've found in Gurgaon. Transparent pricing, no hidden charges. The sofa shampoo service made my 3-year-old sofas look new. Will definitely book again every quarter."],
   ['NT', 'Neha Trivedi', 'Palam Vihar, Gurgaon', "5-star experience from start to finish. The team called before arriving, worked efficiently, and asked for feedback after each room. Customer service is genuinely the best I've seen in this category."],
-  ['VS', 'Vikram Sharma', 'MG Road, Gurgaon', "We've tried 3 other cleaning services before. None come close to Sachin Deep Cleaning. Professional, uses quality products, and the bathroom tiles look like they did when we first moved in. Just brilliant."],
+  ['VS', 'Vikram Sharma', 'MG Road, Gurgaon', "We've tried 3 other cleaning services before. None come close to Balaji Deep Cleaning. Professional, uses quality products, and the bathroom tiles look like they did when we first moved in. Just brilliant."],
 ];
 
 export const WHY_US = [

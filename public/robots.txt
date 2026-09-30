@@ -1,4 +1,4 @@
-# robots.txt — sachindeepcleaning.shop
+# robots.txt — balajicleaningservice.shop
 # Updated: August 2026
 
 User-agent: *
@@ -36,4 +36,4 @@ User-agent: Bytespider
 Allow: /
 
 # Sitemap location
-Sitemap: https://sachindeepcleaning.shop/sitemap.xml
+Sitemap: https://balajicleaningservice.shop/sitemap.xml

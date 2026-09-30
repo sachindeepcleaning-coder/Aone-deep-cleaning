@@ -9,9 +9,9 @@
 //   3. Blog article entries + a blog index page
 //   4. thank-you flagged noindex
 
-export const SITE_URL = 'https://sachindeepcleaning.shop';
-export const SITE_NAME = 'Sachin Deep Cleaning';
-export const OG_IMAGE = 'https://sachindeepcleaning.shop/images/og-cover.jpg';
+export const SITE_URL = 'https://balajicleaningservice.shop';
+export const SITE_NAME = 'Balaji Deep Cleaning';
+export const OG_IMAGE = 'https://balajicleaningservice.shop/images/og-cover.jpg';
 
 export const pages = [
   {
@@ -21,24 +21,24 @@ export const pages = [
   },
   {
     file: 'contact', page: 'contact',
-    title: 'Book a Deep Clean in Gurgaon | Sachin Deep Cleaning',
+    title: 'Book a Deep Clean in Gurgaon | Balaji Deep Cleaning',
     description: 'Get a free quote for home deep cleaning in Gurgaon. Call or WhatsApp +91 9560739281. All sectors served. Same-day slots available.',
   },
   {
     file: 'thank-you', page: 'thank-you',
-    title: 'Booking Confirmed — Sachin Deep Cleaning',
-    description: 'Thank you for booking Sachin Deep Cleaning in Gurgaon. We will call you back within 30 minutes to confirm your slot and fixed price.',
+    title: 'Booking Confirmed — Balaji Deep Cleaning',
+    description: 'Thank you for booking Balaji Deep Cleaning in Gurgaon. We will call you back within 30 minutes to confirm your slot and fixed price.',
     noindex: true,
   },
   {
     file: '404', page: 'notfound',
-    title: 'Page Not Found — Sachin Deep Cleaning Gurgaon',
+    title: 'Page Not Found — Balaji Deep Cleaning Gurgaon',
     description: 'This page moved or never existed. Find deep cleaning services in Gurgaon — fixed prices, same-day slots, pay after satisfaction.',
     noindex: true,
   },
   {
     file: 'about', page: 'about',
-    title: 'About Sachin Deep Cleaning | Trusted Team in Gurgaon',
+    title: 'About Balaji Deep Cleaning | Trusted Team in Gurgaon',
     description: 'Meet the police-verified deep cleaning team in Gurgaon since 2015. Eco-friendly, pay after satisfaction, same-day across DLF & Sohna Road.',
   },
 
@@ -55,7 +55,7 @@ export const pages = [
   },
   {
     file: 'full-home-deep-cleaning-1bhk-gurgaon', page: 'service', serviceKey: 'fullhome', bhk: 1,
-    title: '1 BHK Deep Cleaning Gurgaon | Sachin Deep Cleaning',
+    title: '1 BHK Deep Cleaning Gurgaon | Balaji Deep Cleaning',
     description: '1 BHK full home deep cleaning in Gurgaon. Every room floor to ceiling — kitchen, bathroom, bedroom. Transparent pricing. Book on WhatsApp.',
   },
   {
@@ -65,12 +65,12 @@ export const pages = [
   },
   {
     file: 'full-home-deep-cleaning-3bhk-gurgaon', page: 'service', serviceKey: 'fullhome', bhk: 3,
-    title: '3 BHK Deep Cleaning Gurgaon | Sachin Deep Cleaning',
+    title: '3 BHK Deep Cleaning Gurgaon | Balaji Deep Cleaning',
     description: '3 BHK full home deep cleaning in Gurgaon. Thorough, room-by-room service. Eco-friendly products, pay after satisfaction. Get a free quote today.',
   },
   {
     file: 'full-home-deep-cleaning-4bhk-gurgaon', page: 'service', serviceKey: 'fullhome', bhk: 4,
-    title: '4 BHK Deep Cleaning Gurgaon | Sachin Deep Cleaning',
+    title: '4 BHK Deep Cleaning Gurgaon | Balaji Deep Cleaning',
     description: '4 BHK full home deep cleaning in Gurgaon. Large homes, spotless results. Full team deployed, satisfaction guaranteed. Book on WhatsApp.',
   },
   {
@@ -120,14 +120,14 @@ export const pages = [
   },
   {
     file: 'all-pages', page: 'allpages',
-    title: 'All Services — Sachin Deep Cleaning Gurgaon',
-    description: 'Browse all deep cleaning services in Gurgaon: full home, kitchen, bathroom, sofa, carpet, office and move-in/out cleaning by Sachin Deep Cleaning.',
+    title: 'All Services — Balaji Deep Cleaning Gurgaon',
+    description: 'Browse all deep cleaning services in Gurgaon: full home, kitchen, bathroom, sofa, carpet, office and move-in/out cleaning by Balaji Deep Cleaning.',
   },
 
   // ── Blog ──────────────────────────────────────────────────────────────────
   {
     file: 'blog', page: 'blog',
-    title: 'Blog — Cleaning Guides & Tips | Sachin Deep Cleaning',
+    title: 'Blog — Cleaning Guides & Tips | Balaji Deep Cleaning',
     description: 'Deep cleaning guides for Gurgaon homes: costs by BHK, cleaning frequency, kitchen chimney care, hard water removal and sofa maintenance. Expert tips.',
   },
   {
@@ -203,7 +203,7 @@ export const pages = [
   {
     file: 'blog/best-deep-cleaning-services-gurgaon', page: 'article',
     title: "Best Deep Cleaning Services in Gurgaon: 5 Compared",
-    description: "Five Gurgaon deep cleaning services compared on BHK pricing, scope, staff verification and guarantees — including where Sachin Deep Cleaning wins and why.",
+    description: "Five Gurgaon deep cleaning services compared on BHK pricing, scope, staff verification and guarantees — including where Balaji Deep Cleaning wins and why.",
   },
   {
     file: 'blog/housekeeping-vs-deep-cleaning-gurgaon', page: 'article',
@@ -287,8 +287,8 @@ export const pages = [
   },
   {
     file: 'blog/mr-deep-cleaning-vs-sachin-deep-cleaning', page: 'article',
-    title: "Mr. Deep Cleaning vs Sachin Deep Cleaning: Honest Compare",
-    description: "Mr. Deep Cleaning and Sachin Deep Cleaning compared on BHK rates, checklist depth, verification and guarantee — including the two categories where we lose.",
+    title: "Mr. Deep Cleaning vs Balaji Deep Cleaning: Honest Compare",
+    description: "Mr. Deep Cleaning and Balaji Deep Cleaning compared on BHK rates, checklist depth, verification and guarantee — including the two categories where we lose.",
   },
   {
     file: 'blog/best-office-deep-cleaning-services-gurgaon', page: 'article',
@@ -297,8 +297,8 @@ export const pages = [
   },
   {
     file: 'blog/urban-company-vs-sachin-deep-cleaning', page: 'article',
-    title: "Urban Company vs Sachin Deep Cleaning in Gurgaon",
-    description: "Urban Company vs Sachin Deep Cleaning on price, crew continuity, checklist ownership and what happens when a Gurgaon deep clean goes wrong.",
+    title: "Urban Company vs Balaji Deep Cleaning in Gurgaon",
+    description: "Urban Company vs Balaji Deep Cleaning on price, crew continuity, checklist ownership and what happens when a Gurgaon deep clean goes wrong.",
   },
   {
     file: 'blog/house-maid-vs-deep-cleaning-gurgaon', page: 'article',
@@ -312,13 +312,13 @@ export const pages = [
   },
   {
     file: 'blog/nobroker-cleaning-vs-sachin-deep-cleaning', page: 'article',
-    title: "NoBroker Cleaning vs Sachin Deep Cleaning: Gurgaon Rates",
-    description: "NoBroker cleaning and Sachin Deep Cleaning compared for Gurgaon homes — pricing model, crew vetting, scope depth and rescheduling terms.",
+    title: "NoBroker Cleaning vs Balaji Deep Cleaning: Gurgaon Rates",
+    description: "NoBroker cleaning and Balaji Deep Cleaning compared for Gurgaon homes — pricing model, crew vetting, scope depth and rescheduling terms.",
   },
   {
     file: 'blog/safaiwale-vs-sachin-deep-cleaning', page: 'article',
-    title: "Safaiwale vs Sachin Deep Cleaning: Gurgaon Prices Compared",
-    description: "Safaiwale and Sachin Deep Cleaning side by side for Gurgaon: rate cards, checklist depth, machine use and the guarantee difference that matters.",
+    title: "Safaiwale vs Balaji Deep Cleaning: Gurgaon Prices Compared",
+    description: "Safaiwale and Balaji Deep Cleaning side by side for Gurgaon: rate cards, checklist depth, machine use and the guarantee difference that matters.",
   },
   // ── New: Price-intent blogs (Batch 1 — 1/2/3BHK + sofa per-seat, complete) ──
   {

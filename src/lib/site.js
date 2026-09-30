@@ -1,8 +1,8 @@
-// Central site + analytics config for Sachin Deep Cleaning.
+// Central site + analytics config for Balaji Deep Cleaning.
 // Single source of truth shared across all React components.
 
-export const SITE_URL = 'https://sachindeepcleaning.shop';
-export const SITE_NAME = 'Sachin Deep Cleaning';
+export const SITE_URL = 'https://balajicleaningservice.shop';
+export const SITE_NAME = 'Balaji Deep Cleaning';
 
 // Canonical URL for a page. The homepage is served from the root path.
 export function pageUrl(file = 'index') {
@@ -37,7 +37,7 @@ export const SOCIAL = {
   facebook: 'https://www.facebook.com/profile.php?id=61577737535478',
   instagram: 'https://www.instagram.com/cleaning_service_in_gurgaon',
   youtube: 'https://www.youtube.com/@Cleaning_service_in_Gurgaon',
-  twitter: 'https://x.com/sachindeepclean',
+  twitter: 'https://x.com/balajideepclean',
   whatsapp: WHATSAPP,
 };
 

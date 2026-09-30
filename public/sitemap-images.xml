@@ -1,70 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- sitemap-images.xml — sachindeepcleaning.shop -->
+<!-- sitemap-images.xml — balajicleaningservice.shop -->
 <!-- Place in public/ directory so Vite copies it to dist/ on build -->
 <!-- Register this in Google Search Console alongside sitemap.xml -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
-    <loc>https://sachindeepcleaning.shop/</loc>
+    <loc>https://balajicleaningservice.shop/</loc>
     <image:image>
-      <image:loc>https://sachindeepcleaning.shop/images/cleaning-1.jpg</image:loc>
-      <image:title>Deep cleaning services in Gurgaon — Sachin Deep Cleaning professional team</image:title>
-      <image:caption>Professional home deep cleaning services in Gurgaon by Sachin Deep Cleaning</image:caption>
+      <image:loc>https://balajicleaningservice.shop/images/cleaning-1.jpg</image:loc>
+      <image:title>Deep cleaning services in Gurgaon — Balaji Deep Cleaning professional team</image:title>
+      <image:caption>Professional home deep cleaning services in Gurgaon by Balaji Deep Cleaning</image:caption>
     </image:image>
   </url>
 
   <url>
-    <loc>https://sachindeepcleaning.shop/deep-cleaning-services-in-gurgaon.html</loc>
+    <loc>https://balajicleaningservice.shop/deep-cleaning-services-in-gurgaon.html</loc>
     <image:image>
-      <image:loc>https://sachindeepcleaning.shop/images/full-home-deep-cleaning.jpg</image:loc>
+      <image:loc>https://balajicleaningservice.shop/images/full-home-deep-cleaning.jpg</image:loc>
       <image:title>Deep cleaning services in Gurgaon — trained team scrubbing full home top to bottom</image:title>
-      <image:caption>Sachin Deep Cleaning professionals performing full home deep cleaning in Gurgaon</image:caption>
+      <image:caption>Balaji Deep Cleaning professionals performing full home deep cleaning in Gurgaon</image:caption>
     </image:image>
   </url>
 
   <url>
-    <loc>https://sachindeepcleaning.shop/kitchen-deep-cleaning-gurgaon.html</loc>
+    <loc>https://balajicleaningservice.shop/kitchen-deep-cleaning-gurgaon.html</loc>
     <image:image>
-      <image:loc>https://sachindeepcleaning.shop/images/kitchen-deep-cleaning.webp</image:loc>
+      <image:loc>https://balajicleaningservice.shop/images/kitchen-deep-cleaning.webp</image:loc>
       <image:title>Kitchen deep cleaning in Gurgaon — chimney degreasing and cabinet cleaning</image:title>
       <image:caption>Professional kitchen deep cleaning in Gurgaon: chimney filter, hob, cabinets and tiles</image:caption>
     </image:image>
   </url>
 
   <url>
-    <loc>https://sachindeepcleaning.shop/bathroom-deep-cleaning-gurgaon.html</loc>
+    <loc>https://balajicleaningservice.shop/bathroom-deep-cleaning-gurgaon.html</loc>
     <image:image>
-      <image:loc>https://sachindeepcleaning.shop/images/bathroom-deep-cleaning.jpg</image:loc>
+      <image:loc>https://balajicleaningservice.shop/images/bathroom-deep-cleaning.jpg</image:loc>
       <image:title>Bathroom deep cleaning in Gurgaon — tile descaling and hard water stain removal</image:title>
-      <image:caption>Professional bathroom descaling and sanitization in Gurgaon by Sachin Deep Cleaning</image:caption>
+      <image:caption>Professional bathroom descaling and sanitization in Gurgaon by Balaji Deep Cleaning</image:caption>
     </image:image>
   </url>
 
   <url>
-    <loc>https://sachindeepcleaning.shop/sofa-shampoo-cleaning-gurgaon.html</loc>
+    <loc>https://balajicleaningservice.shop/sofa-shampoo-cleaning-gurgaon.html</loc>
     <image:image>
-      <image:loc>https://sachindeepcleaning.shop/images/sofa-shampoo-cleaning.jpg</image:loc>
+      <image:loc>https://balajicleaningservice.shop/images/sofa-shampoo-cleaning.jpg</image:loc>
       <image:title>Sofa shampoo cleaning in Gurgaon — upholstery hot water extraction</image:title>
       <image:caption>Sofa shampoo and hot-water extraction cleaning service in Gurgaon</image:caption>
     </image:image>
   </url>
 
   <url>
-    <loc>https://sachindeepcleaning.shop/carpet-shampoo-cleaning-gurgaon.html</loc>
+    <loc>https://balajicleaningservice.shop/carpet-shampoo-cleaning-gurgaon.html</loc>
     <image:image>
-      <image:loc>https://sachindeepcleaning.shop/images/carpet-shampoo-cleaning.jpg</image:loc>
+      <image:loc>https://balajicleaningservice.shop/images/carpet-shampoo-cleaning.jpg</image:loc>
       <image:title>Carpet shampoo cleaning in Gurgaon — extraction cleaning for fresh carpets</image:title>
       <image:caption>Professional carpet shampoo cleaning in Gurgaon using hot-water extraction</image:caption>
     </image:image>
   </url>
 
   <url>
-    <loc>https://sachindeepcleaning.shop/house-cleaning-services-in-gurgaon.html</loc>
+    <loc>https://balajicleaningservice.shop/house-cleaning-services-in-gurgaon.html</loc>
     <image:image>
-      <image:loc>https://sachindeepcleaning.shop/images/house-cleaning.jpg</image:loc>
+      <image:loc>https://balajicleaningservice.shop/images/house-cleaning.jpg</image:loc>
       <image:title>House cleaning services in Gurgaon — professional cleaners maintaining living room</image:title>
-      <image:caption>Regular house cleaning services in Gurgaon by trained Sachin Deep Cleaning team</image:caption>
+      <image:caption>Regular house cleaning services in Gurgaon by trained Balaji Deep Cleaning team</image:caption>
     </image:image>
   </url>
 

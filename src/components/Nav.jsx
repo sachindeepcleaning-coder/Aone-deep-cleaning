@@ -6,8 +6,8 @@ export default function Nav() {
   return (
     <nav className="nav" id="mainNav">
       <a href="/" className="logo">
-        <img src="/images/app_icon.png" alt="Sachin Deep Cleaning logo" className="logo-icon" width="38" height="38" loading="eager" decoding="async" />
-        <span className="logo-text">Sachin Deep Cleaning</span>
+        <img src="/images/app_icon.png" alt="Balaji Deep Cleaning logo" className="logo-icon" width="38" height="38" loading="eager" decoding="async" />
+        <span className="logo-text">Balaji Deep Cleaning</span>
       </a>
       <div className="nav-actions">
         <a

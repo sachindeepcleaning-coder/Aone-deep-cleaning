@@ -1,9 +1,9 @@
-# Sachin Deep Cleaning — Website
+# Balaji Deep Cleaning — Website
 
-A modern, mobile-friendly marketing site for **Sachin Deep Cleaning**, a home deep cleaning service in Gurgaon, Haryana. Built with **Vite + React 18 (MPA)**.
+A modern, mobile-friendly marketing site for **Balaji Deep Cleaning**, a home deep cleaning service in Gurgaon, Haryana. Built with **Vite + React 18 (MPA)**.
 
-- **Live URL:** [https://sachindeepcleaning.shop](https://sachindeepcleaning.shop) (custom domain via CNAME)
-- **Repo:** `sachindeepcleaning-coder/Sachin-Deep-Cleaning` (GitHub)
+- **Live URL:** [https://balajicleaningservice.shop](https://balajicleaningservice.shop) (custom domain via CNAME)
+- **Repo:** `sachindeepcleaning-coder/Balaji-Deep-Cleaning` (GitHub)
 - **Hosting:** GitHub Pages (deploys from the **`gh-pages`** branch)
 - **Branch sync rule:** **`main` and `gh-pages` MUST be kept in sync** — `gh-pages` is a snapshot of the latest `main` build, not a separate working branch. After every `main` push, redeploy to `gh-pages` (see below). The script in `scripts/sync-gh-pages.sh` automates the full sequence.
 
@@ -50,7 +50,7 @@ npm run build                     # = sitemap gen + vite build + prerender → d
 
 # 2. Clone the REMOTE gh-pages branch into a scratch dir (no stale local branch)
 rm -rf /tmp/opencode/ghp
-git clone -b gh-pages --single-branch https://github.com/sachindeepcleaning-coder/Sachin-Deep-Cleaning.git /tmp/opencode/ghp
+git clone -b gh-pages --single-branch https://github.com/sachindeepcleaning-coder/Balaji-Deep-Cleaning.git /tmp/opencode/ghp
 
 # 3. Replace contents with the fresh build
 cd /tmp/opencode/ghp
@@ -74,7 +74,7 @@ git push --force origin gh-pages     # force push is fine: gh-pages is a deploy 
 - The local `gh-pages` branch may lag behind `origin/gh-pages`. Always clone fresh (the script does this) instead of reusing the local branch.
 - The script sets `origin` to the **real** GitHub remote. If you `git clone ... .` from inside the working tree, the clone's `origin` points to the local repo path — **fix the remote URL** before pushing, or you'll push nowhere.
 - If the push is rejected with "tip behind", you cloned from a stale local branch → `git push --force` after confirming the working tree has the full build (all `*.html`, `assets/`, `videos/`, `sitemap.xml`, `CNAME`, `robots.txt`, `.nojekyll`).
-- Verify live: `curl -sI https://sachindeepcleaning.shop/<page>.html` → expect `HTTP/2 200`. The new `Last-Modified` header should reflect the time of your deploy.
+- Verify live: `curl -sI https://balajicleaningservice.shop/<page>.html` → expect `HTTP/2 200`. The new `Last-Modified` header should reflect the time of your deploy.
 - **Source-only push (no deploy):** `git add -A && git commit -m "message" && git push origin main`. This updates `main` only — the live site is unchanged until you also deploy to `gh-pages`.
 
 ### Sync verification
@@ -112,7 +112,7 @@ echo "gh-pages:$(git rev-parse --short origin/gh-pages)"
 | `src/styles/global.css` | Global styles / design tokens |
 | `public/sitemap.xml` | SEO sitemap (remember to add new pages here) |
 | `public/robots.txt` | Crawler rules (must be restored in gh-pages deploy) |
-| `public/CNAME` | Custom domain `sachindeepcleaning.shop` (must be restored in gh-pages deploy) |
+| `public/CNAME` | Custom domain `balajicleaningservice.shop` (must be restored in gh-pages deploy) |
 
 ## 🔧 Development
 
@@ -159,15 +159,15 @@ npm run gen        # regenerate HTML entry shells after editing pages.config.mjs
 
 ## 📞 Business Details
 
-- **Company:** Sachin Deep Cleaning
+- **Company:** Balaji Deep Cleaning
 - **Phone / WhatsApp:** +91 9560739281
 - **Location:** Gurgaon, Haryana
-- **Facebook:** [Sachin Deep Cleaning](https://www.facebook.com/profile.php?id=61577737535478)
+- **Facebook:** [Balaji Deep Cleaning](https://www.facebook.com/profile.php?id=61577737535478)
 - **Instagram:** [@cleaning_service_in_gurgaon](https://www.instagram.com/cleaning_service_in_gurgaon)
 - **YouTube:** [@Cleaning_service_in_Gurgaon](https://www.youtube.com/@Cleaning_service_in_Gurgaon)
-- **X:** [@sachindeepclean](https://x.com/sachindeepclean)
+- **X:** [@balajideepclean](https://x.com/balajideepclean)
 - **WhatsApp:** https://wa.me/919560739281
 
 ---
 
-© Sachin Deep Cleaning. All rights reserved.
+© Balaji Deep Cleaning. All rights reserved.

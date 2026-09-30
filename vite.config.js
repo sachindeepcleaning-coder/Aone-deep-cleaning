@@ -38,7 +38,7 @@ const input = Object.fromEntries(
 
 export default defineConfig({
   // Relative base so built asset URLs (./assets/...) resolve correctly whether
-  // the site is served from a GitHub Pages subpath (/Sachin-Deep-Cleaning/),
+  // the site is served from a GitHub Pages subpath (/Balaji-Deep-Cleaning/),
   // a custom domain, or locally. Without this, absolute /assets/ paths 404 on
   // the subpath and React never loads → blank screen.
   base: './',

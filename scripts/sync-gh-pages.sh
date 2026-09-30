@@ -14,7 +14,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SCRATCH="/tmp/opencode/ghp"
-REMOTE="https://github.com/sachindeepcleaning-coder/Sachin-Deep-Cleaning.git"
+REMOTE="https://github.com/sachindeepcleaning-coder/Balaji-Deep-Cleaning.git"
 
 cd "$REPO_ROOT"
 
@@ -78,4 +78,4 @@ echo
 echo "==> DONE. New gh-pages HEAD:"
 git log -1 --pretty="%h %ci  %s" origin/gh-pages
 echo
-echo "Verify live: curl -sI https://sachindeepcleaning.shop/ | grep -i last-modified"
+echo "Verify live: curl -sI https://balajicleaningservice.shop/ | grep -i last-modified"

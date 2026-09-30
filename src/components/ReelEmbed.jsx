@@ -77,7 +77,7 @@ export default function ReelEmbed() {
       <div className="reel-header">
         <div className="reel-avatar">🧹</div>
         <div className="reel-handle">
-          <strong>Sachin Deep Cleaning</strong>
+          <strong>Balaji Deep Cleaning</strong>
           <span>{HANDLE}</span>
         </div>
         <span className="reel-reel-tag">Reel {idx + 1}/{VIDEOS.length}</span>

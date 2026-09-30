@@ -88,7 +88,7 @@ function secondaryImage(article) {
     return { src: article.image2, alt: article.image2Alt || article.title };
   }
   const mapped = (article.cta && SECONDARY_IMAGES[article.cta.href]) || SECONDARY_IMAGES['/deep-cleaning-services-in-gurgaon.html'];
-  const fallbacks = [mapped, SECONDARY_IMAGES['/deep-cleaning-services-in-gurgaon.html'], { src: '/images/cleaning-1.jpg', alt: 'Professional deep cleaning in a Gurgaon home by Sachin Deep Cleaning' }];
+  const fallbacks = [mapped, SECONDARY_IMAGES['/deep-cleaning-services-in-gurgaon.html'], { src: '/images/cleaning-1.jpg', alt: 'Professional deep cleaning in a Gurgaon home by Balaji Deep Cleaning' }];
   for (const img of fallbacks) {
     if (img && img.src !== article.image) return img;
   }
@@ -132,7 +132,7 @@ export default function BlogArticlePage({ file = 'blog', url = '' }) {
             <span>·</span>
             <span>{mins} min read</span>
             <span>·</span>
-            <span>By <a href="/about.html#sachin-kumar" style={{ color: 'var(--primary)', fontWeight: 700 }}>Sachin Deep Cleaning</a>, Founder</span>
+            <span>By <a href="/about.html#sachin-kumar" style={{ color: 'var(--primary)', fontWeight: 700 }}>Balaji Deep Cleaning</a>, Founder</span>
           </div>
           <h1>{article.title}</h1>
           {article.printable && (
