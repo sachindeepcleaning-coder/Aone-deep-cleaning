@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 408 120" role="img" aria-label="Balaji Deep Cleaning logo">
+  <title>Balaji Deep Cleaning</title>
+  <!-- B badge: navy rounded square, white B, cyan droplet accent -->
+  <rect x="12" y="10" width="100" height="100" rx="24" fill="#0a1628"/>
+  <text x="62" y="82" text-anchor="middle" font-family="'Noto Sans', Arial, Helvetica, sans-serif" font-size="62" font-weight="800" fill="#ffffff">B</text>
+  <circle cx="96" cy="26" r="11" fill="#00b4d8"/>
+  <polygon points="88.5,22.7 103.5,22.7 96,4" fill="#00b4d8"/>
+  <circle cx="91.8" cy="23.1" r="3.1" fill="#ffffff"/>
+  <!-- Wordmark -->
+  <text x="128" y="70" font-family="'Noto Sans', Arial, Helvetica, sans-serif" font-size="72" font-weight="800" letter-spacing="6" fill="#0a1628">BALAJI</text>
+  <text x="130" y="108" font-family="'Noto Sans', Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="2" fill="#00b4d8">DEEP CLEANING</text>
+</svg>

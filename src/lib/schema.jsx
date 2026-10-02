@@ -62,7 +62,7 @@ export function localBusinessSchema({ url }) {
     telephone: PHONE,
     email: 'contact@balajicleaningservice.shop',
     url,
-    logo: `${SITE_URL}/images/app_icon.png`,
+    logo: `${SITE_URL}/images/template/logo.webp?v=3`,
     image: [
       `${SITE_URL}/images/cleaning-1.jpg`,
       `${SITE_URL}/images/full-home-deep-cleaning.jpg`,
@@ -239,7 +239,7 @@ export function articleSchema({ title, description, url, datePublished, dateModi
       name: 'Balaji Deep Cleaning',
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/images/app_icon.png`,
+        url: `${SITE_URL}/images/template/logo.webp?v=3`,
       },
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },

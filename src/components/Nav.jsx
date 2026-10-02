@@ -17,7 +17,7 @@ export default function Nav() {
   return (
     <nav className="nav" id="mainNav">
       <a href="/" className="logo">
-        <img src="/images/template/logo.webp" alt="Balaji Deep Cleaning logo" className="logo-icon" width="170" height="44" loading="eager" decoding="async" />
+        <img src="/images/template/logo.webp?v=3" alt="Balaji Deep Cleaning logo" className="logo-icon" width="163" height="48" loading="eager" decoding="async" />
       </a>
       <div className={`nav-links${open ? ' open' : ''}`}>
         {LINKS.map(([label, href]) => (

@@ -129,7 +129,7 @@ video { height: auto; }
 }
 .logo { display: flex; align-items: center; gap: 10px; font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; color: var(--dark); white-space: nowrap; }
 .logo strong { color: var(--primary); }
-.logo-icon { height: 44px; width: auto; max-width: 190px; object-fit: contain; display: block; flex-shrink: 0; }
+.logo-icon { height: 48px; width: auto; max-width: 220px; object-fit: contain; display: block; flex-shrink: 0; }
 .logo-text { font-size: 19px; }
 .nav-links { display: flex; gap: 26px; align-items: center; }
 .nav-links a { font-weight: 500; font-size: 15px; color: var(--dark); transition: color .2s; }
@@ -708,6 +708,7 @@ footer strong { color: #fff; }
   .nav-links.open { display: flex; }
   .nav-links a { padding: 12px 4px; border-bottom: 1px solid #f0f0f0; font-size: 16px; }
   .hamburger { display: block; }
+  .logo-icon { height: 40px; }
   .hero h1 { font-size: 30px; }
   .hero-inner { padding: 60px 20px 50px; }
   .cards, .features, .steps, .stats { grid-template-columns: 1fr; }
