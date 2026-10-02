@@ -14,3 +14,8 @@ dist-ssr
 *key.json
 *service-account*.json
 *credentials*.json
+
+# Local video library: 150MB of topic clips stay on disk + ship via dist/
+# to gh-pages, but never enter git history (except the player clip).
+public/videos/*.mp4
+!public/videos/cleaning-2.mp4
