@@ -34,7 +34,7 @@ export default function Hero() {
           </p>
           <div className="hero-actions">
             <a href="#formCard" className="btn btn-primary">Get Free Quote →</a>
-            <a href={PHONE_TEL} className="btn btn-outline" style={{ color: '#fff', borderColor: '#fff' }} onClick={phoneCallClick}>📞 +91 95607-39281</a>
+            <a href={PHONE_TEL} className="btn btn-outline" style={{ color: '#fff', borderColor: '#fff' }} onClick={phoneCallClick}>📞 +91 92679-05943</a>
           </div>
           <div className="hero-pills">
             {PILLS.map((p) => (

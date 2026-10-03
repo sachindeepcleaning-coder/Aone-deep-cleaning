@@ -12,7 +12,7 @@ const TEAM = [
 ];
 
 const PROCESS = [
-  { title: 'Call or WhatsApp', desc: 'Reach us at +91 9560739281 or fill the form — we confirm scope, exact price and slot, often same-day if booked before noon.' },
+  { title: 'Call or WhatsApp', desc: 'Reach us at +91 9267905943 or fill the form — we confirm scope, exact price and slot, often same-day if booked before noon.' },
   { title: 'We Arrive Equipped', desc: 'Our team arrives with all machines and eco-friendly, food-safe products.' },
   { title: 'We Deep Clean', desc: 'Every area is cleaned systematically — kitchen, bathrooms, rooms, floors and fixtures.' },
   { title: 'You Inspect', desc: 'We walk through every area together so you can see the result.' },
@@ -35,7 +35,7 @@ export default function AboutPage({ url }) {
   const orgSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Balaji Deep Cleaning',
+    name: 'Aone Deep Cleaning',
     url: SITE_URL,
     telephone: PHONE,
     address: { '@type': 'PostalAddress', addressLocality: 'Gurgaon', addressRegion: 'Haryana', addressCountry: 'IN' },
@@ -54,7 +54,7 @@ export default function AboutPage({ url }) {
     sameAs: [SOCIAL.facebook, SOCIAL.instagram],
     worksFor: { '@id': `${SITE_URL}/#business` },
     knowsAbout: ['Deep Cleaning', 'House Cleaning', 'Bathroom Descaling', 'Kitchen Degreasing', 'Gurgaon'],
-    description: 'Founder of Balaji Deep Cleaning, 10+ years hands-on deep cleaning in Gurgaon — DLF to Sohna Road, 148 verified Google reviews, police-verified team lead.',
+    description: 'Founder of Aone Deep Cleaning, 10+ years hands-on deep cleaning in Gurgaon — DLF to Sohna Road, 148 verified Google reviews, police-verified team lead.',
   };
 
   return (
@@ -74,7 +74,7 @@ export default function AboutPage({ url }) {
           <div className="hero-left">
             <div className="hero-eyebrow">
               <svg width="8" height="8" fill="#4ade80" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" /></svg>
-              About Balaji Deep Cleaning
+              About Aone Deep Cleaning
             </div>
             <h1>
               <span className="hl">The Police-Verified</span><br />
@@ -224,10 +224,10 @@ export default function AboutPage({ url }) {
             <div className="section-tag">Our Story</div>
             <h2 className="section-title">Cleaning Gurgaon Homes Since 2015</h2>
             <p className="section-sub" style={{ margin: '0 auto' }}>
-              Balaji Deep Cleaning started in 2015 with one team, one scrubber and a simple rule that has never changed: <strong>you pay only after you walk through and approve the work</strong>. A decade later that rule still runs every job — across DLF Phase 1–5, Sohna Road, Golf Course Road, Palam Vihar, Sushant Lok, South City and 30+ sectors, from compact 1 RK studios to 5 BHK villas, plus offices, shops and clinics after hours.
+              Aone Deep Cleaning started in 2015 with one team, one scrubber and a simple rule that has never changed: <strong>you pay only after you walk through and approve the work</strong>. A decade later that rule still runs every job — across DLF Phase 1–5, Sohna Road, Golf Course Road, Palam Vihar, Sushant Lok, South City and 30+ sectors, from compact 1 RK studios to 5 BHK villas, plus offices, shops and clinics after hours.
             </p>
             <p className="section-sub" style={{ margin: '16px auto 0' }}>
-              What changed in ten years is the craft: hot-water extraction for sofas and carpets, acid descaling tuned for Gurgaon’s hard water, food-safe degreasing for modular chimneys, and a supervisor walkthrough on every booking — plus festive rosters that have run eleven straight Diwali seasons without missing a single booked slot. What never changed is the accountability — the owner’s number (+91 95607-39281) is on every quote, and the same police-verified teams return to the same societies season after season.
+              What changed in ten years is the craft: hot-water extraction for sofas and carpets, acid descaling tuned for Gurgaon’s hard water, food-safe degreasing for modular chimneys, and a supervisor walkthrough on every booking — plus festive rosters that have run eleven straight Diwali seasons without missing a single booked slot. What never changed is the accountability — the owner’s number (+91 92679-05943) is on every quote, and the same police-verified teams return to the same societies season after season.
             </p>
           </div>
           <div className="hiw-wrap" style={{ marginTop: '36px' }}>
@@ -266,12 +266,12 @@ export default function AboutPage({ url }) {
         <div className="section-inner">
           <div className="fade-up" style={{ textAlign: 'center' }}>
             <div className="section-tag">Meet the Founder</div>
-            <h2 className="section-title">Balaji Deep Cleaning — Hands-On in Every Gurgaon Home</h2>
+            <h2 className="section-title">Aone Deep Cleaning — Hands-On in Every Gurgaon Home</h2>
           </div>
           <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap', marginTop: 32, maxWidth: 800, marginInline: 'auto' }} className="fade-up">
-            <img src="/images/cleaning-1.webp" alt="Balaji Deep Cleaning team in Gurgaon — police-verified lead specialists" width="180" height="180" style={{ borderRadius: '50%', width: 140, height: 140, objectFit: 'cover', border: '3px solid var(--primary)' }} loading="lazy" />
+            <img src="/images/cleaning-1.webp" alt="Aone Deep Cleaning team in Gurgaon — police-verified lead specialists" width="180" height="180" style={{ borderRadius: '50%', width: 140, height: 140, objectFit: 'cover', border: '3px solid var(--primary)' }} loading="lazy" />
             <div style={{ flex: 1, minWidth: 260 }}>
-              <h3 style={{ fontFamily: 'Syne', fontWeight: 800, marginBottom: 8 }}>Balaji Deep Cleaning — Founder & Lead Specialist</h3>
+              <h3 style={{ fontFamily: 'Syne', fontWeight: 800, marginBottom: 8 }}>Aone Deep Cleaning — Founder & Lead Specialist</h3>
               <p style={{ color: 'var(--muted)', lineHeight: 1.7, marginBottom: 12 }}>10+ years cleaning Gurgaon homes from DLF Phase 5 to Sector 92. Police-verified, owner-present on every 3 BHK+ job, 148 verified Google reviews. Trained in descaling, extraction and food-safe degreasing. <a href="/blog/best-deep-cleaning-services-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>See how we compare →</a></p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <a href={SOCIAL.facebook} target="_blank" rel="noopener" style={{ color: 'var(--primary)', fontWeight: 700 }}>Facebook →</a>
@@ -348,7 +348,7 @@ export default function AboutPage({ url }) {
               <a href={waMsg('Hi, I want a free quote for deep cleaning in Gurgaon.')} target="_blank" rel="noopener" className="btn-wa-form" style={{ margin: 0 }} onClick={whatsappClick}>
                 💬 WhatsApp: {PHONE}
               </a>
-              <a href="tel:+919560739281" className="fcta-call" style={{ margin: 0, textAlign: 'center' }} onClick={phoneCallClick}>
+              <a href="tel:+919267905943" className="fcta-call" style={{ margin: 0, textAlign: 'center' }} onClick={phoneCallClick}>
                 📞 Call: {PHONE}
               </a>
             </div>

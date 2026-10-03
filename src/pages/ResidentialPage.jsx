@@ -146,7 +146,7 @@ export default function ResidentialPage({ url }) {
           </div>
           <div className="hiw-wrap" style={{ marginTop: '36px' }}>
             {[
-              ['Share sector + BHK', 'WhatsApp +91 9560739281 — society, tower and preferred date. Thirty seconds of typing.'],
+              ['Share sector + BHK', 'WhatsApp +91 9267905943 — society, tower and preferred date. Thirty seconds of typing.'],
               ['Nearest roster checked', 'We match your zone, not a random citywide queue — travel stays under an hour.'],
               ['Fixed quote on call', 'Rooms, baths, kitchen and add-ons itemised and locked. No travel fee, ever.'],
               ['Team arrives equipped', 'Machines, descalers and eco-friendly products in hand; IDs ready for your gate.'],

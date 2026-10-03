@@ -32,7 +32,7 @@ export default function ContactPage({ url }) {
           <div className="hero-left">
             <div className="hero-eyebrow">
               <svg width="8" height="8" fill="#4ade80" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" /></svg>
-              Contact Balaji Deep Cleaning
+              Contact Aone Deep Cleaning
             </div>
             <h1>
               <span className="hl">Get Your Free Quote</span><br />
@@ -51,8 +51,8 @@ export default function ContactPage({ url }) {
               <a href={waMsg('Hi, I would like to get a quote for cleaning in Gurgaon.')} target="_blank" rel="noopener" className="btn-wa-form" style={{ margin: 0 }} onClick={whatsappClick}>
                 💬 WhatsApp Us Now — Instant Reply
               </a>
-              <a href="tel:+919560739281" className="fcta-call" style={{ margin: 0, textAlign: 'center' }} onClick={phoneCallClick}>
-                📞 Call: +91 95607-39281
+              <a href="tel:+919267905943" className="fcta-call" style={{ margin: 0, textAlign: 'center' }} onClick={phoneCallClick}>
+                📞 Call: +91 92679-05943
               </a>
             </div>
           </div>
@@ -96,7 +96,7 @@ export default function ContactPage({ url }) {
           </div>
           <div className="whyus-grid" style={{ marginTop: '28px' }}>
             {[
-              ['📞', 'Call +91 95607-39281', 'Fastest for complex jobs — villas, offices, post-renovation. Talk scope with the manager and lock the price in one conversation.'],
+              ['📞', 'Call +91 92679-05943', 'Fastest for complex jobs — villas, offices, post-renovation. Talk scope with the manager and lock the price in one conversation.'],
               ['💬', 'WhatsApp with photos', 'Best for accuracy — send room, kitchen and bathroom photos with your sector and BHK; the fixed quote comes back with zero guesswork.'],
               ['📝', 'Quote form above', 'Best when busy — drop name, number and requirement; callback in under 5 minutes in working hours. Zero spam, zero commitment.'],
               ['🏢', 'Societies & offices', 'Share tower, sq ft and timing constraints once — RWA passes, service lifts and after-hours windows handled for you.'],
@@ -147,11 +147,11 @@ export default function ContactPage({ url }) {
           <div style={{ textAlign: 'center' }} className="fade-up">
             <div className="section-tag">Find Us</div>
             <h2 className="section-title">We Serve Every Sector of Gurgaon</h2>
-            <p className="section-sub" style={{ margin: '0 auto' }}>Service-area business — no single shop counter, team dispatched to your sector. Headquarters at <a href="/blog/sushant-lok-1-deep-cleaning-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>Sushant Lok Phase I</a> with zone rosters across DLF, <a href="/blog/golf-course-road-deep-cleaning-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>Golf Course Road</a>, <a href="/blog/sohna-road-deep-cleaning-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>Sohna Road</a>, West and Central Gurgaon, so the <a href="/residential-cleaners-near-me.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>nearest crew</a> — never a cross-city one — gets your job. Call +91 95607-39281 to confirm nearest slot.</p>
+            <p className="section-sub" style={{ margin: '0 auto' }}>Service-area business — no single shop counter, team dispatched to your sector. Headquarters at <a href="/blog/sushant-lok-1-deep-cleaning-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>Sushant Lok Phase I</a> with zone rosters across DLF, <a href="/blog/golf-course-road-deep-cleaning-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>Golf Course Road</a>, <a href="/blog/sohna-road-deep-cleaning-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>Sohna Road</a>, West and Central Gurgaon, so the <a href="/residential-cleaners-near-me.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>nearest crew</a> — never a cross-city one — gets your job. Call +91 92679-05943 to confirm nearest slot.</p>
           </div>
           <div style={{ marginTop: 32, borderRadius: 14, overflow: 'hidden', border: '1px solid var(--border)', height: 360 }} className="fade-up">
             <iframe
-              title="Balaji Deep Cleaning — A one deep cleaning, Sushant Lok Phase I, Gurugram"
+              title="Aone Deep Cleaning — A one deep cleaning, Sushant Lok Phase I, Gurugram"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.5!2d77.0786716!3d28.4612679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1918a4b66c09%3A0xd7f8d0265ff60bef!2sA%20one%20deep%20cleaning!5e0!3m2!1sen!2sin"
               width="100%"
               height="360"
@@ -162,7 +162,7 @@ export default function ContactPage({ url }) {
             />
           </div>
           <div style={{ textAlign: 'center', marginTop: 16, fontSize: '.92rem', color: 'var(--muted)' }}>
-            <strong style={{ color: 'var(--dark)' }}>Balaji Deep Cleaning</strong> — Sushant Lok Phase I, Gurugram, Haryana 122009 &nbsp;|&nbsp; <a href="tel:+919560739281" style={{ color: 'var(--primary)', fontWeight: 700 }}>+91 95607-39281</a>
+            <strong style={{ color: 'var(--dark)' }}>Aone Deep Cleaning</strong> — Sushant Lok Phase I, Gurugram, Haryana 122009 &nbsp;|&nbsp; <a href="tel:+919267905943" style={{ color: 'var(--primary)', fontWeight: 700 }}>+91 92679-05943</a>
           </div>
         </div>
       </section>

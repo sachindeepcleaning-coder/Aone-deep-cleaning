@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-// Phone-style local reel player (old Firebase ad-page design, Balaji header).
+// Phone-style local reel player (old Firebase ad-page design, Aone header).
 // Single verified-clean clip only: public/videos/cleaning-2.mp4 carries no
 // brand or phone overlays. No YouTube/Instagram embeds or outbound links —
 // safe for PPC pages. SSR renders the shell; src attaches on visibility.
@@ -76,7 +76,7 @@ export default function LocalReel() {
               <div className="sdc-reel-header">
                 <div className="sdc-reel-avatar">🧹</div>
                 <div className="sdc-reel-handle">
-                  <strong>Balaji Deep Cleaning</strong>
+                  <strong>Aone Deep Cleaning</strong>
                   <span>Gurgaon · Real job footage</span>
                 </div>
               </div>

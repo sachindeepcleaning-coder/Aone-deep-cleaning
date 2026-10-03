@@ -29,11 +29,11 @@ export default function Footer() {
       <div className="footer-grid">
         <div className="footer-brand">
           <a href="/" className="logo">
-            <img src="/images/template/logo.webp?v=3" alt="Balaji Deep Cleaning logo" className="logo-icon" width="163" height="48" loading="lazy" decoding="async" />
+            <img src="/images/template/logo.webp?v=3" alt="Aone Deep Cleaning logo" className="logo-icon" width="163" height="48" loading="lazy" decoding="async" />
           </a>
           <p>Professional deep cleaning in Gurgaon since 2015 — police-verified team, eco-friendly products, pay only after you approve the work.</p>
           <p style={{ marginTop: '12px' }}>📍 Serving all of Gurgaon, Haryana</p>
-          <p>📞 <a href={PHONE_TEL} onClick={phoneCallClick}>+91 95607-39281</a></p>
+          <p>📞 <a href={PHONE_TEL} onClick={phoneCallClick}>+91 92679-05943</a></p>
           <p style={{ marginTop: '12px' }}>
             <a href={SOCIAL.facebook} target="_blank" rel="noopener" style={{ marginRight: '14px' }}>Facebook</a>
             <a href={SOCIAL.instagram} target="_blank" rel="noopener" style={{ marginRight: '14px' }}>Instagram</a>
@@ -59,14 +59,14 @@ export default function Footer() {
           <a href="/about.html">About Us</a>
           <a href="/blog.html">Blog &amp; Guides</a>
           <a href="/blog/deep-cleaning-cost-gurgaon-2026.html">Deep Cleaning Cost Guide</a>
-          <a href="/blog/urban-company-vs-sachin-deep-cleaning.html">Urban Company vs Balaji</a>
+          <a href="/blog/urban-company-vs-sachin-deep-cleaning.html">Urban Company vs Aone</a>
           <a href="/blog/diwali-cleaning-gurgaon.html">Diwali Cleaning Gurgaon</a>
           <a href="/contact.html">Contact Us</a>
           <a href="/all-pages.html">All Pages</a>
           <a href="/sitemap.xml">Sitemap</a>
         </div>
       </div>
-      <div className="footer-bottom">© {new Date().getFullYear()} Balaji Deep Cleaning. All rights reserved.</div>
+      <div className="footer-bottom">© {new Date().getFullYear()} Aone Deep Cleaning. All rights reserved.</div>
     </footer>
   );
 }

@@ -3,7 +3,7 @@
   "private": true,
   "version": "2.0.0",
   "type": "module",
-  "description": "Balaji Deep Cleaning — production-grade marketing site (Vite + React MPA)",
+  "description": "Aone Deep Cleaning — production-grade marketing site (Vite + React MPA)",
   "scripts": {
     "dev": "vite",
     "build": "node scripts/content-lint.mjs && node scripts/gen-sitemap.mjs && vite build && node scripts/prerender.mjs",

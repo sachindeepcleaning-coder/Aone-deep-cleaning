@@ -39,7 +39,7 @@ const PPC = {
       ['Can I get same-day deep cleaning in Gurgaon?', 'Yes, subject to slots. Message before noon for the best chance of same-day service across DLF, Sohna Road, Golf Course Road and all sectors.'],
       ['Is the team police-verified?', 'Every cleaner is police-verified, ID-checked and trained before their first booking. Team-lead number shared before arrival.'],
       ['What if I\u2019m not happy with any area?', 'Tell us within 24 hours and we return and re-clean it free. That guarantee holds on offer bookings exactly like full-price ones.'],
-      ['Gurgaon me deep cleaning aaj book ho jayegi?', 'Haan — WhatsApp +91 9560739281 par BHK + sector bhejein. Dopahar se pehle message par same-day slot, fixed price call par lock, kaam ke baad hi payment.'],
+      ['Gurgaon me deep cleaning aaj book ho jayegi?', 'Haan — WhatsApp +91 9267905943 par BHK + sector bhejein. Dopahar se pehle message par same-day slot, fixed price call par lock, kaam ke baad hi payment.'],
     ],
   },
   'book-house-deep-cleaning-services-in-gurgaon': {
@@ -64,7 +64,7 @@ const PPC = {
       ['How long does a full house take?', 'A 2–3 BHK house typically takes a full day (7–10 hrs); 4 BHK and villas can extend past a day with 5–6 cleaners. Timing is confirmed before booking.'],
       ['Do I pay in advance?', 'Never. Zero advance on offer bookings too — pay by UPI, cash or card only after you inspect the whole house.'],
       ['Can I get same-day house deep cleaning?', 'Message before noon and we confirm a same-day or next-morning slot in most sectors, villas included.'],
-      ['Kya poore ghar ki deep cleaning ek din me ho jayegi?', '2–3 BHK ghar aam taur par ek din me ho jata hai; bade villa me 5–6 cleaners lagte hain. WhatsApp +91 9560739281 par ghar ka size bhejein — fixed price aur slot turant confirm.'],
+      ['Kya poore ghar ki deep cleaning ek din me ho jayegi?', '2–3 BHK ghar aam taur par ek din me ho jata hai; bade villa me 5–6 cleaners lagte hain. WhatsApp +91 9267905943 par ghar ka size bhejein — fixed price aur slot turant confirm.'],
     ],
   },
 };
@@ -169,7 +169,7 @@ export default function PpcPage({ url, file }) {
       <section className="section">
         <div className="section-inner">
           <div style={{ textAlign: 'center' }} className="fade-up">
-            <div className="section-tag">Why Balaji</div>
+            <div className="section-tag">Why Aone</div>
             <h2 className="section-title">6 Reasons Gurgaon Trusts Us</h2>
           </div>
           <div className="whyus-grid">
@@ -209,7 +209,7 @@ export default function PpcPage({ url, file }) {
             <a href={waMsg(`Hi, I saw the 40% OFF offer for ${cfg.keyword}. Please share my fixed price.`)} target="_blank" rel="noopener" className="btn-wa-form" style={{ margin: 0 }} onClick={whatsappClick}>
               💬 Claim 40% OFF on WhatsApp
             </a>
-            <a href="tel:+919560739281" className="fcta-call" style={{ margin: 0, textAlign: 'center' }} onClick={phoneCallClick}>
+            <a href="tel:+919267905943" className="fcta-call" style={{ margin: 0, textAlign: 'center' }} onClick={phoneCallClick}>
               📞 Call: {PHONE}
             </a>
           </div>

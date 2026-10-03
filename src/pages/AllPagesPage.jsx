@@ -46,7 +46,7 @@ const GROUPS = [
   {
     label: 'Main & Utility Pages',
     items: [
-      { icon: '🏠', title: 'Home', text: 'Balaji Deep Cleaning — home page.', href: 'index.html' },
+      { icon: '🏠', title: 'Home', text: 'Aone Deep Cleaning — home page.', href: 'index.html' },
       { icon: '👨‍🔧', title: 'About Us', text: 'Our team, process, areas & transparent pricing.', href: 'about.html' },
       { icon: '📞', title: 'Contact Us', text: 'Get a free quote — call or WhatsApp.', href: 'contact.html' },
       { icon: '✅', title: 'Thank You', text: 'Confirmation page after lead submission.', href: 'thank-you.html' },
@@ -73,7 +73,7 @@ export default function AllPagesPage({ url }) {
             </div>
             <h1>
               <span className="hl">All Pages</span><br />
-              <span className="hl2">Balaji Deep Cleaning — Gurgaon</span>
+              <span className="hl2">Aone Deep Cleaning — Gurgaon</span>
             </h1>
             <p className="hero-sub">
               A single directory of every page on this site — services, BHK packages, contact and more. Jump straight to what you need.

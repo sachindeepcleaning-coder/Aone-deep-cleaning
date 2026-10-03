@@ -42,7 +42,7 @@ const BANNED = [
 const COMPETITOR_BRANDS = [
   'ProsAdda', 'SKKS', 'AKS Facilities', 'BusyBucket', 'Kleanhomz', 'DustBusters',
   'TechSquad', 'Zoopgo', 'Tumbledry', 'SPFM', 'Favorz', 'MaidsinGurgaon',
-  'Aone', 'A One Deep Cleaning', 'Smart City Care',
+  'Smart City Care',
 ];
 const isComparatorPage = (slug) => /-vs-|best-|versus|compare/.test(slug);
 

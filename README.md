@@ -1,6 +1,6 @@
-# Balaji Deep Cleaning — Website
+# Aone Deep Cleaning — Website
 
-A modern, mobile-friendly marketing site for **Balaji Deep Cleaning**, a home deep cleaning service in Gurgaon, Haryana. Built with **Vite + React 18 (MPA)**. Template-style look (sky-blue + lime, Poppins).
+A modern, mobile-friendly marketing site for **Aone Deep Cleaning**, a home deep cleaning service in Gurgaon, Haryana. Built with **Vite + React 18 (MPA)**. Template-style look (sky-blue + lime, Poppins).
 
 - **Live URL:** [https://balajicleaningservice.shop](https://balajicleaningservice.shop) (custom domain via CNAME)
 - **Repo:** `sachindeepcleaning-coder/Balaji-Deep-Cleaning` (GitHub)
@@ -130,8 +130,8 @@ python3 -m http.server 8322 --directory dist   # → http://localhost:8322/
 ## ⚙️ Config
 
 - **Build:** `npm run build` (vite). No Tailwind, no Bootstrap, no jQuery — template look is hand-ported CSS.
-- **Leads:** Netlify Forms (`lead-quote`) + `FORMSPREE_ID = 'moevgqwr'` fallback via `QuoteForm.jsx`; redirect to `thank-you.html`. Balaji-only inbox — Sachin keeps the old `xdaqkbwa` endpoint on its own repo. Never swap these.
-- **Tracking (Balaji-only — never replace with Sachin's):** `GTM-WK78FVFS` via `src/lib/site.js`. Sachin keeps `GTM-P4KVBGRK` on its own repo. Do NOT bring in other GTM/GA/Ads IDs (the static template carried its own — intentionally left out). If any future change reintroduces `GTM-P4KVBGRK` or `xdaqkbwa` here, treat it as a brand-contamination bug and revert.
+- **Leads:** Netlify Forms (`lead-quote`) + `FORMSPREE_ID = 'moevgqwr'` fallback via `QuoteForm.jsx`; redirect to `thank-you.html`. Aone-only inbox — Sachin keeps the old `xdaqkbwa` endpoint on its own repo. Never swap these.
+- **Tracking (Aone-only — never replace with Sachin's):** `GTM-WK78FVFS` via `src/lib/site.js`. Sachin keeps `GTM-P4KVBGRK` on its own repo. Do NOT bring in other GTM/GA/Ads IDs (the static template carried its own — intentionally left out). If any future change reintroduces `GTM-P4KVBGRK` or `xdaqkbwa` here, treat it as a brand-contamination bug and revert.
 - **Videos:** `LocalReel.jsx` phone-style player (autoplay muted on scroll into view, tap to pause). YouTube Shorts render as click-to-play facades (nothing loads until tapped). No IG embeds anywhere.
 - **Fonts:** self-hosted Poppins in `public/fonts`, preloaded in entry shells — no Google Fonts requests.
 - **Media:** `public/images` (responsive `-400w`/`-800w` webp + `template/` folder) + `public/videos` (topic-named mp4s).
@@ -150,7 +150,7 @@ python3 -m http.server 8322 --directory dist   # → http://localhost:8322/
 - **Service pages** are data-driven: `src/lib/services.js` keyed by `serviceKey` (`deep/house/kitchen/bathroom/sofa/carpet/office/move/fullhome` + `bhk` 1–5), rendered by `ServicePage.jsx` with Service + FAQ + Reviews + Breadcrumb JSON-LD, pricing tables, before/after sliders (deep/fullhome), related guides + services.
 - **Blog articles** live in `src/lib/blog.js` (`ARTICLES[]`: slug/file/title/description/dates/image/lead/faqs/cta/blocks). Block types: `p, lead, h2, h3, table{head,rows}, ul, ol, tip`; `**bold**` inline supported. Rendered by `BlogArticlePage.jsx` with Article + FAQ + Breadcrumb JSON-LD.
 - **Custom pages** (`index/residential/partners/landing/ppc/about/blog/allpages/contact/thank-you/404`) are hand-built components with own schema; new page types need an `app.jsx` lazy mapping + `pages.config.mjs` entry (see `PpcPage.jsx` + `page:'ppc'` precedent — content keyed by `file` prop so no prop plumbing is needed).
-- **PPC pages** (`page:'ppc'`, `noindex:true`): conversion-focused (urgency bar variant, exact-keyword hero + QuoteForm, countdown, strikethrough pricing, keyword FAQs). Never link them internally; never add to sitemap. Verify `tel:`/`wa.me` links after every change (all must be `+919560739281`).
+- **PPC pages** (`page:'ppc'`, `noindex:true`): conversion-focused (urgency bar variant, exact-keyword hero + QuoteForm, countdown, strikethrough pricing, keyword FAQs). Never link them internally; never add to sitemap. Verify `tel:`/`wa.me` links after every change (all must be `+919267905943`).
 - **Content bars (enforced):** titles <60 chars, descriptions 120–160, exactly 1 H1, primary keyword in title/H1/lead + body multiples, Hinglish FAQ on local-intent pages, CTA → money page, `since 2015` business history, prices from the live rate card only. 40% OFF strike-through MRPs must be prices genuinely quoted, or Ads may flag misleading pricing.
 - **Comparison pages** (Mr/UC/NoBroker/Safaiwale/Best-office): verifiable public facts only, “Not publicly listed” where unknown, affiliation disclosed in lead + tip, figures dated (Sep 2026).
 - **Internal linking:** `RelatedGuides.jsx` (serviceKey → guides), `RelatedServices.jsx` (service mesh), blog CTA footer (3 money links), footer keyword columns, `llms.txt` mirror for AI discovery.
@@ -169,20 +169,20 @@ python3 -m http.server 8322 --directory dist   # → http://localhost:8322/
 - **Backlinks:** `BACKLINKS.md` (NAP block, copy kit, tiered targets). Rule: never buy/automate links.
 - **Indexing discipline:** `scripts/submit-indexing.cjs` ONLY for newly written or materially changed URLs (`--url …`); never mass `--reset` except after site-wide rebuilds (200/day project quota).
 - **Pre-flight before every deploy:** `npm run build` must pass `content-lint`; internal links resolve; JSON-LD parses; noindex only on thank-you/404 + PPC pages; zero third-party fetch hosts in initial HTML (GTM + schema.org + sameAs socials excepted); Playwright console audit clean (repeat runs — hydration races are flaky).
-- **Founder stays Sachin Kumar** (`about.html#sachin-kumar`, Person schema) while the brand is Balaji Deep Cleaning. Socials stay on the original handles (`x.com/sachindeepclean`). Contact email follows the domain (`contact@balajicleaningservice.shop`).
+- **Founder stays Sachin Kumar** (`about.html#sachin-kumar`, Person schema) while the brand is Aone Deep Cleaning. Socials stay on the original handles (`x.com/sachindeepclean`). Contact email follows the domain (`contact@balajicleaningservice.shop`).
 - **Docs policy:** `.md` files are local-only (`*.md` gitignored) except `README.md`, which stays on GitHub. Secrets safety net in `.gitignore` (`*key.json`, `.env*`); the Indexing API key lives outside any git repo and is referenced by path only.
 
 ## 📞 Business Details
 
-- **Company:** Balaji Deep Cleaning
-- **Phone / WhatsApp:** +91 9560739281
+- **Company:** Aone Deep Cleaning
+- **Phone / WhatsApp:** +91 9267905943
 - **Location:** Gurgaon, Haryana
-- **Facebook:** [Balaji Deep Cleaning](https://www.facebook.com/profile.php?id=61577737535478)
+- **Facebook:** [Aone Deep Cleaning](https://www.facebook.com/profile.php?id=61577737535478)
 - **Instagram:** [@cleaning_service_in_gurgaon](https://www.instagram.com/cleaning_service_in_gurgaon)
 - **YouTube:** [@Cleaning_service_in_Gurgaon](https://www.youtube.com/@Cleaning_service_in_Gurgaon)
 - **X:** [@sachindeepclean](https://x.com/sachindeepclean)
-- **WhatsApp:** https://wa.me/919560739281
+- **WhatsApp:** https://wa.me/919267905943
 
 ---
 
-© Balaji Deep Cleaning. All rights reserved.
+© Aone Deep Cleaning. All rights reserved.

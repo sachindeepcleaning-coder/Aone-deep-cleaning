@@ -1,17 +1,17 @@
-// Central site + analytics config for Balaji Deep Cleaning.
+// Central site + analytics config for Aone Deep Cleaning.
 // Single source of truth shared across all React components.
 
 export const SITE_URL = 'https://balajicleaningservice.shop';
-export const SITE_NAME = 'Balaji Deep Cleaning';
+export const SITE_NAME = 'Aone Deep Cleaning';
 
 // Canonical URL for a page. The homepage is served from the root path.
 export function pageUrl(file = 'index') {
   return file === 'index' ? `${SITE_URL}/` : `${SITE_URL}/${file}.html`;
 }
 
-export const PHONE = '+91 95607-39281';
-export const PHONE_TEL = 'tel:+919560739281';
-export const WHATSAPP_NUMBER = '919560739281';
+export const PHONE = '+91 92679-05943';
+export const PHONE_TEL = 'tel:+919267905943';
+export const WHATSAPP_NUMBER = '919267905943';
 export const WHATSAPP = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 // Pre-filled WhatsApp links for the template CTAs.
@@ -23,7 +23,7 @@ export function waMsg(msg) {
 // Analytics — Google Tag Manager only (GA4 removed; old project had GTM only).
 export const GTM_ID = 'GTM-WK78FVFS';
 
-// Microsoft Clarity (Balaji project) — heatmaps + session recordings.
+// Microsoft Clarity (Aone project) — heatmaps + session recordings.
 export const CLARITY_ID = 'yrzcljz2zn';
 
 // Netlify Forms handles lead capture (works when deployed to Netlify).

@@ -15,8 +15,8 @@ export default function ThankYouPage() {
           <a href={waMsg('Hi, I just submitted a quote. Please share pricing.')} target="_blank" rel="noopener" className="fcta-wa" onClick={whatsappClick}>
             💬 WhatsApp Us Now
           </a>
-          <a href="tel:+919560739281" className="fcta-call" onClick={phoneCallClick}>
-            📞 Call: +91 95607-39281
+          <a href="tel:+919267905943" className="fcta-call" onClick={phoneCallClick}>
+            📞 Call: +91 92679-05943
           </a>
         </div>
         <p style={{ marginTop: '28px' }}>

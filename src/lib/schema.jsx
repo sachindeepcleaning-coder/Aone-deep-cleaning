@@ -60,7 +60,7 @@ export function websiteSchema() {
     '@type': 'WebSite',
     '@id': `${SITE_URL}/#website`,
     url: `${SITE_URL}/`,
-    name: 'Balaji Deep Cleaning',
+    name: 'Aone Deep Cleaning',
     publisher: {
       '@id': `${SITE_URL}/#business`,
     },
@@ -73,7 +73,7 @@ export function localBusinessSchema({ url }) {
     '@context': 'https://schema.org',
     '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
     '@id': `${SITE_URL}/#business`,
-    name: 'Balaji Deep Cleaning',
+    name: 'Aone Deep Cleaning',
     description:
       'Professional home deep cleaning services in Gurgaon — sofas, bathrooms, kitchens, carpets, offices and full-house makeovers. Eco-friendly products, trained staff, pay after satisfaction.',
     telephone: PHONE,
@@ -151,7 +151,7 @@ export function serviceSchema({ name, description, url, price, image }) {
     image: image ? `${SITE_URL}${image}` : `${SITE_URL}/images/cleaning-1.jpg`,
     provider: {
       '@id': `${SITE_URL}/#business`,
-      name: 'Balaji Deep Cleaning',
+      name: 'Aone Deep Cleaning',
       telephone: PHONE,
     },
     areaServed: SERVICE_AREAS,
@@ -253,7 +253,7 @@ export function articleSchema({ title, description, url, datePublished, dateModi
     },
     publisher: {
       '@id': `${SITE_URL}/#business`,
-      name: 'Balaji Deep Cleaning',
+      name: 'Aone Deep Cleaning',
       logo: {
         '@type': 'ImageObject',
         url: `${SITE_URL}/images/template/logo.webp?v=3`,
@@ -291,7 +291,7 @@ export function reviewsSchema(reviews, serviceName) {
         itemReviewed: {
           '@type': 'LocalBusiness',
           '@id': `${SITE_URL}/#business`,
-          name: 'Balaji Deep Cleaning',
+          name: 'Aone Deep Cleaning',
         },
         datePublished: reviewDate(idx),
       },
@@ -318,19 +318,19 @@ export function breadcrumbSchema(items) {
 export const HOW_TO_CONFIGS = {
   deep: {
     name: 'How to Deep Clean a Home in Gurgaon',
-    description: 'Step-by-step professional deep cleaning process used by Balaji Deep Cleaning for Gurgaon homes.',
+    description: 'Step-by-step professional deep cleaning process used by Aone Deep Cleaning for Gurgaon homes.',
     totalTime: 'PT8H',
     estimatedCost: '2000',
   },
   fullhome: {
     name: 'How to Deep Clean a Full Home in Gurgaon',
-    description: 'Complete step-by-step full home deep cleaning process by BHK size — Balaji Deep Cleaning Gurgaon.',
+    description: 'Complete step-by-step full home deep cleaning process by BHK size — Aone Deep Cleaning Gurgaon.',
     totalTime: 'PT8H',
     estimatedCost: '2500',
   },
   house: {
     name: 'How to Clean a House Professionally',
-    description: 'The standard house cleaning process followed by Balaji Deep Cleaning in Gurgaon.',
+    description: 'The standard house cleaning process followed by Aone Deep Cleaning in Gurgaon.',
     totalTime: 'PT3H',
     estimatedCost: '499',
   },

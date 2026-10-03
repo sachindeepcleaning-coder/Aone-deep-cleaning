@@ -28,10 +28,10 @@ export default function IndexPage({ url }) {
       <section className="section">
         <div className="section-inner split">
           <div className="fade-up">
-            <img src="/images/template/about.webp" alt="Balaji Deep Cleaning professional team at work in Gurgaon" className="split-img" loading="lazy" width="570" height="420" />
+            <img src="/images/template/about.webp" alt="Aone Deep Cleaning professional team at work in Gurgaon" className="split-img" loading="lazy" width="570" height="420" />
           </div>
           <div className="split-text fade-up">
-            <div className="section-tag">About Balaji Deep Cleaning</div>
+            <div className="section-tag">About Aone Deep Cleaning</div>
             <h2 className="section-title">Professional Deep Cleaning Services in Gurgaon</h2>
             <p>Now quality deep cleaning services in Gurgaon are just a phone call away. Polite, friendly and efficient, our staff guarantee a top-quality clean on a timetable that suits you — since 2015.</p>
             <ul className="split-points">

@@ -16,7 +16,7 @@ const BENEFITS = [
 ];
 
 const STEPS = [
-  ['Message your BHK', 'WhatsApp +91 9560739281 — sector, BHK, preferred date. Thirty seconds of typing.'],
+  ['Message your BHK', 'WhatsApp +91 9267905943 — sector, BHK, preferred date. Thirty seconds of typing.'],
   ['Get fixed price', 'Itemised quote on the call: rooms, bathrooms, kitchen, add-ons. Locked, no asterisks.'],
   ['Team arrives equipped', 'Police-verified crew with machines and eco-friendly products. Team-lead number shared beforehand.'],
   ['Approve, then pay', 'Walk every room first. Pay only on approval; misses re-cleaned on the spot, free.'],
@@ -29,7 +29,7 @@ const FAQS = [
   ['Can I reschedule or cancel online?', 'Yes — one message moves or cancels free of charge, even morning-of. Compare that against app cancellation windows before you commit elsewhere.'],
   ['Is my number and address safe without an app?', 'Your details stay in a private chat with our booking desk — no app permissions, no location tracking, no data harvesting. Key-pouch + photo-log system for working couples.'],
   ['What if I need a daily maid, not a one-time clean?', 'We will tell you honestly: daily chores need a maid agency, not us. Read our house-maid-vs-deep-cleaning guide first — then book us for weekly upkeep (from ₹499/visit) and quarterly resets.'],
-  ['Online booking Gurgaon me kaise karein bina app ke?', 'WhatsApp +91 9560739281 par BHK + sector bhejein — 30 minute me fixed price, same-day slot dopahar se pehle message par. Kaam ke baad payment, advance kabhi nahi.'],
+  ['Online booking Gurgaon me kaise karein bina app ke?', 'WhatsApp +91 9267905943 par BHK + sector bhejein — 30 minute me fixed price, same-day slot dopahar se pehle message par. Kaam ke baad payment, advance kabhi nahi.'],
   ['Can I book for my parents’ home in another sector?', 'Yes — share their sector, BHK and a contact number; we confirm the slot with you, clean with a walkthrough to them on video call if needed, and you pay on UPI after their approval. Popular for NRI families booking from abroad.'],
   ['Do you serve Delhi or Noida for online bookings?', 'Our teams cover all of Gurgaon (DLF to Manesar) same-day. Delhi/Noida requests are quoted case-by-case on WhatsApp depending on crew routing — message us and we confirm honestly instead of overpromising.'],
   ['What if I need changes after booking online?', 'Message any change — date, scope, address — and it is done free, even morning-of. No app cancellation windows, no penalty logic, no rebooking fees. Your thread holds the full history if anything is ever disputed.'],

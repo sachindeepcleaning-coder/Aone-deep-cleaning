@@ -46,7 +46,7 @@ export default function LeadForm({ formName = 'lead', source = 'Website', compac
             id={`${formName}-phone`}
             name="phone"
             type="tel"
-            placeholder="+91 9560739281"
+            placeholder="+91 9267905943"
             pattern="[0-9+ ]{8,15}"
             required
           />

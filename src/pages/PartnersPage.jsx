@@ -24,7 +24,7 @@ const FAQS = [
 ];
 
 const STEPS = [
-  ['Share society + scope', 'RWA contact or owner sends tower name, flat count or BHK mix, and preferred date on WhatsApp +91 9560739281.'],
+  ['Share society + scope', 'RWA contact or owner sends tower name, flat count or BHK mix, and preferred date on WhatsApp +91 9267905943.'],
   ['Fixed quote per unit', 'Each flat or room gets an itemised locked price — BHK bands plus add-ons. Consolidated billing for the society.'],
   ['Gate pre-clearance', 'Team IDs and police-verification shared a day prior; service-lift windows mapped with the facility desk.'],
   ['Cluster-day execution', 'Supervisor-led roster works flat to flat; each walkthrough signed before payment — UPI, cash or bank transfer.'],

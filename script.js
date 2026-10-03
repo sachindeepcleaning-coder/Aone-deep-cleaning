@@ -1,5 +1,5 @@
 /* =========================================================
-   Balaji Deep Cleaning — interactivity
+   Aone Deep Cleaning — interactivity
    - Theme toggle (light/dark) with localStorage persistence
    - Mobile sticky call/whatsapp bar (injected on every page)
    - Mobile menu, footer year, FAQ accordion, scroll reveal
@@ -41,9 +41,9 @@
     bar.className = 'mobile-bar';
     bar.id = 'mobileBar';
     bar.innerHTML =
-      '<a href="tel:+919560739281" class="mb-btn mb-call" aria-label="Call Balaji Deep Cleaning">' +
+      '<a href="tel:+919267905943" class="mb-btn mb-call" aria-label="Call Aone Deep Cleaning">' +
         '<span class="mb-icon">📞</span><span>Call</span></a>' +
-      '<a href="https://wa.me/919560739281" target="_blank" rel="noopener" class="mb-btn mb-wa" aria-label="Chat on WhatsApp">' +
+      '<a href="https://wa.me/919267905943" target="_blank" rel="noopener" class="mb-btn mb-wa" aria-label="Chat on WhatsApp">' +
         '<span class="mb-icon">💬</span><span>WhatsApp</span></a>';
     document.body.appendChild(bar);
   }

@@ -17,7 +17,7 @@ export default function Nav() {
   return (
     <nav className="nav" id="mainNav">
       <a href="/" className="logo">
-        <img src="/images/template/logo.webp?v=3" alt="Balaji Deep Cleaning logo" className="logo-icon" width="163" height="48" loading="eager" decoding="async" />
+        <img src="/images/template/logo.webp?v=3" alt="Aone Deep Cleaning logo" className="logo-icon" width="163" height="48" loading="eager" decoding="async" />
       </a>
       <div className={`nav-links${open ? ' open' : ''}`}>
         {LINKS.map(([label, href]) => (
@@ -40,7 +40,7 @@ export default function Nav() {
           onClick={phoneCallClick}
         >
           <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-          <span className="lbl">+91 95607-39281</span>
+          <span className="lbl">+91 92679-05943</span>
         </a>
         <button className="hamburger" aria-label="Open menu" aria-expanded={open} onClick={() => setOpen(!open)}>☰</button>
       </div>

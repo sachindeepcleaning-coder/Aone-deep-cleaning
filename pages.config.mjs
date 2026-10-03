@@ -10,35 +10,35 @@
 //   4. thank-you flagged noindex
 
 export const SITE_URL = 'https://balajicleaningservice.shop';
-export const SITE_NAME = 'Balaji Deep Cleaning';
+export const SITE_NAME = 'Aone Deep Cleaning';
 export const OG_IMAGE = 'https://balajicleaningservice.shop/images/og-cover.jpg';
 
 export const pages = [
   {
     file: 'index', page: 'index',
     title: 'Full Home Deep Cleaning Gurgaon | From ₹2,500',
-    description: 'Trusted deep cleaning in Gurgaon since 2015. Full-home from ₹2,500, kitchen, bathroom, sofa & carpet. Pay after satisfaction. Book on WhatsApp: +91 9560739281.',
+    description: 'Trusted deep cleaning in Gurgaon since 2015. Full-home from ₹2,500, kitchen, bathroom, sofa & carpet. Pay after satisfaction. Book on WhatsApp: +91 9267905943.',
   },
   {
     file: 'contact', page: 'contact',
-    title: 'Book a Deep Clean in Gurgaon | Balaji Deep Cleaning',
-    description: 'Get a free quote for home deep cleaning in Gurgaon. Call or WhatsApp +91 9560739281. All sectors served. Same-day slots available.',
+    title: 'Book a Deep Clean in Gurgaon | Aone Deep Cleaning',
+    description: 'Get a free quote for home deep cleaning in Gurgaon. Call or WhatsApp +91 9267905943. All sectors served. Same-day slots available.',
   },
   {
     file: 'thank-you', page: 'thank-you',
-    title: 'Booking Confirmed — Balaji Deep Cleaning',
-    description: 'Thank you for booking Balaji Deep Cleaning in Gurgaon. We will call you back within 30 minutes to confirm your slot and fixed price.',
+    title: 'Booking Confirmed — Aone Deep Cleaning',
+    description: 'Thank you for booking Aone Deep Cleaning in Gurgaon. We will call you back within 30 minutes to confirm your slot and fixed price.',
     noindex: true,
   },
   {
     file: '404', page: 'notfound',
-    title: 'Page Not Found — Balaji Deep Cleaning Gurgaon',
+    title: 'Page Not Found — Aone Deep Cleaning Gurgaon',
     description: 'This page moved or never existed. Find deep cleaning services in Gurgaon — fixed prices, same-day slots, pay after satisfaction.',
     noindex: true,
   },
   {
     file: 'about', page: 'about',
-    title: 'About Balaji Deep Cleaning | Trusted Team in Gurgaon',
+    title: 'About Aone Deep Cleaning | Trusted Team in Gurgaon',
     description: 'Meet the police-verified deep cleaning team in Gurgaon since 2015. Eco-friendly, pay after satisfaction, same-day across DLF & Sohna Road.',
   },
 
@@ -55,7 +55,7 @@ export const pages = [
   },
   {
     file: 'full-home-deep-cleaning-1bhk-gurgaon', page: 'service', serviceKey: 'fullhome', bhk: 1,
-    title: '1 BHK Deep Cleaning Gurgaon | Balaji Deep Cleaning',
+    title: '1 BHK Deep Cleaning Gurgaon | Aone Deep Cleaning',
     description: '1 BHK full home deep cleaning in Gurgaon. Every room floor to ceiling — kitchen, bathroom, bedroom. Transparent pricing. Book on WhatsApp.',
   },
   {
@@ -65,18 +65,18 @@ export const pages = [
   },
   {
     file: 'full-home-deep-cleaning-3bhk-gurgaon', page: 'service', serviceKey: 'fullhome', bhk: 3,
-    title: '3 BHK Deep Cleaning Gurgaon | Balaji Deep Cleaning',
+    title: '3 BHK Deep Cleaning Gurgaon | Aone Deep Cleaning',
     description: '3 BHK full home deep cleaning in Gurgaon. Thorough, room-by-room service. Eco-friendly products, pay after satisfaction. Get a free quote today.',
   },
   {
     file: 'full-home-deep-cleaning-4bhk-gurgaon', page: 'service', serviceKey: 'fullhome', bhk: 4,
-    title: '4 BHK Deep Cleaning Gurgaon | Balaji Deep Cleaning',
+    title: '4 BHK Deep Cleaning Gurgaon | Aone Deep Cleaning',
     description: '4 BHK full home deep cleaning in Gurgaon. Large homes, spotless results. Full team deployed, satisfaction guaranteed. Book on WhatsApp.',
   },
   {
     file: 'full-home-deep-cleaning-5bhk-gurgaon', page: 'service', serviceKey: 'fullhome', bhk: 5,
     title: '5 BHK Deep Cleaning Gurgaon | Premium Full-Home',
-    description: '5 BHK full home deep cleaning in Gurgaon. Comprehensive luxury home service. Full professional team. Book on WhatsApp or call +91 9560739281.',
+    description: '5 BHK full home deep cleaning in Gurgaon. Comprehensive luxury home service. Full professional team. Book on WhatsApp or call +91 9267905943.',
   },
   {
     file: 'kitchen-deep-cleaning-gurgaon', page: 'service', serviceKey: 'kitchen',
@@ -120,14 +120,14 @@ export const pages = [
   },
   {
     file: 'all-pages', page: 'allpages',
-    title: 'All Services — Balaji Deep Cleaning Gurgaon',
-    description: 'Browse all deep cleaning services in Gurgaon: full home, kitchen, bathroom, sofa, carpet, office and move-in/out cleaning by Balaji Deep Cleaning.',
+    title: 'All Services — Aone Deep Cleaning Gurgaon',
+    description: 'Browse all deep cleaning services in Gurgaon: full home, kitchen, bathroom, sofa, carpet, office and move-in/out cleaning by Aone Deep Cleaning.',
   },
 
   // ── Blog ──────────────────────────────────────────────────────────────────
   {
     file: 'blog', page: 'blog',
-    title: 'Blog — Cleaning Guides & Tips | Balaji Deep Cleaning',
+    title: 'Blog — Cleaning Guides & Tips | Aone Deep Cleaning',
     description: 'Deep cleaning guides for Gurgaon homes: costs by BHK, cleaning frequency, kitchen chimney care, hard water removal and sofa maintenance. Expert tips.',
   },
   {
@@ -203,7 +203,7 @@ export const pages = [
   {
     file: 'blog/best-deep-cleaning-services-gurgaon', page: 'article',
     title: "Best Deep Cleaning Services in Gurgaon: 5 Compared",
-    description: "Five Gurgaon deep cleaning services compared on BHK pricing, scope, staff verification and guarantees — including where Balaji Deep Cleaning wins and why.",
+    description: "Five Gurgaon deep cleaning services compared on BHK pricing, scope, staff verification and guarantees — including where Aone Deep Cleaning wins and why.",
   },
   {
     file: 'blog/housekeeping-vs-deep-cleaning-gurgaon', page: 'article',
@@ -287,8 +287,8 @@ export const pages = [
   },
   {
     file: 'blog/mr-deep-cleaning-vs-sachin-deep-cleaning', page: 'article',
-    title: "Mr. Deep Cleaning vs Balaji Deep Cleaning: Honest Compare",
-    description: "Mr. Deep Cleaning and Balaji Deep Cleaning compared on BHK rates, checklist depth, verification and guarantee — including the two categories where we lose.",
+    title: "Mr. Deep Cleaning vs Aone Deep Cleaning: Honest Compare",
+    description: "Mr. Deep Cleaning and Aone Deep Cleaning compared on BHK rates, checklist depth, verification and guarantee — including the two categories where we lose.",
   },
   {
     file: 'blog/best-office-deep-cleaning-services-gurgaon', page: 'article',
@@ -297,8 +297,8 @@ export const pages = [
   },
   {
     file: 'blog/urban-company-vs-sachin-deep-cleaning', page: 'article',
-    title: "Urban Company vs Balaji Deep Cleaning in Gurgaon",
-    description: "Urban Company vs Balaji Deep Cleaning on price, crew continuity, checklist ownership and what happens when a Gurgaon deep clean goes wrong.",
+    title: "Urban Company vs Aone Deep Cleaning in Gurgaon",
+    description: "Urban Company vs Aone Deep Cleaning on price, crew continuity, checklist ownership and what happens when a Gurgaon deep clean goes wrong.",
   },
   {
     file: 'blog/house-maid-vs-deep-cleaning-gurgaon', page: 'article',
@@ -325,13 +325,13 @@ export const pages = [
   },
   {
     file: 'blog/nobroker-cleaning-vs-sachin-deep-cleaning', page: 'article',
-    title: "NoBroker Cleaning vs Balaji Deep Cleaning: Gurgaon Rates",
-    description: "NoBroker cleaning and Balaji Deep Cleaning compared for Gurgaon homes — pricing model, crew vetting, scope depth and rescheduling terms.",
+    title: "NoBroker Cleaning vs Aone Deep Cleaning: Gurgaon Rates",
+    description: "NoBroker cleaning and Aone Deep Cleaning compared for Gurgaon homes — pricing model, crew vetting, scope depth and rescheduling terms.",
   },
   {
     file: 'blog/safaiwale-vs-sachin-deep-cleaning', page: 'article',
-    title: "Safaiwale vs Balaji Deep Cleaning: Gurgaon Prices Compared",
-    description: "Safaiwale and Balaji Deep Cleaning side by side for Gurgaon: rate cards, checklist depth, machine use and the guarantee difference that matters.",
+    title: "Safaiwale vs Aone Deep Cleaning: Gurgaon Prices Compared",
+    description: "Safaiwale and Aone Deep Cleaning side by side for Gurgaon: rate cards, checklist depth, machine use and the guarantee difference that matters.",
   },
   // ── New: Price-intent blogs (Batch 1 — 1/2/3BHK + sofa per-seat, complete) ──
   {

@@ -75,7 +75,7 @@ export default function ServicePage({ serviceKey, bhk, url = '' }) {
           '@context': 'https://schema.org',
           '@type': 'VideoObject',
           name: `${s.name} — Real Cleaning Video Gurgaon`,
-          description: `Watch real ${s.name.toLowerCase()} work by Balaji Deep Cleaning team in Gurgaon — before/after, 60 seconds.`,
+          description: `Watch real ${s.name.toLowerCase()} work by Aone Deep Cleaning team in Gurgaon — before/after, 60 seconds.`,
           thumbnailUrl: `https://balajicleaningservice.shop${s.image}`,
           uploadDate: '2026-08-28',
           duration: 'PT60S',
@@ -84,7 +84,7 @@ export default function ServicePage({ serviceKey, bhk, url = '' }) {
           publisher: {
             '@type': 'Organization',
             '@id': 'https://balajicleaningservice.shop/#business',
-            name: 'Balaji Deep Cleaning',
+            name: 'Aone Deep Cleaning',
           },
           contentUrl: 'https://balajicleaningservice.shop/videos/cleaning-2.mp4',
           embedUrl: 'https://www.youtube.com/shorts/p-ArftUay5I',
