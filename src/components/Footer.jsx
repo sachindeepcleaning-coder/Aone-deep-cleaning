@@ -29,7 +29,7 @@ export default function Footer() {
       <div className="footer-grid">
         <div className="footer-brand">
           <a href="/" className="logo">
-            <img src="/images/template/logo.webp?v=3" alt="Aone Deep Cleaning logo" className="logo-icon" width="163" height="48" loading="lazy" decoding="async" />
+            <img src="/images/template/logo.webp?v=3" alt="Aone Deep Cleaning logo" className="logo-icon" width="144" height="48" loading="lazy" decoding="async" />
           </a>
           <p>Professional deep cleaning in Gurgaon since 2015 — police-verified team, eco-friendly products, pay only after you approve the work.</p>
           <p style={{ marginTop: '12px' }}>📍 Serving all of Gurgaon, Haryana</p>
