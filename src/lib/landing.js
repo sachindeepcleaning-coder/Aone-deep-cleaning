@@ -22,6 +22,11 @@ export function phoneCallClick() {
 }
 
 // WhatsApp click → GA4 "whatsapp_click" event (matches GTM trigger).
+export function thankYouPath() {
+  if (typeof window === 'undefined') return '/thank-you.html';
+  const depth = window.location.pathname.split('/').filter(Boolean).length;
+  return depth > 1 ? '../thank-you.html' : './thank-you.html';
+}
 export function whatsappClick() {
   track('whatsapp_click', {
     phone_number: '+919267905943',

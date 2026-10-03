@@ -28,6 +28,14 @@ export function imageDims(src) {
 }
 
 // Truthful srcset: 400w/800w variants (verified 400/800px) + base at real width.
+export function srcSetForRel(file, src) {
+  const pre = (file && file.includes('/')) ? '..' : '.';
+  return srcSetFor(src).split(', ').map((s) => {
+    const parts = s.split(' ');
+    const u = parts[0];
+    return (u.startsWith('/') ? pre + u : u) + ' ' + parts[1];
+  }).join(', ');
+}
 export function srcSetFor(src) {
   const base = src.replace(/\.(jpg|webp)$/, '');
   const [w] = imageDims(src);

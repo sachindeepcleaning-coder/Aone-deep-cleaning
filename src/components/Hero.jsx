@@ -1,5 +1,5 @@
 import QuoteForm from './QuoteForm.jsx';
-import { PHONE_TEL } from '../lib/site.js';
+import { PHONE_TEL, asset } from '../lib/site.js';
 import { phoneCallClick } from '../lib/landing.js';
 
 const PILLS = [
@@ -17,9 +17,9 @@ const STATS = [
   ['₹2,000', '+', 'Starting Price'],
 ];
 
-export default function Hero() {
+export default function Hero({ file }) {
   return (
-    <section className="hero">
+    <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/template/home/Balaji-Deep-Cleaning-banner-1.webp')}")` }}>
       <div className="hero-inner">
         <div className="hero-left">
           <div className="hero-eyebrow">

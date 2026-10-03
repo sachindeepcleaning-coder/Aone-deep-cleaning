@@ -1,4 +1,5 @@
 import { track } from '../lib/landing.js';
+import { asset, pageLink } from '../lib/site.js';
 
 const SERVICES = [
   { img: '/images/template/service/home-cleaning.jpg', name: 'Full Home Deep Cleaning', url: '/full-home-deep-cleaning-1bhk-gurgaon.html', price: 'From ₹2,500', desc: 'Every room, floor to ceiling — bedrooms, kitchen, bathrooms, balconies. Priced by BHK.' },
@@ -12,7 +13,7 @@ const SERVICES = [
   { img: '/images/template/slider-services/bedroom-service.jpg', name: 'Move-In / Move-Out Cleaning', url: '/move-in-move-out-cleaning-gurgaon.html', price: 'From ₹1,999', desc: 'Spotless handovers and move-in ready homes — checklist sign-off included.' },
 ];
 
-export default function ServiceSection() {
+export default function ServiceSection({ file }) {
   return (
     <section className="section">
       <div className="section-inner">
@@ -23,8 +24,8 @@ export default function ServiceSection() {
         </div>
         <div className="services-grid">
           {SERVICES.map((s) => (
-            <a key={s.name} href={s.url} className="service-card fade-up" onClick={() => track('service_select', { event_category: 'Engagement', event_label: s.name })}>
-              <img src={s.img} alt={`${s.name} in Gurgaon`} className="sc-img" loading="lazy" width="400" height="200" />
+            <a key={s.name} href={pageLink(file, s.url)} className="service-card fade-up" onClick={() => track('service_select', { event_category: 'Engagement', event_label: s.name })}>
+              <img src={asset(file, s.img)} alt={`${s.name} in Gurgaon`} className="sc-img" loading="lazy" width="400" height="200" />
               <div className="sc-body">
                 <div className="sc-name">{s.name}</div>
                 <div className="sc-desc">{s.desc}</div>

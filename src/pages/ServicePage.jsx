@@ -14,20 +14,20 @@ import RelatedServices from '../components/RelatedServices.jsx';
 import RelatedGuides from '../components/RelatedGuides.jsx';
 import { JsonLd, localBusinessSchema, serviceSchema, faqSchema, breadcrumbSchema, reviewsSchema } from '../lib/schema.jsx';
 import { trustVariantFor, guaranteeVariantFor } from '../lib/trust-variants.js';
-import { imageDims, srcSetFor } from '../lib/image-dims.js';
+import { imageDims, srcSetForRel } from '../lib/image-dims.js';
 import { getService } from '../lib/services.js';
-import { pageUrl } from '../lib/site.js';
+import { pageUrl, asset, pageLink } from '../lib/site.js';
 
 // Renders inline **bold** markdown and [anchor](/path.html) links in service copy.
 // Same authoring convention as BlogArticlePage.jsx, so editors write internal
 // links identically on blog and service pages.
-function Rich({ text }) {
+function Rich({ text, file }) {
   const segs = String(text).split(/(\[[^\]]+\]\([^)]+\))/g);
   return segs.map((s, i) => {
     const m = s.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
     if (m) {
       const ext = /^https?:/.test(m[2]);
-      return <a key={i} href={m[2]} {...(ext ? { target: '_blank', rel: 'noopener' } : {})} style={{ color: 'var(--primary)', fontWeight: 700 }}>{m[1]}</a>;
+      return <a key={i} href={pageLink(file, m[2])} {...(ext ? { target: '_blank', rel: 'noopener' } : {})} style={{ color: 'var(--primary)', fontWeight: 700 }}>{m[1]}</a>;
     }
     return String(s).split(/\*\*(.+?)\*\*/g).map((p, j) => (j % 2 === 1 ? <strong key={`${i}-${j}`}>{p}</strong> : p));
   });
@@ -38,7 +38,7 @@ function plain(text) {
   return String(text).replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\*\*/g, '');
 }
 
-export default function ServicePage({ serviceKey, bhk, url = '' }) {
+export default function ServicePage({ serviceKey, bhk, url = '', file = 'index' }) {
   const s = getService(serviceKey, bhk);
   // 2026-09-20 audit: vary the shared trust blocks per service group so the
   // 13 service pages don't render byte-identical WhyUs/Guarantee/TrustBar.
@@ -92,7 +92,7 @@ export default function ServicePage({ serviceKey, bhk, url = '' }) {
       />
       )}
 
-      <section className="hero">
+      <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/template/home/Balaji-Deep-Cleaning-banner-1.webp')}")` }}>
         <div className="hero-grid"></div>
         <div className="hero-inner">
           <div className="hero-left">
@@ -103,7 +103,7 @@ export default function ServicePage({ serviceKey, bhk, url = '' }) {
             <h1>
               <span className="hl">{s.name}</span>
             </h1>
-            <p className="hero-sub"><Rich text={s.intro} /> {s.price?.amount && s.price.amount !== 'request' && <strong>{s.price.amount} onwards.</strong>}</p>
+            <p className="hero-sub"><Rich text={s.intro} file={file} /> {s.price?.amount && s.price.amount !== 'request' && <strong>{s.price.amount} onwards.</strong>}</p>
             <div className="hero-pills">
               <span className="pill"><span className="pi">✓</span> Same-Day Service</span>
               <span className="pill"><span className="pi">✓</span> Police-Verified Team</span>
@@ -127,14 +127,14 @@ export default function ServicePage({ serviceKey, bhk, url = '' }) {
               <p className="section-sub" style={{ margin: '0 auto' }}>8 specialised services, each with a confirmed upfront price — no surprises on the day.</p>
             </div>
             <div className="services-grid" style={{ marginTop: 32 }}>
-              <a className="service-card" href="/full-home-deep-cleaning-3bhk-gurgaon.html"><div className="sc-icon">🏠</div><div className="sc-name">Full Home Cleaning</div><div className="sc-desc">Every room top to bottom</div><div className="sc-price">From ₹2,500</div></a>
-              <a className="service-card" href="/office-deep-cleaning-gurgaon.html"><div className="sc-icon">🏢</div><div className="sc-name">Office &amp; Shop Cleaning</div><div className="sc-desc">Workstations & washrooms</div><div className="sc-price">From ₹5,000</div></a>
-              <a className="service-card" href="/kitchen-deep-cleaning-gurgaon.html"><div className="sc-icon">🍳</div><div className="sc-name">Kitchen Deep Cleaning</div><div className="sc-desc">Chimney & hob degreasing</div><div className="sc-price">From ₹1,500</div></a>
-              <a className="service-card" href="/bathroom-deep-cleaning-gurgaon.html"><div className="sc-icon">🚿</div><div className="sc-name">Bathroom Cleaning</div><div className="sc-desc">Descaling & sanitization</div><div className="sc-price">From ₹800</div></a>
-              <a className="service-card" href="/sofa-shampoo-cleaning-gurgaon.html"><div className="sc-icon">🛋️</div><div className="sc-name">Sofa Cleaning</div><div className="sc-desc">Shampoo & extraction</div><div className="sc-price">From ₹499/seat</div></a>
-              <a className="service-card" href="/carpet-shampoo-cleaning-gurgaon.html"><div className="sc-icon">🧶</div><div className="sc-name">Carpet Cleaning</div><div className="sc-desc">Hot-water extraction</div><div className="sc-price">From ₹18/sq ft</div></a>
-              <a className="service-card" href="/house-cleaning-services-in-gurgaon.html"><div className="sc-icon">✨</div><div className="sc-name">House Cleaning</div><div className="sc-desc">Regular upkeep plans</div><div className="sc-price">From ₹499</div></a>
-              <a className="service-card" href="/move-in-move-out-cleaning-gurgaon.html"><div className="sc-icon">📦</div><div className="sc-name">Move-In / Move-Out</div><div className="sc-desc">Empty-flat handover</div><div className="sc-price">From ₹1,999</div></a>
+              <a className="service-card" href={pageLink(file, "/full-home-deep-cleaning-3bhk-gurgaon.html")}><div className="sc-icon">🏠</div><div className="sc-name">Full Home Cleaning</div><div className="sc-desc">Every room top to bottom</div><div className="sc-price">From ₹2,500</div></a>
+              <a className="service-card" href={pageLink(file, "/office-deep-cleaning-gurgaon.html")}><div className="sc-icon">🏢</div><div className="sc-name">Office &amp; Shop Cleaning</div><div className="sc-desc">Workstations & washrooms</div><div className="sc-price">From ₹5,000</div></a>
+              <a className="service-card" href={pageLink(file, "/kitchen-deep-cleaning-gurgaon.html")}><div className="sc-icon">🍳</div><div className="sc-name">Kitchen Deep Cleaning</div><div className="sc-desc">Chimney & hob degreasing</div><div className="sc-price">From ₹1,500</div></a>
+              <a className="service-card" href={pageLink(file, "/bathroom-deep-cleaning-gurgaon.html")}><div className="sc-icon">🚿</div><div className="sc-name">Bathroom Cleaning</div><div className="sc-desc">Descaling & sanitization</div><div className="sc-price">From ₹800</div></a>
+              <a className="service-card" href={pageLink(file, "/sofa-shampoo-cleaning-gurgaon.html")}><div className="sc-icon">🛋️</div><div className="sc-name">Sofa Cleaning</div><div className="sc-desc">Shampoo & extraction</div><div className="sc-price">From ₹499/seat</div></a>
+              <a className="service-card" href={pageLink(file, "/carpet-shampoo-cleaning-gurgaon.html")}><div className="sc-icon">🧶</div><div className="sc-name">Carpet Cleaning</div><div className="sc-desc">Hot-water extraction</div><div className="sc-price">From ₹18/sq ft</div></a>
+              <a className="service-card" href={pageLink(file, "/house-cleaning-services-in-gurgaon.html")}><div className="sc-icon">✨</div><div className="sc-name">House Cleaning</div><div className="sc-desc">Regular upkeep plans</div><div className="sc-price">From ₹499</div></a>
+              <a className="service-card" href={pageLink(file, "/move-in-move-out-cleaning-gurgaon.html")}><div className="sc-icon">📦</div><div className="sc-name">Move-In / Move-Out</div><div className="sc-desc">Empty-flat handover</div><div className="sc-price">From ₹1,999</div></a>
             </div>
           </div>
         </section>
@@ -150,13 +150,13 @@ export default function ServicePage({ serviceKey, bhk, url = '' }) {
           <div className="about-wrap fade-up" style={{ display: 'flex', flexWrap: 'wrap', gap: '32px', alignItems: 'center', marginTop: '32px' }}>
             <div style={{ flex: '1 1 300px', minWidth: 0 }}>
               {s.detail.split('\n\n').map((p, i) => (
-                <p key={i} style={{ margin: '0 0 16px', lineHeight: 1.75, color: 'var(--muted)' }}><Rich text={p} /></p>
+                <p key={i} style={{ margin: '0 0 16px', lineHeight: 1.75, color: 'var(--muted)' }}><Rich text={p} file={file} /></p>
               ))}
             </div>
             <div style={{ flex: '1 1 300px', minWidth: 0 }}>
               <img
-                src={s.image}
-                srcSet={srcSetFor(s.image)}
+                src={asset(file, s.image)}
+                srcSet={srcSetForRel(file, s.image)}
                 sizes="(max-width: 600px) 400px, (max-width: 1000px) 800px, 600px"
                 alt={s.imageAlt}
                 loading="lazy"
@@ -287,9 +287,9 @@ export default function ServicePage({ serviceKey, bhk, url = '' }) {
               <p className="section-sub" style={{ margin: '0 auto' }}>Drag the slider — real Gurgaon homes, not stock. Same 8-hour process you’ll get.</p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20, marginTop: 32 }}>
-              <div className="fade-up"><BeforeAfter before="/images/bathroom-deep-cleaning.jpg" after="/images/full-home-deep-cleaning.jpg" beforeLabel="Before — Hard-water scale" afterLabel="After — Descaled" /></div>
-              <div className="fade-up"><BeforeAfter before="/images/sofa-shampoo-cleaning.jpg" after="/images/carpet-shampoo-cleaning.jpg" beforeLabel="Before — Dusty" afterLabel="After — Extracted" /></div>
-              <div className="fade-up"><BeforeAfter before="/images/house-cleaning.jpg" after="/images/kitchen-deep-cleaning.webp" beforeLabel="Before — Greasy" afterLabel="After — Degreased" /></div>
+              <div className="fade-up"><BeforeAfter before={asset(file, '/images/bathroom-deep-cleaning.jpg')} after={asset(file, '/images/full-home-deep-cleaning.jpg')} beforeLabel="Before — Hard-water scale" afterLabel="After — Descaled" /></div>
+              <div className="fade-up"><BeforeAfter before={asset(file, '/images/sofa-shampoo-cleaning.jpg')} after={asset(file, '/images/carpet-shampoo-cleaning.jpg')} beforeLabel="Before — Dusty" afterLabel="After — Extracted" /></div>
+              <div className="fade-up"><BeforeAfter before={asset(file, '/images/house-cleaning.jpg')} after={asset(file, '/images/kitchen-deep-cleaning.webp')} beforeLabel="Before — Greasy" afterLabel="After — Degreased" /></div>
             </div>
           </div>
         </section>
@@ -297,7 +297,7 @@ export default function ServicePage({ serviceKey, bhk, url = '' }) {
 
       <ReviewsSection reviews={reviews} />
 
-      {serviceKey === 'office' ? <OfficeReelSection /> : <YtShortsSection />}
+      {serviceKey === 'office' ? <OfficeReelSection file={file} /> : <YtShortsSection file={file} />}
 
       <GuaranteeSection variant={guaranteeVariant} />
 
@@ -307,7 +307,7 @@ export default function ServicePage({ serviceKey, bhk, url = '' }) {
         </div>
       </section>
 
-      <RelatedGuides serviceKey={serviceKey} />
+      <RelatedGuides serviceKey={serviceKey} file={file} />
       <RelatedServices currentHref={url.split('/').pop()} />
     </>
   );

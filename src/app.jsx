@@ -41,7 +41,7 @@ export default function App({ page = 'index', file = 'index', serviceKey, bhk })
 
   return (
     <ThemeProvider>
-      <Layout page={page}>
+      <Layout page={page} file={file}>
         <Suspense fallback={null}>
           <Page url={pageUrl(file)} file={file} serviceKey={serviceKey} bhk={bhk} />
         </Suspense>

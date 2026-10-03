@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { pageLink } from '../lib/site.js';
 
 const DATA = [
   { bhk: '1 BHK', time: '5-6 hr', price: '₹2,500' },
@@ -9,7 +10,7 @@ const DATA = [
 ];
 
 // Interactive service comparison + live price quote.
-export default function ComparisonTool() {
+export default function ComparisonTool({ file } = {}) {
   const [sel, setSel] = useState('all');
   const rows = sel === 'all' ? DATA : DATA.filter((r) => r.bhk === sel);
   const total = sel === 'all' ? null : DATA.find((r) => r.bhk === sel)?.price;
@@ -40,7 +41,7 @@ export default function ComparisonTool() {
               <td>{r.time}</td>
               <td>{r.price}</td>
               <td>
-                <a className="btn btn-secondary" href="/contact.html" style={{ padding: '6px 14px', fontSize: 13 }}>
+                <a className="btn btn-secondary" href={pageLink(file, "/contact.html")} style={{ padding: '6px 14px', fontSize: 13 }}>
                   Book
                 </a>
               </td>

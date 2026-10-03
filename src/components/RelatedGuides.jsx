@@ -1,3 +1,4 @@
+import { pageLink } from '../lib/site.js';
 // Internal links from each service page to the most relevant blog guides.
 // Helps Google crawl the articles and builds topical authority (service → guide).
 const GUIDES = [
@@ -62,7 +63,7 @@ const GUIDES = [
   { serviceKey: 'office', title: 'Sector 32 — Weekend-Night Offices', href: '/blog/office-deep-cleaning-sector-32-gurgaon.html' },
 ];
 
-export default function RelatedGuides({ serviceKey }) {
+export default function RelatedGuides({ serviceKey, file }) {
   const guides = GUIDES.filter((g) => g.serviceKey === serviceKey);
   if (guides.length === 0) return null;
 
@@ -76,7 +77,7 @@ export default function RelatedGuides({ serviceKey }) {
         </div>
         <div className="areas-list" style={{ marginTop: '28px' }}>
           {guides.map((g) => (
-            <a key={g.href} href={g.href} className="area-tag" style={{ color: 'var(--green)', fontWeight: 700 }}>
+            <a key={g.href} href={pageLink(file, g.href)} className="area-tag" style={{ color: 'var(--green)', fontWeight: 700 }}>
               {g.title} →
             </a>
           ))}

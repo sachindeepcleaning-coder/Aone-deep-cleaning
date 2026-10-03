@@ -1,19 +1,19 @@
 import { JsonLd, articleSchema, faqSchema, breadcrumbSchema } from '../lib/schema.jsx';
 import { getArticle } from '../lib/blog.js';
-import { pageUrl } from '../lib/site.js';
-import { imageDims, srcSetFor } from '../lib/image-dims.js';
+import { pageUrl, asset, pageLink } from '../lib/site.js';
+import { imageDims, srcSetForRel } from '../lib/image-dims.js';
 import QuoteForm from '../components/QuoteForm.jsx';
 import FaqSection from '../components/FaqSection.jsx';
 import TrustBar from '../components/TrustBar.jsx';
 
 // Renders inline **bold** markdown and [anchor](/path.html) links in article text.
-function Rich({ text }) {
+function Rich({ text, file }) {
   const segs = String(text).split(/(\[[^\]]+\]\([^)]+\))/g);
   return segs.map((s, i) => {
     const m = s.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
     if (m) {
       const ext = /^https?:/.test(m[2]);
-      return <a key={i} href={m[2]} {...(ext ? { target: '_blank', rel: 'noopener' } : {})} style={{ color: 'var(--primary)', fontWeight: 700 }}>{m[1]}</a>;
+      return <a key={i} href={pageLink(file, m[2])} {...(ext ? { target: '_blank', rel: 'noopener' } : {})} style={{ color: 'var(--primary)', fontWeight: 700 }}>{m[1]}</a>;
     }
     return String(s).split(/\*\*(.+?)\*\*/g).map((p, j) => (j % 2 === 1 ? <strong key={`${i}-${j}`}>{p}</strong> : p));
   });
@@ -22,10 +22,10 @@ function Rich({ text }) {
 function slugId(text) {
   return String(text).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 60);
 }
-function renderBlock(b, key) {
+function renderBlock(b, key, file) {
   switch (b.t) {
-    case 'p': return <p key={key} className="blog-p"><Rich text={b.x} /></p>;
-    case 'lead': return <p key={key} className="blog-lead"><Rich text={b.x} /></p>;
+    case 'p': return <p key={key} className="blog-p"><Rich text={b.x} file={file} /></p>;
+    case 'lead': return <p key={key} className="blog-lead"><Rich text={b.x} file={file} /></p>;
     case 'h2': return <h2 key={key} id={slugId(b.x)} className="blog-h2">{b.x}</h2>;
     case 'h3': return <h3 key={key} id={slugId(b.x)} className="blog-h3">{b.x}</h3>;
     case 'table':
@@ -37,15 +37,15 @@ function renderBlock(b, key) {
             </thead>
             <tbody>
               {b.rows.map((r, ri) => (
-                <tr key={ri}>{r.map((c, ci) => <td key={ci}><Rich text={c} /></td>)}</tr>
+                <tr key={ri}>{r.map((c, ci) => <td key={ci}><Rich text={c} file={file} /></td>)}</tr>
               ))}
             </tbody>
           </table>
         </div>
       );
-    case 'ul': return <ul key={key} className="blog-ul">{b.items.map((it, i) => <li key={i}><Rich text={it} /></li>)}</ul>;
-    case 'ol': return <ol key={key} className="blog-ol">{b.items.map((it, i) => <li key={i}><Rich text={it} /></li>)}</ol>;
-    case 'tip': return <div key={key} className="blog-tip"><Rich text={b.x} /></div>;
+    case 'ul': return <ul key={key} className="blog-ul">{b.items.map((it, i) => <li key={i}><Rich text={it} file={file} /></li>)}</ul>;
+    case 'ol': return <ol key={key} className="blog-ol">{b.items.map((it, i) => <li key={i}><Rich text={it} file={file} /></li>)}</ol>;
+    case 'tip': return <div key={key} className="blog-tip"><Rich text={b.x} file={file} /></div>;
     default: return null;
   }
 }
@@ -103,7 +103,7 @@ export default function BlogArticlePage({ file = 'blog', url = '' }) {
       <section className="section">
         <div className="section-inner" style={{ textAlign: 'center' }}>
           <h1>Article not found</h1>
-          <p style={{ color: 'var(--muted)' }}>This guide does not exist. <a href="/blog.html" style={{ color: 'var(--primary)' }}>Browse all guides</a>.</p>
+          <p style={{ color: 'var(--muted)' }}>This guide does not exist. <a href={pageLink(file, '/blog.html')} style={{ color: 'var(--primary)' }}>Browse all guides</a>.</p>
         </div>
       </section>
     );
@@ -127,12 +127,12 @@ export default function BlogArticlePage({ file = 'blog', url = '' }) {
       <section className="blog-hero">
         <div className="section-inner">
           <div className="blog-meta">
-            <a href="/blog.html" className="blog-back">← All guides</a>
+            <a href={pageLink(file, '/blog.html')} className="blog-back">← All guides</a>
             <span>Updated {article.dateModified}</span>
             <span>·</span>
             <span>{mins} min read</span>
             <span>·</span>
-            <span>By <a href="/about.html#sachin-kumar" style={{ color: 'var(--primary)', fontWeight: 700 }}>Aone Deep Cleaning</a>, Founder</span>
+            <span>By <a href={pageLink(file, '/about.html#sachin-kumar')} style={{ color: 'var(--primary)', fontWeight: 700 }}>Aone Deep Cleaning</a>, Founder</span>
           </div>
           <h1>{article.title}</h1>
           {article.printable && (
@@ -143,8 +143,8 @@ export default function BlogArticlePage({ file = 'blog', url = '' }) {
             </div>
           )}
           <img
-            src={article.image}
-            srcSet={srcSetFor(article.image)}
+            src={asset(file, article.image)}
+            srcSet={srcSetForRel(file, article.image)}
             sizes="(max-width: 600px) 400px, (max-width: 1000px) 800px, 860px"
             alt={article.imageAlt}
             width={imageDims(article.image)[0]}
@@ -160,10 +160,10 @@ export default function BlogArticlePage({ file = 'blog', url = '' }) {
         <div className="section-inner blog-content">
           <QuoteForm />
           <article>
-            {article.blocks.slice(0, Math.ceil(article.blocks.length / 2)).map((b, i) => renderBlock(b, `${b.t}-${i}`))}
+            {article.blocks.slice(0, Math.ceil(article.blocks.length / 2)).map((b, i) => renderBlock(b, `${b.t}-${i}`, file))}
             {secondaryImage(article) && (
               <img
-                src={secondaryImage(article).src}
+                src={asset(file, secondaryImage(article).src)}
                 alt={secondaryImage(article).alt}
                 width={imageDims(secondaryImage(article).src)[0]}
                 height={imageDims(secondaryImage(article).src)[1]}
@@ -172,7 +172,7 @@ export default function BlogArticlePage({ file = 'blog', url = '' }) {
                 decoding="async"
               />
             )}
-            {article.blocks.slice(Math.ceil(article.blocks.length / 2)).map((b, i) => renderBlock(b, `${b.t}-b${i}`))}
+            {article.blocks.slice(Math.ceil(article.blocks.length / 2)).map((b, i) => renderBlock(b, `${b.t}-b${i}`, file))}
           </article>
           {article.cta && (
             <div className="blog-cta">
@@ -180,15 +180,15 @@ export default function BlogArticlePage({ file = 'blog', url = '' }) {
               <p>
                 <strong>{article.title}</strong>? Our police-verified team in Gurgaon handles it for you — with a fixed quote before we start and pay-after-satisfaction. Same-day slots are often available if you book before noon.
               </p>
-              <a href={article.cta.href} className="blog-cta-btn">{article.cta.label}</a>
+              <a href={pageLink(file, article.cta.href)} className="blog-cta-btn">{article.cta.label}</a>
               <div style={{ marginTop: 16, display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
                 {[
-                  { href: '/deep-cleaning-services-in-gurgaon.html', label: 'Deep Cleaning Services in Gurgaon →' },
-                  { href: '/house-cleaning-services-in-gurgaon.html', label: 'House Cleaning Services in Gurgaon →' },
-                  { href: '/kitchen-deep-cleaning-gurgaon.html', label: 'Kitchen Deep Cleaning Gurgaon →' },
+                  { href: pageLink(file, '/deep-cleaning-services-in-gurgaon.html'), label: 'Deep Cleaning Services in Gurgaon →' },
+                  { href: pageLink(file, '/house-cleaning-services-in-gurgaon.html'), label: 'House Cleaning Services in Gurgaon →' },
+                  { href: pageLink(file, '/kitchen-deep-cleaning-gurgaon.html'), label: 'Kitchen Deep Cleaning Gurgaon →' },
                   // blog-seo-check §5.5: never repeat the CTA destination in body links.
-                  { href: '/bathroom-deep-cleaning-gurgaon.html', label: 'Bathroom Deep Cleaning Gurgaon →' },
-                  { href: '/sofa-shampoo-cleaning-gurgaon.html', label: 'Sofa Shampoo Cleaning Gurgaon →' },
+                  { href: pageLink(file, '/bathroom-deep-cleaning-gurgaon.html'), label: 'Bathroom Deep Cleaning Gurgaon →' },
+                  { href: pageLink(file, '/sofa-shampoo-cleaning-gurgaon.html'), label: 'Sofa Shampoo Cleaning Gurgaon →' },
                 ].filter((l) => !article.cta || l.href !== article.cta.href).slice(0, 3).map((l) => (
                   <a key={l.href} href={l.href} style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '.88rem' }}>{l.label}</a>
                 ))}
@@ -211,7 +211,7 @@ export default function BlogArticlePage({ file = 'blog', url = '' }) {
             </div>
           )}
           <p className="blog-end" style={{ textAlign: 'center', marginTop: '40px' }}>
-            <a href="/blog.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>More cleaning guides for Gurgaon homes →</a>
+            <a href={pageLink(file, '/blog.html')} style={{ color: 'var(--primary)', fontWeight: 700 }}>More cleaning guides for Gurgaon homes →</a>
           </p>
         </div>
       </section>

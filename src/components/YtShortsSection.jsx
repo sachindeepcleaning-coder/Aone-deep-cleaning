@@ -3,6 +3,7 @@
 // real iframe only loads when tapped. This avoids YouTube's "Video unavailable"
 // overlay on embeds and removes 3 iframes from every page load (big speed win).
 import { useState } from 'react';
+import { asset } from '../lib/site.js';
 
 const SHORTS = [
   {
@@ -28,7 +29,7 @@ const SHORTS = [
 export const YT_CHANNEL = 'https://www.youtube.com/@Cleaning_service_in_Gurgaon';
 export const IG_PAGE = 'https://www.instagram.com/cleaning_service_in_gurgaon/';
 
-function ShortCard({ id, label, caption, poster, onTrack }) {
+function ShortCard({ id, label, caption, poster, onTrack, file }) {
   const [play, setPlay] = useState(false);
 
   return (
@@ -55,7 +56,7 @@ function ShortCard({ id, label, caption, poster, onTrack }) {
               aria-label={`Play video: ${caption}`}
             >
               <img
-                src={poster}
+                src={asset(file, poster)}
                 alt={`${caption} — watch on YouTube`}
                 loading="lazy"
                 decoding="async"
@@ -80,7 +81,7 @@ function ShortCard({ id, label, caption, poster, onTrack }) {
   );
 }
 
-export default function YtShortsSection() {
+export default function YtShortsSection({ file }) {
   const track = (label) => {
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'yt_short_click', { event_category: 'Social', event_label: label });
@@ -100,7 +101,7 @@ export default function YtShortsSection() {
 
         <div className="sdc-reel-grid">
           {SHORTS.map((s) => (
-            <ShortCard key={s.id} {...s} onTrack={track} />
+            <ShortCard key={s.id} {...s} onTrack={track} file={file} />
           ))}
         </div>
 

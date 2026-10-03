@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { PHONE_TEL, waMsg } from '../lib/site.js';
+import { PHONE_TEL, waMsg, asset, pageLink } from '../lib/site.js';
 import { phoneCallClick, whatsappClick } from '../lib/landing.js';
 
 // Template-style white sticky navbar: logo left, links center, CTAs right.
@@ -12,16 +12,16 @@ const LINKS = [
   ['Contact', '/contact.html'],
 ];
 
-export default function Nav() {
+export default function Nav({ file }) {
   const [open, setOpen] = useState(false);
   return (
     <nav className="nav" id="mainNav">
-      <a href="/" className="logo">
-        <img src="/images/template/logo.webp?v=3" alt="Aone Deep Cleaning logo" className="logo-icon" width="144" height="48" loading="eager" decoding="async" />
+      <a href={pageLink(file, '/')} className="logo">
+        <img src={asset(file, '/images/template/logo.webp?v=3')} alt="Aone Deep Cleaning logo" className="logo-icon" width="144" height="48" loading="eager" decoding="async" />
       </a>
       <div className={`nav-links${open ? ' open' : ''}`}>
         {LINKS.map(([label, href]) => (
-          <a key={href + label} href={href} onClick={() => setOpen(false)}>{label}</a>
+          <a key={href + label} href={pageLink(file, href)} onClick={() => setOpen(false)}>{label}</a>
         ))}
       </div>
       <div className="nav-actions">

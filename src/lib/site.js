@@ -9,6 +9,22 @@ export function pageUrl(file = 'index') {
   return file === 'index' ? `${SITE_URL}/` : `${SITE_URL}/${file}.html`;
 }
 
+// Depth-aware URLs: the same build serves a custom domain (site root) and
+// the GitHub Pages project subpath, and pages live at root and under blog/.
+// Prefix every site-relative asset/link with the current page's depth so
+// both contexts resolve. `file` comes from App (SSR and client agree).
+export function relBase(file) {
+  return file && file.includes('/') ? '..' : '.';
+}
+export function asset(file, p) {
+  if (!p || !p.startsWith('/')) return p;
+  return relBase(file) + p;
+}
+export function pageLink(file, href) {
+  if (!href || !href.startsWith('/') || href.startsWith('//')) return href;
+  return relBase(file) + href;
+}
+
 export const PHONE = '+91 92679-05943';
 export const PHONE_TEL = 'tel:+919267905943';
 export const WHATSAPP_NUMBER = '919267905943';

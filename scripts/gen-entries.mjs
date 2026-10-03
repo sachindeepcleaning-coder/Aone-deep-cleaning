@@ -156,8 +156,8 @@ ${noindex}  <meta name="geo.region" content="IN-HR" />
   <meta name="twitter:image" content="${ogImage}" />
 ${preload}  ${gtm}
   ${clarity}
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/poppins-400.woff2" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/poppins-700.woff2" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="${p.file.includes('/') ? '..' : '.'}/fonts/poppins-400.woff2" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="${p.file.includes('/') ? '..' : '.'}/fonts/poppins-700.woff2" />
   <link rel="stylesheet" href="/src/styles/global.css" />
 </head>
 <body>

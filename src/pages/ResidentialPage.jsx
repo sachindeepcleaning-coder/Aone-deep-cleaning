@@ -1,3 +1,4 @@
+import { asset } from '../lib/site.js';
 import QuoteForm from '../components/QuoteForm.jsx';
 import TrustBar from '../components/TrustBar.jsx';
 import ReviewsSection from '../components/ReviewsSection.jsx';
@@ -43,7 +44,7 @@ const STATS = [
 ];
 
 
-export default function ResidentialPage({ url }) {
+export default function ResidentialPage({ url, file }) {
 
 
   return (
@@ -52,7 +53,7 @@ export default function ResidentialPage({ url }) {
       <JsonLd data={serviceSchema({ name: 'Residential Cleaners Near Me in Gurgaon', description: 'Local, police-verified residential cleaners dispatched from the team nearest to your Gurgaon area. Pay only after cleaning.', url })} />
       <JsonLd data={faqSchema(FAQS.map(([q, a]) => ({ q, a })))} />
 
-      <section className="hero">
+      <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/template/home/Balaji-Deep-Cleaning-banner-1.webp')}")` }}>
         <div className="hero-grid"></div>
         <div className="hero-inner">
           <div className="hero-left">
@@ -184,7 +185,7 @@ export default function ResidentialPage({ url }) {
                     aria-label="Watch residential deep-cleaning reel on Instagram"
                   >
                     <img
-                      src="/images/full-home-deep-cleaning.webp"
+                      src={asset(file, '/images/full-home-deep-cleaning.webp')}
                       alt="Residential deep-cleaning job in Gurgaon — watch on Instagram"
                       loading="lazy"
                       decoding="async"
@@ -201,7 +202,7 @@ export default function ResidentialPage({ url }) {
         </div>
       </section>
 
-      <YtShortsSection />
+      <YtShortsSection file={file} />
 
       <AreasSection />
 

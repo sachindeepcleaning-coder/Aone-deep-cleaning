@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { NETLIFY_FORM_NAME, FORMSPREE_ID, PHONE, PHONE_TEL, waMsg } from '../lib/site.js';
-import { track, whatsappClick } from '../lib/landing.js';
+import { track, whatsappClick, thankYouPath } from '../lib/landing.js';
 
 // Hero quote form card.
 // Primary: Netlify Forms (works when deployed to Netlify).
@@ -34,7 +34,7 @@ export default function QuoteForm() {
       track('generate_lead', { event_category: 'Lead', event_label: 'Quote Form' });
       // Give GTM a beat to read the dataLayer, then redirect to the thank-you
       // page so the "GA4 Form submission" tag (page path /thank-you.html) fires.
-      window.setTimeout(() => { window.location.href = '/thank-you.html'; }, 250);
+      window.setTimeout(() => { window.location.href = thankYouPath(); }, 250);
     };
 
     try {

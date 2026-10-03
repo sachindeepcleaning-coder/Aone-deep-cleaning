@@ -2,7 +2,7 @@ import FinalCta from '../components/FinalCta.jsx';
 import QuoteForm from '../components/QuoteForm.jsx';
 import YtShortsSection from '../components/YtShortsSection.jsx';
 import { JsonLd, breadcrumbSchema } from '../lib/schema.jsx';
-import { pageUrl, WA_BOOK, waMsg } from '../lib/site.js';
+import { pageUrl, WA_BOOK, waMsg, asset } from '../lib/site.js';
 import { whatsappClick } from '../lib/landing.js';
 import { ARTICLES } from '../lib/blog.js';
 
@@ -55,7 +55,7 @@ const GROUPS = [
   },
 ];
 
-export default function AllPagesPage({ url }) {
+export default function AllPagesPage({ url, file }) {
   return (
     <>
       <JsonLd data={breadcrumbSchema([
@@ -63,7 +63,7 @@ export default function AllPagesPage({ url }) {
         { name: 'All Pages', url },
       ])} />
 
-      <section className="hero">
+      <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/template/home/Balaji-Deep-Cleaning-banner-1.webp')}")` }}>
         <div className="hero-grid"></div>
         <div className="hero-inner">
           <div className="hero-left">
@@ -145,7 +145,7 @@ export default function AllPagesPage({ url }) {
         </div>
       </section>
 
-      <YtShortsSection />
+      <YtShortsSection file={file} />
 
       <FinalCta />
     </>

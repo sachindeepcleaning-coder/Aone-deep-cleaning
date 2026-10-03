@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { asset } from '../lib/site.js';
 
 // Phone-style local reel player (old Firebase ad-page design, Aone header).
 // Single verified-clean clip only: public/videos/cleaning-2.mp4 carries no
@@ -7,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 const CLIP = 'videos/cleaning-2.mp4';
 const POSTER = '/images/cleaning-1.webp';
 
-export default function LocalReel() {
+export default function LocalReel({ file }) {
   const wrapRef = useRef(null);
   const videoRef = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -66,7 +67,7 @@ export default function LocalReel() {
               <video
                 ref={videoRef}
                 src={visible ? CLIP : undefined}
-                poster={POSTER}
+                poster={asset(file, POSTER)}
                 muted
                 loop
                 playsInline

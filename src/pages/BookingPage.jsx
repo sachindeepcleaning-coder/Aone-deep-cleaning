@@ -1,3 +1,4 @@
+import { asset, pageLink } from '../lib/site.js';
 import QuoteForm from '../components/QuoteForm.jsx';
 import TrustBar from '../components/TrustBar.jsx';
 import AreasSection from '../components/AreasSection.jsx';
@@ -36,14 +37,14 @@ const FAQS = [
   ['Can societies or offices book online in bulk?', 'Yes — facility desks and RWAs book cluster days over WhatsApp with consolidated GST invoicing, staff ID records and photo-logged walkthroughs. See our society cleaning page for the bulk playbook, or just message the requirement directly.'],
 ];
 
-export default function BookingPage({ url }) {
+export default function BookingPage({ url, file }) {
   return (
     <>
       <JsonLd data={localBusinessSchema({ url })} />
       <JsonLd data={serviceSchema({ name: 'Book Cleaning Online in Gurgaon — No App Needed', description: 'Book house and deep cleaning online in Gurgaon without any app: WhatsApp booking in 30 seconds, same-day slots, fixed price, pay after walkthrough.', url })} />
       <JsonLd data={faqSchema(FAQS.map(([q, a]) => ({ q, a })))} />
 
-      <section className="hero">
+      <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/template/home/Balaji-Deep-Cleaning-banner-1.webp')}")` }}>
         <div className="hero-grid"></div>
         <div className="hero-inner">
           <div className="hero-left">
@@ -56,7 +57,7 @@ export default function BookingPage({ url }) {
               Without Any <span className="hl2">App Download</span>
             </h1>
             <p className="hero-sub">
-              Skip the 7-screen app checkout. One WhatsApp message books <a href="/deep-cleaning-services-in-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>verified deep cleaning</a> with a
+              Skip the 7-screen app checkout. One WhatsApp message books <a href={pageLink(file, '/deep-cleaning-services-in-gurgaon.html')} style={{ color: 'var(--primary)', fontWeight: 700 }}>verified deep cleaning</a> with a
               fixed price and <strong>pay-after-walkthrough</strong> — serving Gurgaon since <strong>2015</strong>.
             </p>
             <div className="hero-pills">
@@ -116,7 +117,7 @@ export default function BookingPage({ url }) {
           <div style={{ textAlign: 'center' }} className="fade-up">
             <div className="section-tag">App vs Direct</div>
             <h2 className="section-title">What App Checkout Costs You (Beyond Money)</h2>
-            <p className="section-sub" style={{ margin: '0 auto' }}><a href="/blog/urban-company-vs-sachin-deep-cleaning.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>Urban Company and NoBroker</a> run the best-built booking apps in Indian home services. Here is the honest side-by-side so you can choose with open eyes.</p>
+            <p className="section-sub" style={{ margin: '0 auto' }}><a href={pageLink(file, '/blog/urban-company-vs-sachin-deep-cleaning.html')} style={{ color: 'var(--primary)', fontWeight: 700 }}>Urban Company and NoBroker</a> run the best-built booking apps in Indian home services. Here is the honest side-by-side so you can choose with open eyes.</p>
           </div>
           <div className="fade-up" style={{ marginTop: 32, overflowX: 'auto', borderRadius: 14, border: '1px solid var(--border)' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: 'var(--card)' }}>
@@ -148,7 +149,7 @@ export default function BookingPage({ url }) {
           <div style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto' }} className="fade-up">
             <div className="section-tag">Honest Note</div>
             <h2 className="section-title">If You Need a Daily Maid, We\u2019ll Say So</h2>
-            <p className="section-sub" style={{ margin: '0 auto' }}>We sell professional cleaning visits \u2014 not live-in maids. If your need is daily chores, our <a href="/blog/house-maid-vs-deep-cleaning-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>house-maid-vs-deep-cleaning guide</a> maps the right hire, and our weekly plans (from \u20b9499/visit) cover everything between maid days and quarterly resets. No bait, no app required to find out.</p>
+            <p className="section-sub" style={{ margin: '0 auto' }}>We sell professional cleaning visits \u2014 not live-in maids. If your need is daily chores, our <a href={pageLink(file, '/blog/house-maid-vs-deep-cleaning-gurgaon.html')} style={{ color: 'var(--primary)', fontWeight: 700 }}>house-maid-vs-deep-cleaning guide</a> maps the right hire, and our weekly plans (from \u20b9499/visit) cover everything between maid days and quarterly resets. No bait, no app required to find out.</p>
           </div>
           <div className="fade-up" style={{ marginTop: 32, overflowX: 'auto', borderRadius: 14, border: '1px solid var(--border)' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', background: 'var(--card)' }}>
@@ -171,7 +172,7 @@ export default function BookingPage({ url }) {
               </tbody>
             </table>
           </div>
-          <p className="section-sub" style={{ margin: '16px auto 0', textAlign: 'center' }}>Every figure locked on the confirmation call \u2014 identical in DLF, <a href="/blog/sohna-road-deep-cleaning-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>Sohna Road</a>, <a href="/blog/golf-course-road-deep-cleaning-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>Golf Course Road</a> and all sectors.</p>
+          <p className="section-sub" style={{ margin: '16px auto 0', textAlign: 'center' }}>Every figure locked on the confirmation call \u2014 identical in DLF, <a href={pageLink(file, '/blog/sohna-road-deep-cleaning-gurgaon.html')} style={{ color: 'var(--primary)', fontWeight: 700 }}>Sohna Road</a>, <a href={pageLink(file, '/blog/golf-course-road-deep-cleaning-gurgaon.html')} style={{ color: 'var(--primary)', fontWeight: 700 }}>Golf Course Road</a> and all sectors.</p>
           <div style={{ textAlign: 'center', maxWidth: '760px', margin: '32px auto 0' }} className="fade-up">
             <div className="section-tag">Who Books Online Most</div>
             <h2 className="section-title">Built for Busy Gurgaon Lives</h2>

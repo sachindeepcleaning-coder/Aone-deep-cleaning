@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { asset } from '../lib/site.js';
 import YtShortsSection from './YtShortsSection.jsx';
 
 // Portrait 9:16 Instagram reels as click-to-play facades (local poster, real
@@ -26,7 +27,7 @@ const REELS = [
   },
 ];
 
-function IgCard({ id, label, caption, poster, onTrack }) {
+function IgCard({ id, label, caption, poster, onTrack, file }) {
   const [play, setPlay] = useState(false);
   return (
     <div className="sdc-reel-item fade-up">
@@ -53,7 +54,7 @@ function IgCard({ id, label, caption, poster, onTrack }) {
               aria-label={`Play Instagram reel: ${caption}`}
             >
               <img
-                src={poster}
+                src={asset(file, poster)}
                 alt={`${caption} — watch on Instagram`}
                 loading="lazy"
                 decoding="async"
@@ -78,7 +79,7 @@ function IgCard({ id, label, caption, poster, onTrack }) {
   );
 }
 
-export default function OfficeReelSection() {
+export default function OfficeReelSection({ file }) {
   const track = (label) => {
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'ig_reel_click', { event_category: 'Social', event_label: label });
@@ -99,7 +100,7 @@ export default function OfficeReelSection() {
 
         <div className="sdc-reel-grid">
           {REELS.map((r) => (
-            <IgCard key={r.id} {...r} onTrack={track} />
+            <IgCard key={r.id} {...r} onTrack={track} file={file} />
           ))}
         </div>
 

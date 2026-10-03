@@ -165,7 +165,7 @@ video { height: auto; }
 }
 
 /* ---------- Hero (template slider look, static) ---------- */
-.hero { position: relative; overflow: hidden; background: #000d26 url('/images/template/home/Balaji-Deep-Cleaning-banner-1.webp') center/cover no-repeat; }
+.hero { position: relative; overflow: hidden; background-color: #000d26; }
 .hero::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(135deg, rgba(0,13,38,.78) 0%, rgba(0,13,38,.55) 60%, rgba(0,168,240,.35) 100%);

@@ -1,4 +1,4 @@
-import { PHONE_TEL, SOCIAL, WHATSAPP } from '../lib/site.js';
+import { PHONE_TEL, SOCIAL, WHATSAPP, asset, pageLink } from '../lib/site.js';
 import { phoneCallClick, whatsappClick } from '../lib/landing.js';
 
 const SERVICE_LINKS = [
@@ -23,13 +23,13 @@ const BHK_LINKS = [
   ['Book Cleaning Online', '/book-cleaning-online-gurgaon.html'],
 ];
 
-export default function Footer() {
+export default function Footer({ file }) {
   return (
     <footer>
       <div className="footer-grid">
         <div className="footer-brand">
-          <a href="/" className="logo">
-            <img src="/images/template/logo.webp?v=3" alt="Aone Deep Cleaning logo" className="logo-icon" width="144" height="48" loading="lazy" decoding="async" />
+          <a href={pageLink(file, '/')} className="logo">
+            <img src={asset(file, '/images/template/logo.webp?v=3')} alt="Aone Deep Cleaning logo" className="logo-icon" width="144" height="48" loading="lazy" decoding="async" />
           </a>
           <p>Professional deep cleaning in Gurgaon since 2015 — police-verified team, eco-friendly products, pay only after you approve the work.</p>
           <p style={{ marginTop: '12px' }}>📍 Serving all of Gurgaon, Haryana</p>
@@ -45,25 +45,25 @@ export default function Footer() {
         <div className="footer-col">
           <h4>Services</h4>
           {SERVICE_LINKS.map(([label, href]) => (
-            <a key={href} href={href}>{label}</a>
+            <a key={href} href={pageLink(file, href)}>{label}</a>
           ))}
         </div>
         <div className="footer-col">
           <h4>BHK Packages</h4>
           {BHK_LINKS.map(([label, href]) => (
-            <a key={href} href={href}>{label}</a>
+            <a key={href} href={pageLink(file, href)}>{label}</a>
           ))}
         </div>
         <div className="footer-col">
           <h4>Company</h4>
-          <a href="/about.html">About Us</a>
-          <a href="/blog.html">Blog &amp; Guides</a>
-          <a href="/blog/deep-cleaning-cost-gurgaon-2026.html">Deep Cleaning Cost Guide</a>
-          <a href="/blog/urban-company-vs-sachin-deep-cleaning.html">Urban Company vs Aone</a>
-          <a href="/blog/diwali-cleaning-gurgaon.html">Diwali Cleaning Gurgaon</a>
-          <a href="/contact.html">Contact Us</a>
-          <a href="/all-pages.html">All Pages</a>
-          <a href="/sitemap.xml">Sitemap</a>
+          <a href={pageLink(file, '/about.html')}>About Us</a>
+          <a href={pageLink(file, '/blog.html')}>Blog &amp; Guides</a>
+          <a href={pageLink(file, '/blog/deep-cleaning-cost-gurgaon-2026.html')}>Deep Cleaning Cost Guide</a>
+          <a href={pageLink(file, '/blog/urban-company-vs-sachin-deep-cleaning.html')}>Urban Company vs Aone</a>
+          <a href={pageLink(file, '/blog/diwali-cleaning-gurgaon.html')}>Diwali Cleaning Gurgaon</a>
+          <a href={pageLink(file, '/contact.html')}>Contact Us</a>
+          <a href={pageLink(file, '/all-pages.html')}>All Pages</a>
+          <a href={pageLink(file, '/sitemap.xml')}>Sitemap</a>
         </div>
       </div>
       <div className="footer-bottom">© {new Date().getFullYear()} Aone Deep Cleaning. All rights reserved.</div>

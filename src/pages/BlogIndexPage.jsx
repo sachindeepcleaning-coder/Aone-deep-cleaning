@@ -1,9 +1,9 @@
 import { ARTICLES } from '../lib/blog.js';
 import { JsonLd, breadcrumbSchema } from '../lib/schema.jsx';
-import { pageUrl } from '../lib/site.js';
+import { pageUrl, asset } from '../lib/site.js';
 import TrustBar from '../components/TrustBar.jsx';
 
-export default function BlogIndexPage({ url }) {
+export default function BlogIndexPage({ url, file }) {
   return (
     <>
       <JsonLd
@@ -42,7 +42,7 @@ export default function BlogIndexPage({ url }) {
             {ARTICLES.map((a) => (
               <a key={a.slug} className="blog-card" href={`${a.file}.html`}>
                 <img
-                  src={a.image}
+                  src={asset(file, a.image)}
                   alt={a.imageAlt}
                   loading="lazy"
                   width="1200"

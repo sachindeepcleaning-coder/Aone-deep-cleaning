@@ -1,7 +1,7 @@
 import QuoteForm from '../components/QuoteForm.jsx';
 import TrustBar from '../components/TrustBar.jsx';
 import { JsonLd, breadcrumbSchema } from '../lib/schema.jsx';
-import { pageUrl } from '../lib/site.js';
+import { pageUrl, pageLink } from '../lib/site.js';
 
 // GitHub Pages serves /404.html for unknown paths. Kept useful (not a dead
 // end): search box equivalent via popular links + instant quote CTA.
@@ -16,7 +16,7 @@ const LINKS = [
   ['Book a Deep Clean', '/contact.html'],
 ];
 
-export default function NotFoundPage({ url }) {
+export default function NotFoundPage({ url, file }) {
   return (
     <>
       <JsonLd
@@ -36,7 +36,7 @@ export default function NotFoundPage({ url }) {
           </p>
           <div className="areas-list" style={{ marginTop: '28px', justifyContent: 'center' }}>
             {LINKS.map(([label, href]) => (
-              <a key={href} href={href} className="area-tag" style={{ color: 'var(--green)', fontWeight: 700 }}>
+              <a key={href} href={pageLink(file, href)} className="area-tag" style={{ color: 'var(--green)', fontWeight: 700 }}>
                 {label} →
               </a>
             ))}

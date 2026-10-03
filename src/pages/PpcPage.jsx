@@ -89,7 +89,7 @@ export default function PpcPage({ url, file }) {
         ])}
       />
 
-      <section className="hero">
+      <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/template/home/Balaji-Deep-Cleaning-banner-1.webp')}")` }}>
         <div className="hero-grid"></div>
         <div className="hero-inner">
           <div className="hero-left">
@@ -125,7 +125,7 @@ export default function PpcPage({ url, file }) {
 
       <CountdownStrip offerText={cfg.offer} />
 
-      <LocalReel />
+      <LocalReel file={file} />
 
       <section className="section">
         <div className="section-inner">

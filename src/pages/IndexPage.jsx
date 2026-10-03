@@ -1,3 +1,4 @@
+import { asset, pageLink } from '../lib/site.js';
 import Hero from '../components/Hero.jsx';
 import TrustBar from '../components/TrustBar.jsx';
 import LocalReel from '../components/LocalReel.jsx';
@@ -15,7 +16,7 @@ import FinalCta from '../components/FinalCta.jsx';
 import { JsonLd, websiteSchema, localBusinessSchema, faqSchema, reviewsSchema } from '../lib/schema.jsx';
 import { FAQS, REVIEWS } from '../lib/landing.js';
 
-export default function IndexPage({ url }) {
+export default function IndexPage({ url, file }) {
   return (
     <>
       <JsonLd data={websiteSchema()} />
@@ -23,12 +24,12 @@ export default function IndexPage({ url }) {
       <JsonLd data={faqSchema(FAQS.map(([q, a]) => ({ q, a })))} />
       <JsonLd data={reviewsSchema(REVIEWS, 'Deep Cleaning Services in Gurgaon')} />
 
-      <Hero />
+      <Hero file={file} />
       <TrustBar />
       <section className="section">
         <div className="section-inner split">
           <div className="fade-up">
-            <img src="/images/template/about.webp" alt="Aone Deep Cleaning professional team at work in Gurgaon" className="split-img" loading="lazy" width="570" height="420" />
+            <img src={asset(file, '/images/template/about.webp')} alt="Aone Deep Cleaning professional team at work in Gurgaon" className="split-img" loading="lazy" width="570" height="420" />
           </div>
           <div className="split-text fade-up">
             <div className="section-tag">About Aone Deep Cleaning</div>
@@ -41,15 +42,15 @@ export default function IndexPage({ url }) {
               <li>Same-day slots across all Gurgaon sectors</li>
             </ul>
             <div className="hero-actions">
-              <a href="/about.html" className="btn btn-primary">Know More →</a>
-              <a href="/contact.html" className="btn btn-outline">Contact Us</a>
+              <a href={pageLink(file, '/about.html')} className="btn btn-primary">Know More →</a>
+              <a href={pageLink(file, '/contact.html')} className="btn btn-outline">Contact Us</a>
             </div>
           </div>
         </div>
       </section>
-      <LocalReel />
+      <LocalReel file={file} />
       <CountdownStrip />
-      <ServiceSection />
+      <ServiceSection file={file} />
       <ChecklistSection />
       <HowItWorks />
       <ReviewsSection />

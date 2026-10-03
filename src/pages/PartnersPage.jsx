@@ -1,3 +1,4 @@
+import { asset, pageLink } from '../lib/site.js';
 import QuoteForm from '../components/QuoteForm.jsx';
 import TrustBar from '../components/TrustBar.jsx';
 import ReviewsSection from '../components/ReviewsSection.jsx';
@@ -30,14 +31,14 @@ const STEPS = [
   ['Cluster-day execution', 'Supervisor-led roster works flat to flat; each walkthrough signed before payment — UPI, cash or bank transfer.'],
 ];
 
-export default function PartnersPage({ url }) {
+export default function PartnersPage({ url, file }) {
   return (
     <>
       <JsonLd data={localBusinessSchema({ url })} />
       <JsonLd data={serviceSchema({ name: 'Society & Apartment Cleaning Services in Gurgaon', description: 'Bulk RWA cluster-day bookings, villa and PG turnover cleaning across Gurgaon societies. Fixed quotes, GST invoice, pay after walkthrough.', url })} />
       <JsonLd data={faqSchema(FAQS.map(([q, a]) => ({ q, a })))} />
 
-      <section className="hero">
+      <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/template/home/Balaji-Deep-Cleaning-banner-1.webp')}")` }}>
         <div className="hero-grid"></div>
         <div className="hero-inner">
           <div className="hero-left">
@@ -50,7 +51,7 @@ export default function PartnersPage({ url }) {
               RWA Bulk Bookings, <span className="hl2">One Trusted Crew</span>
             </h1>
             <p className="hero-sub">
-              <a href="/deep-cleaning-services-in-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>Cluster-day deep cleaning</a> for towers, villa rows and PG floors — one roster, one supervisor,
+              <a href={pageLink(file, '/deep-cleaning-services-in-gurgaon.html')} style={{ color: 'var(--primary)', fontWeight: 700 }}>Cluster-day deep cleaning</a> for towers, villa rows and PG floors — one roster, one supervisor,
               one GST invoice. Serving Gurgaon societies <strong>since 2015</strong> with fixed quotes and
               <strong> pay only after walkthrough</strong>.
             </p>
@@ -72,7 +73,7 @@ export default function PartnersPage({ url }) {
           <div style={{ textAlign: 'center' }} className="fade-up">
             <div className="section-tag">Who We Serve</div>
             <h2 className="section-title">Built for How Gurgaon Societies Actually Work</h2>
-            <p className="section-sub" style={{ margin: '0 auto' }}>Gate passes, service lifts, quiet hours, <a href="/blog/diwali-cleaning-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>festival rushes</a> — society cleaning fails on logistics, not mops. Our cluster model solves the logistics first.</p>
+            <p className="section-sub" style={{ margin: '0 auto' }}>Gate passes, service lifts, quiet hours, <a href={pageLink(file, '/blog/diwali-cleaning-gurgaon.html')} style={{ color: 'var(--primary)', fontWeight: 700 }}>festival rushes</a> — society cleaning fails on logistics, not mops. Our cluster model solves the logistics first.</p>
           </div>
           <div className="whyus-grid">
             {WHO.map(([icon, title, desc]) => (
@@ -111,7 +112,7 @@ export default function PartnersPage({ url }) {
           <div style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto' }} className="fade-up">
             <div className="section-tag">Why Societies Stay Since 2015</div>
             <h2 className="section-title">The Same Crews, Season After Season</h2>
-            <p className="section-sub" style={{ margin: '0 auto' }}>A decade of Diwali rushes, tenant turnovers and monsoon recoveries across <a href="/blog/dlf-phase-4-deep-cleaning-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>DLF 1–5</a>, Vatika City, Nirvana Country, <a href="/blog/sushant-lok-3-deep-cleaning-gurgaon.html" style={{ color: 'var(--primary)', fontWeight: 700 }}>Sushant Lok</a>, South City, Palam Vihar and Sectors 14–92. Facility desks keep our number because gate formalities, fixed billing and re-clean windows work the same way every single time — no retraining a new vendor each festival. Tower clusters, villa rows and PG floors all run on the identical pay-after-walkthrough promise as single homes: inspect every room first, pay only on approval, with a free 24-hour re-clean on any miss.</p>
+            <p className="section-sub" style={{ margin: '0 auto' }}>A decade of Diwali rushes, tenant turnovers and monsoon recoveries across <a href={pageLink(file, '/blog/dlf-phase-4-deep-cleaning-gurgaon.html')} style={{ color: 'var(--primary)', fontWeight: 700 }}>DLF 1–5</a>, Vatika City, Nirvana Country, <a href={pageLink(file, '/blog/sushant-lok-3-deep-cleaning-gurgaon.html')} style={{ color: 'var(--primary)', fontWeight: 700 }}>Sushant Lok</a>, South City, Palam Vihar and Sectors 14–92. Facility desks keep our number because gate formalities, fixed billing and re-clean windows work the same way every single time — no retraining a new vendor each festival. Tower clusters, villa rows and PG floors all run on the identical pay-after-walkthrough promise as single homes: inspect every room first, pay only on approval, with a free 24-hour re-clean on any miss.</p>
           </div>
         </div>
       </section>

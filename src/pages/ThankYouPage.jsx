@@ -1,9 +1,9 @@
-import { waMsg } from '../lib/site.js';
+import { waMsg, pageLink, asset } from '../lib/site.js';
 import { phoneCallClick, whatsappClick } from '../lib/landing.js';
 
-export default function ThankYouPage() {
+export default function ThankYouPage({ file }) {
   return (
-    <section className="hero" style={{ minHeight: '70vh', display: 'flex', alignItems: 'center' }}>
+    <section className="hero" style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', backgroundImage: `url("${asset(file, '/images/template/home/Balaji-Deep-Cleaning-banner-1.webp')}")` }}>
       <div className="hero-grid"></div>
       <div className="hero-inner" style={{ maxWidth: 720, textAlign: 'center', display: 'block' }}>
         <div className="hero-eyebrow" style={{ margin: '0 auto 18px' }}>Request Received</div>
@@ -20,7 +20,7 @@ export default function ThankYouPage() {
           </a>
         </div>
         <p style={{ marginTop: '28px' }}>
-          <a href="/" style={{ color: '#8FA4BE', textDecoration: 'none', fontWeight: 600 }}>← Back to home</a>
+          <a href={pageLink(file, '/')} style={{ color: '#8FA4BE', textDecoration: 'none', fontWeight: 600 }}>← Back to home</a>
         </p>
       </div>
     </section>
