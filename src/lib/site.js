@@ -47,7 +47,7 @@ export const NETLIFY_FORM_NAME = 'lead-quote';
 
 // Core business claims (from the high-converting landing page).
 // Legacy Formspree (kept for older pages accepting leads until migrated).
-export const FORMSPREE_ID = 'moevgqwr';
+export const FORMSPREE_ID = 'mjyknzgy';
 
 export const STARTING_PRICE = '₹2,000';
 export const PHONE_HREF = PHONE_TEL;
