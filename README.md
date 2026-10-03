@@ -130,8 +130,8 @@ python3 -m http.server 8322 --directory dist   # → http://localhost:8322/
 ## ⚙️ Config
 
 - **Build:** `npm run build` (vite). No Tailwind, no Bootstrap, no jQuery — template look is hand-ported CSS.
-- **Leads:** Netlify Forms (`lead-quote`) + `FORMSPREE_ID = 'xdaqkbwa'` fallback via `QuoteForm.jsx`; redirect to `thank-you.html`.
-- **Tracking (ours — never replace):** `GTM-P4KVBGRK` via `src/lib/site.js`. Do NOT bring in other GTM/GA/Ads IDs (the static template carried its own — intentionally left out).
+- **Leads:** Netlify Forms (`lead-quote`) + `FORMSPREE_ID = 'moevgqwr'` fallback via `QuoteForm.jsx`; redirect to `thank-you.html`. Balaji-only inbox — Sachin keeps the old `xdaqkbwa` endpoint on its own repo. Never swap these.
+- **Tracking (Balaji-only — never replace with Sachin's):** `GTM-WK78FVFS` via `src/lib/site.js`. Sachin keeps `GTM-P4KVBGRK` on its own repo. Do NOT bring in other GTM/GA/Ads IDs (the static template carried its own — intentionally left out). If any future change reintroduces `GTM-P4KVBGRK` or `xdaqkbwa` here, treat it as a brand-contamination bug and revert.
 - **Videos:** `LocalReel.jsx` phone-style player (autoplay muted on scroll into view, tap to pause). YouTube Shorts render as click-to-play facades (nothing loads until tapped). No IG embeds anywhere.
 - **Fonts:** self-hosted Poppins in `public/fonts`, preloaded in entry shells — no Google Fonts requests.
 - **Media:** `public/images` (responsive `-400w`/`-800w` webp + `template/` folder) + `public/videos` (topic-named mp4s).
