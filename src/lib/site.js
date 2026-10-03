@@ -40,7 +40,7 @@ export function waMsg(msg) {
 export const GTM_ID = 'GTM-WK78FVFS';
 
 // Microsoft Clarity (Aone project) — heatmaps + session recordings.
-export const CLARITY_ID = 'yrzcljz2zn';
+export const CLARITY_ID = 'ys36vx3fo7';
 
 // Netlify Forms handles lead capture (works when deployed to Netlify).
 export const NETLIFY_FORM_NAME = 'lead-quote';
