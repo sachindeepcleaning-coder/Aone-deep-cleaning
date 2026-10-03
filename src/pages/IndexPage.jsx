@@ -12,12 +12,13 @@ import GuaranteeSection from '../components/GuaranteeSection.jsx';
 import AreasSection from '../components/AreasSection.jsx';
 import FaqSection from '../components/FaqSection.jsx';
 import FinalCta from '../components/FinalCta.jsx';
-import { JsonLd, localBusinessSchema, faqSchema, reviewsSchema } from '../lib/schema.jsx';
+import { JsonLd, websiteSchema, localBusinessSchema, faqSchema, reviewsSchema } from '../lib/schema.jsx';
 import { FAQS, REVIEWS } from '../lib/landing.js';
 
 export default function IndexPage({ url }) {
   return (
     <>
+      <JsonLd data={websiteSchema()} />
       <JsonLd data={localBusinessSchema({ url })} />
       <JsonLd data={faqSchema(FAQS.map(([q, a]) => ({ q, a })))} />
       <JsonLd data={reviewsSchema(REVIEWS, 'Deep Cleaning Services in Gurgaon')} />

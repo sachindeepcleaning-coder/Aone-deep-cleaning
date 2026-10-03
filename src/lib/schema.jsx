@@ -50,6 +50,23 @@ const SERVICE_AREAS = [
   { '@type': 'AdministrativeArea', name: 'Manesar' },
 ];
 
+// ─── WebSite (site name for Google Search) ─────────────────────────────────
+// Google's site-name system reads the `name` here on the HOMEPAGE only.
+// Keep it identical to the brand everywhere (titles, og:site_name, GBP).
+// Emitted solely by IndexPage.jsx — never add to other pages.
+export function websiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE_URL}/#website`,
+    url: `${SITE_URL}/`,
+    name: 'Balaji Deep Cleaning',
+    publisher: {
+      '@id': `${SITE_URL}/#business`,
+    },
+  };
+}
+
 // ─── LocalBusiness ──────────────────────────────────────────────────────────
 export function localBusinessSchema({ url }) {
   return {
