@@ -1,0 +1,39 @@
+# robots.txt — balajicleaningservice.shop
+# Updated: August 2026
+
+User-agent: *
+Disallow: /thank-you.html
+Disallow: /google4bc4a68e1ff9b7f5.html
+
+# Allow important crawlers explicitly
+User-agent: Googlebot
+Allow: /
+Disallow: /thank-you.html
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /
+
+# AI Search crawlers — GEO
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Sitemap location
+Sitemap: https://balajicleaningservice.shop/sitemap.xml
