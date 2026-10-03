@@ -17,7 +17,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { pages, SITE_URL, SITE_NAME, OG_IMAGE } from '../pages.config.mjs';
-import { GTM_ID, NETLIFY_FORM_NAME } from '../src/lib/site.js';
+import { GTM_ID, NETLIFY_FORM_NAME, CLARITY_ID } from '../src/lib/site.js';
 import { ARTICLES } from '../src/lib/blog.js';
 import { getService } from '../src/lib/services.js';
 import { imageDims } from '../src/lib/image-dims.js';
@@ -30,6 +30,16 @@ const gtm = `<!-- Google Tag Manager -->
 <!-- End Google Tag Manager -->`;
 
 const gtmNoscript = `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`;
+
+const clarity = `<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "${CLARITY_ID}");
+</script>
+<!-- End Microsoft Clarity -->`;
 
 // Netlify Forms: a real (static) form in the served HTML so the build
 // auto-detects the lead form ("lead-quote"). Field values are copied to the
@@ -145,6 +155,7 @@ ${noindex}  <meta name="geo.region" content="IN-HR" />
   <meta name="twitter:description" content="${p.description}" />
   <meta name="twitter:image" content="${ogImage}" />
 ${preload}  ${gtm}
+  ${clarity}
   <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/poppins-400.woff2" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/poppins-700.woff2" />
   <link rel="stylesheet" href="/src/styles/global.css" />
