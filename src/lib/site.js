@@ -37,7 +37,7 @@ export function waMsg(msg) {
 }
 
 // Analytics — Google Tag Manager only (GA4 removed; old project had GTM only).
-export const GTM_ID = 'GTM-WK78FVFS';
+export const GTM_ID = 'GTM-W9LQXHZM';
 
 // Microsoft Clarity (Aone project) — heatmaps + session recordings.
 export const CLARITY_ID = 'ys36vx3fo7';
