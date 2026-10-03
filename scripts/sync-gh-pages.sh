@@ -14,7 +14,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SCRATCH="/tmp/opencode/ghp"
-REMOTE="https://github.com/sachindeepcleaning-coder/Balaji-Deep-Cleaning.git"
+REMOTE="https://github.com/sachindeepcleaning-coder/Aone-deep-cleaning.git"
 
 cd "$REPO_ROOT"
 
