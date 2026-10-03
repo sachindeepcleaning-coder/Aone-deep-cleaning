@@ -21,14 +21,14 @@ export function waMsg(msg) {
 }
 
 // Analytics — Google Tag Manager only (GA4 removed; old project had GTM only).
-export const GTM_ID = 'GTM-P4KVBGRK';
+export const GTM_ID = 'GTM-WK78FVFS';
 
 // Netlify Forms handles lead capture (works when deployed to Netlify).
 export const NETLIFY_FORM_NAME = 'lead-quote';
 
 // Core business claims (from the high-converting landing page).
 // Legacy Formspree (kept for older pages accepting leads until migrated).
-export const FORMSPREE_ID = 'xdaqkbwa';
+export const FORMSPREE_ID = 'moevgqwr';
 
 export const STARTING_PRICE = '₹2,000';
 export const PHONE_HREF = PHONE_TEL;
