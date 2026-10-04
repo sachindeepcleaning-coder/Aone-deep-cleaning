@@ -89,7 +89,7 @@ export default function PpcPage({ url, file }) {
         ])}
       />
 
-      <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/template/home/Balaji-Deep-Cleaning-banner-1.webp')}")` }}>
+      <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/aone-old/cleaning/about1.jpg')}")` }}>
         <div className="hero-grid"></div>
         <div className="hero-inner">
           <div className="hero-left">

@@ -38,7 +38,7 @@ export default function PartnersPage({ url, file }) {
       <JsonLd data={serviceSchema({ name: 'Society & Apartment Cleaning Services in Gurgaon', description: 'Bulk RWA cluster-day bookings, villa and PG turnover cleaning across Gurgaon societies. Fixed quotes, GST invoice, pay after walkthrough.', url })} />
       <JsonLd data={faqSchema(FAQS.map(([q, a]) => ({ q, a })))} />
 
-      <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/template/home/Balaji-Deep-Cleaning-banner-1.webp')}")` }}>
+      <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/aone-old/cleaning/about1.jpg')}")` }}>
         <div className="hero-grid"></div>
         <div className="hero-inner">
           <div className="hero-left">

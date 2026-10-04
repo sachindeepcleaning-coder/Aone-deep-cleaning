@@ -44,7 +44,7 @@ export default function BookingPage({ url, file }) {
       <JsonLd data={serviceSchema({ name: 'Book Cleaning Online in Gurgaon — No App Needed', description: 'Book house and deep cleaning online in Gurgaon without any app: WhatsApp booking in 30 seconds, same-day slots, fixed price, pay after walkthrough.', url })} />
       <JsonLd data={faqSchema(FAQS.map(([q, a]) => ({ q, a })))} />
 
-      <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/template/home/Balaji-Deep-Cleaning-banner-1.webp')}")` }}>
+      <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/aone-old/cleaning/about1.jpg')}")` }}>
         <div className="hero-grid"></div>
         <div className="hero-inner">
           <div className="hero-left">

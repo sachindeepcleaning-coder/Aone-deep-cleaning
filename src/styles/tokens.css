@@ -1,6 +1,6 @@
 /* =========================================================
-   Design tokens — Aone Deep Cleaning (template theme)
-   Sky-blue primary + lime accent, Poppins type, light only.
+   Design tokens — Aone Deep Cleaning (old-Aone theme)
+   Royal-blue primary + amber accent, Poppins type, light only.
    The [data-theme='dark'] block intentionally mirrors light:
    the template is a light design and the toggle is not rendered.
    ========================================================= */
@@ -9,40 +9,40 @@
 :root,
 [data-theme='light'],
 [data-theme='dark'] {
-  --primary: #00a8f0;          /* template sky blue */
-  --primary-dark: #0088c7;
-  --primary-darker: #006fa3;
-  --primary-soft: #e3f5fe;
-  --accent: #90c714;           /* template lime */
-  --accent-dark: #6fa30e;
-  --accent-soft: #f2f9e2;
+  --primary: #006df9;          /* old-Aone royal blue */
+  --primary-dark: #0057c9;
+  --primary-darker: #06278a;
+  --primary-soft: #e3efff;
+  --accent: #ffb400;           /* old-Aone amber */
+  --accent-dark: #c78d00;
+  --accent-soft: #fff6e0;
   --on-primary: #ffffff;
 
   /* Semantic palette */
   --success: #16a34a;  --success-soft: #dcfce7;
   --warning: #f59e0b;  --warning-soft: #fef3c7;
   --error:   #dc2626;  --error-soft:   #fee2e2;
-  --info:    #00a8f0;  --info-soft:    #e3f5fe;
+  --info:    #006df9;  --info-soft:    #e3efff;
 
   /* Conversion accent (kept for call/urgency elements) */
   --secondary: #f97316;      --secondary-dark: #ea580c;
   --secondary-soft: #ffedd5; --on-secondary: #ffffff;
 
   --bg: #ffffff;
-  --bg-alt: #f2f9fd;
+  --bg-alt: #f4f7fd;
   --card: #ffffff;
   --card-muted: #f6fafd;
-  --dark: #111111;
+  --dark: #1d2746;
   --text: #464646;
   --muted: #757575;
   --border: #dcdcdc;
 
-  --footer-bg: #000d26;
+  --footer-bg: #1d2746;
   --footer-text: #b9c7dd;
   --footer-head: #ffffff;
 
   --header-bg: rgba(255, 255, 255, 0.97);
-  --shadow: 0 10px 30px rgba(0, 168, 240, 0.10);
+  --shadow: 0 10px 30px rgba(0, 109, 249, 0.10);
   --shadow-strong: 0 18px 45px rgba(0, 13, 38, 0.14);
   --hero-grad: linear-gradient(135deg, rgba(0,13,38,.72) 0%, rgba(0,13,38,.55) 100%);
 

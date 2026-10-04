@@ -29,7 +29,7 @@ export default function IndexPage({ url, file }) {
       <section className="section">
         <div className="section-inner split">
           <div className="fade-up">
-            <img src={asset(file, '/images/template/about.webp')} alt="Aone Deep Cleaning professional team at work in Gurgaon" className="split-img" loading="lazy" width="570" height="420" />
+            <img src={asset(file, '/images/aone-old/cleaning/about1.jpg')} alt="Aone Deep Cleaning professional team at work in Gurgaon" className="split-img" loading="lazy" width="570" height="420" />
           </div>
           <div className="split-text fade-up">
             <div className="section-tag">About Aone Deep Cleaning</div>

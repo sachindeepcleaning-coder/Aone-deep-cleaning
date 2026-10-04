@@ -3,7 +3,7 @@ import { phoneCallClick, whatsappClick } from '../lib/landing.js';
 
 export default function ThankYouPage({ file }) {
   return (
-    <section className="hero" style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', backgroundImage: `url("${asset(file, '/images/template/home/Balaji-Deep-Cleaning-banner-1.webp')}")` }}>
+    <section className="hero" style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', backgroundImage: `url("${asset(file, '/images/aone-old/cleaning/about1.jpg')}")` }}>
       <div className="hero-grid"></div>
       <div className="hero-inner" style={{ maxWidth: 720, textAlign: 'center', display: 'block' }}>
         <div className="hero-eyebrow" style={{ margin: '0 auto 18px' }}>Request Received</div>

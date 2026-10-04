@@ -91,7 +91,7 @@ video { height: auto; }
 /* ---------- Buttons (template .default-btn: 5px radius) ---------- */
 .btn, .default-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 15px 35px; border-radius: 5px; font-weight: 500;
+  padding: 15px 35px; border-radius: 100px; font-weight: 500;
   font-family: 'Poppins', sans-serif; font-size: 15px; cursor: pointer;
   border: 1px solid var(--primary); text-align: center; text-transform: capitalize;
   transition: background .25s ease, color .25s ease, transform .2s ease;
@@ -139,14 +139,14 @@ video { height: auto; }
 .btn-nav-call {
   display: inline-flex; align-items: center; gap: 6px;
   background: var(--primary); color: #fff; text-decoration: none;
-  padding: 12px 22px; border-radius: 5px; font-weight: 500; font-size: 15px;
+  padding: 12px 22px; border-radius: 100px; font-weight: 500; font-size: 15px;
   transition: background .2s, transform .2s; white-space: nowrap;
 }
 .btn-nav-call:hover { background: var(--primary-dark); transform: translateY(-1px); }
 .btn-nav-wa {
   display: inline-flex; align-items: center; gap: 6px;
   background: #25D366; color: #fff; text-decoration: none;
-  padding: 12px 18px; border-radius: 5px; font-weight: 500; font-size: 15px;
+  padding: 12px 18px; border-radius: 100px; font-weight: 500; font-size: 15px;
   transition: background .2s, transform .2s; white-space: nowrap;
 }
 .btn-nav-wa:hover { background: #1ebe5b; transform: translateY(-1px); }
@@ -255,7 +255,7 @@ video { height: auto; }
 .phone-wrap input { padding-left: 46px; }
 .btn-submit {
   width: 100%; padding: 14px 12px; background: var(--primary); color: #fff;
-  border: none; border-radius: 5px; font-family: 'Poppins', sans-serif;
+  border: none; border-radius: 100px; font-family: 'Poppins', sans-serif;
   font-size: 1rem; font-weight: 600; cursor: pointer; letter-spacing: .3px;
   transition: background .2s, transform .2s; margin-top: 4px;
 }
@@ -268,7 +268,7 @@ video { height: auto; }
 .or-divider::before,.or-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 .btn-wa-form {
   display: flex; align-items: center; justify-content: center; gap: 8px;
-  width: 100%; padding: 13px; background: #25D366; color: #fff; border-radius: 5px;
+  width: 100%; padding: 13px; background: #25D366; color: #fff; border-radius: 100px;
   text-decoration: none; font-weight: 600; font-size: .93rem; transition: background .2s, transform .2s;
 }
 .btn-wa-form:hover { transform: translateY(-1px); background: #1ebe5b; }
@@ -411,7 +411,7 @@ video { height: auto; }
 .pc-items { list-style: none; text-align: left; margin: 0 0 22px; display: grid; gap: 8px; }
 .pc-items li { color: var(--text); font-size: 14.5px; padding-left: 24px; position: relative; }
 .pc-items li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-dark); font-weight: 700; }
-.btn-pc { display: inline-block; background: var(--primary); color: #fff; padding: 13px 34px; border-radius: 5px; font-weight: 600; transition: background .2s, transform .2s; }
+.btn-pc { display: inline-block; background: var(--primary); color: #fff; padding: 13px 34px; border-radius: 100px; font-weight: 600; transition: background .2s, transform .2s; }
 .btn-pc:hover { background: var(--primary-dark); transform: translateY(-2px); }
 .quote-box { text-align: center; margin-top: 32px; }
 .quote-price { font-family: 'Poppins'; font-size: 40px; font-weight: 700; color: var(--primary); }
@@ -458,7 +458,7 @@ video { height: auto; }
 .final-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 .fcta-call, .fcta-wa {
   display: inline-flex; align-items: center; gap: 8px; padding: 14px 30px;
-  border-radius: 5px; font-weight: 600; font-size: 15.5px; transition: transform .2s ease, background .2s ease;
+  border-radius: 100px; font-weight: 600; font-size: 15.5px; transition: transform .2s ease, background .2s ease;
 }
 .fcta-call { background: #fff; color: var(--primary-dark); }
 .fcta-call:hover { transform: translateY(-2px); }
@@ -536,7 +536,7 @@ footer strong { color: #fff; }
 }
 .sm-call, .sm-wa {
   flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
-  padding: 13px 0; border-radius: 5px; font-weight: 600; font-size: 15px; text-decoration: none;
+  padding: 13px 0; border-radius: 100px; font-weight: 600; font-size: 15px; text-decoration: none;
 }
 .sm-call { background: var(--primary); color: #fff; }
 .sm-wa { background: #25D366; color: #fff; }
