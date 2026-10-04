@@ -78,4 +78,4 @@ echo
 echo "==> DONE. New gh-pages HEAD:"
 git log -1 --pretty="%h %ci  %s" origin/gh-pages
 echo
-echo "Verify live: curl -sI https://balajicleaningservice.shop/ | grep -i last-modified"
+echo "Verify live: curl -sI https://aonedeepcleaning.shop/ | grep -i last-modified"

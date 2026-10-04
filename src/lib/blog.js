@@ -3346,7 +3346,7 @@ export const ARTICLES = [
         '**Clarify payment timing** — after walkthrough is the only safe answer',
         '**Get the re-clean promise in writing** — 24-hour free re-clean is our standard; ask for theirs',
       ]},
-      { t: 'tip', x: 'Disclosure: this page is written by Aone Deep Cleaning (balajicleaningservice.shop). Competitor facts checked against mrdeepcleaning.com, September 2026. Verify current details with both sides — then book whoever passes the 5-question test: +91 9267905943.' },
+      { t: 'tip', x: 'Disclosure: this page is written by Aone Deep Cleaning (aonedeepcleaning.shop). Competitor facts checked against mrdeepcleaning.com, September 2026. Verify current details with both sides — then book whoever passes the 5-question test: +91 9267905943.' },
       { t: 'h2', x: 'The Two Categories Where Mr. Deep Cleaning Wins' },
       { t: 'ul', items: [
         '**Brand recall at the shelf moment** — larger ad presence means more people search for them by name; if you discovered deep cleaning through their ads, their bundle pricing may match what we quote anyway — price us both.',

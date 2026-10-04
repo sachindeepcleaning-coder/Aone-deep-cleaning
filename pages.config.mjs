@@ -9,9 +9,9 @@
 //   3. Blog article entries + a blog index page
 //   4. thank-you flagged noindex
 
-export const SITE_URL = 'https://balajicleaningservice.shop';
+export const SITE_URL = 'https://aonedeepcleaning.shop';
 export const SITE_NAME = 'Aone Deep Cleaning';
-export const OG_IMAGE = 'https://balajicleaningservice.shop/images/og-cover.jpg';
+export const OG_IMAGE = 'https://aonedeepcleaning.shop/images/og-cover.jpg';
 
 export const pages = [
   {

@@ -2,7 +2,7 @@
 
 A modern, mobile-friendly marketing site for **Aone Deep Cleaning**, a home deep cleaning service in Gurgaon, Haryana. Built with **Vite + React 18 (MPA)**. Template-style look (sky-blue + lime, Poppins).
 
-- **Live URL:** [https://balajicleaningservice.shop](https://balajicleaningservice.shop) (custom domain via CNAME)
+- **Live URL:** [https://aonedeepcleaning.shop](https://aonedeepcleaning.shop) (custom domain via CNAME)
 - **Repo:** `sachindeepcleaning-coder/Balaji-Deep-Cleaning` (GitHub)
 - **Hosting:** GitHub Pages (deploys from the **`gh-pages`** branch)
 - **Branch sync rule:** **`main` and `gh-pages` MUST be kept in sync** — `gh-pages` is a snapshot of the latest `main` build, not a separate working branch. After every `main` push, redeploy to `gh-pages` (see below). The script in `scripts/sync-gh-pages.sh` automates the full sequence.
@@ -73,7 +73,7 @@ git push --force origin gh-pages     # force push is fine: gh-pages is a deploy 
 - **`main` and `gh-pages` desync = live regressions.** If you fix something in `main` and forget to run the script, live keeps showing the old build. Add a post-commit hook or CI reminder if you ship often.
 - The local `gh-pages` branch may lag behind `origin/gh-pages`. Always clone fresh (the script does this) instead of reusing the local branch.
 - If the push is rejected with "tip behind", you cloned from a stale local branch → `git push --force` after confirming the working tree has the full build (all `*.html`, `assets/`, `videos/`, `sitemap.xml`, `CNAME`, `robots.txt`, `.nojekyll`).
-- Verify live: `curl -sI https://balajicleaningservice.shop/<page>.html` → expect `HTTP/2 200`. The new `Last-Modified` header should reflect the time of your deploy.
+- Verify live: `curl -sI https://aonedeepcleaning.shop/<page>.html` → expect `HTTP/2 200`. The new `Last-Modified` header should reflect the time of your deploy.
 - If `git fetch` shows odd SHAs right after a push, re-run `git ls-remote origin` — local tracking refs can lag; `ls-remote` is truth.
 - **Source-only push (no deploy):** `git add -A && git commit -m "message" && git push origin main`. This updates `main` only — the live site is unchanged until you also deploy to `gh-pages`.
 
@@ -111,7 +111,7 @@ git ls-remote origin   # truth: main + gh-pages SHAs
 | `src/styles/global.css` | All component styles (template look; every `className` used in `src/` must be defined here) |
 | `public/sitemap.xml` | SEO sitemap (auto-generated; never hand-edit — add pages via `pages.config.mjs`) |
 | `public/robots.txt` | Crawler rules (must be restored in gh-pages deploy) |
-| `public/CNAME` | Custom domain `balajicleaningservice.shop` (must be restored in gh-pages deploy) |
+| `public/CNAME` | Custom domain `aonedeepcleaning.shop` (must be restored in gh-pages deploy) |
 | `public/images/template/` | Template imagery (12MB: banners, service photos, logo) — same-domain only |
 | `public/videos/` | Topic-named local clips (`sofa-1.mp4`, `kitchen-1.mp4`, …) + `cleaning-2.mp4` — verified-clean footage only (see 🎬 rule below) |
 | `public/fonts/` | Self-hosted Poppins 400/600/700/800, preloaded — no Google Fonts requests |
@@ -169,7 +169,7 @@ python3 -m http.server 8322 --directory dist   # → http://localhost:8322/
 - **Backlinks:** `BACKLINKS.md` (NAP block, copy kit, tiered targets). Rule: never buy/automate links.
 - **Indexing discipline:** `scripts/submit-indexing.cjs` ONLY for newly written or materially changed URLs (`--url …`); never mass `--reset` except after site-wide rebuilds (200/day project quota).
 - **Pre-flight before every deploy:** `npm run build` must pass `content-lint`; internal links resolve; JSON-LD parses; noindex only on thank-you/404 + PPC pages; zero third-party fetch hosts in initial HTML (GTM + schema.org + sameAs socials excepted); Playwright console audit clean (repeat runs — hydration races are flaky).
-- **Founder stays Sachin Kumar** (`about.html#sachin-kumar`, Person schema) while the brand is Aone Deep Cleaning. Socials stay on the original handles (`x.com/sachindeepclean`). Contact email follows the domain (`contact@balajicleaningservice.shop`).
+- **Founder stays Sachin Kumar** (`about.html#sachin-kumar`, Person schema) while the brand is Aone Deep Cleaning. Socials stay on the original handles (`x.com/sachindeepclean`). Contact email follows the domain (`contact@aonedeepcleaning.shop`).
 - **Docs policy:** `.md` files are local-only (`*.md` gitignored) except `README.md`, which stays on GitHub. Secrets safety net in `.gitignore` (`*key.json`, `.env*`); the Indexing API key lives outside any git repo and is referenced by path only.
 
 ## 📞 Business Details

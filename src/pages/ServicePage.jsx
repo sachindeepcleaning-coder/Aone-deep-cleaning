@@ -76,17 +76,17 @@ export default function ServicePage({ serviceKey, bhk, url = '', file = 'index' 
           '@type': 'VideoObject',
           name: `${s.name} — Real Cleaning Video Gurgaon`,
           description: `Watch real ${s.name.toLowerCase()} work by Aone Deep Cleaning team in Gurgaon — before/after, 60 seconds.`,
-          thumbnailUrl: `https://balajicleaningservice.shop${s.image}`,
+          thumbnailUrl: `https://aonedeepcleaning.shop${s.image}`,
           uploadDate: '2026-08-28',
           duration: 'PT60S',
           isFamilyFriendly: true,
-          author: { '@type': 'Person', name: 'Sachin Kumar', url: 'https://balajicleaningservice.shop/about.html#sachin-kumar' },
+          author: { '@type': 'Person', name: 'Sachin Kumar', url: 'https://aonedeepcleaning.shop/about.html#sachin-kumar' },
           publisher: {
             '@type': 'Organization',
-            '@id': 'https://balajicleaningservice.shop/#business',
+            '@id': 'https://aonedeepcleaning.shop/#business',
             name: 'Aone Deep Cleaning',
           },
-          contentUrl: 'https://balajicleaningservice.shop/videos/cleaning-2.mp4',
+          contentUrl: 'https://aonedeepcleaning.shop/videos/cleaning-2.mp4',
           embedUrl: 'https://www.youtube.com/shorts/p-ArftUay5I',
         }}
       />

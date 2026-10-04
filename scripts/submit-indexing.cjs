@@ -1,5 +1,5 @@
 /**
- * Google Indexing API submitter for balajicleaningservice.shop.
+ * Google Indexing API submitter for aonedeepcleaning.shop.
  *
  * Reads URLs from public/sitemap.xml, skips URLs already submitted
  * (tracked in indexing-progress.json at the repo root), submits the rest
@@ -8,7 +8,7 @@
  * Key: uses the shared service-account key via INDEXING_KEY_FILE env,
  * defaulting to the existing bot key in /home/vegeta/Pictures/code3.
  * The service account must be added as Owner on the Search Console
- * property https://balajicleaningservice.shop/ or Google returns 403.
+ * property https://aonedeepcleaning.shop/ or Google returns 403.
  *
  * Usage:
  *   node scripts/submit-indexing.cjs            # submit all pending (cap 200)

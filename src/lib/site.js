@@ -1,7 +1,7 @@
 // Central site + analytics config for Aone Deep Cleaning.
 // Single source of truth shared across all React components.
 
-export const SITE_URL = 'https://balajicleaningservice.shop';
+export const SITE_URL = 'https://aonedeepcleaning.shop';
 export const SITE_NAME = 'Aone Deep Cleaning';
 
 // Canonical URL for a page. The homepage is served from the root path.

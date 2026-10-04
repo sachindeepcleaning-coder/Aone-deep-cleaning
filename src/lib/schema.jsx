@@ -77,7 +77,7 @@ export function localBusinessSchema({ url }) {
     description:
       'Professional home deep cleaning services in Gurgaon — sofas, bathrooms, kitchens, carpets, offices and full-house makeovers. Eco-friendly products, trained staff, pay after satisfaction.',
     telephone: PHONE,
-    email: 'contact@balajicleaningservice.shop',
+    email: 'contact@aonedeepcleaning.shop',
     url,
     logo: `${SITE_URL}/images/template/logo.webp?v=3`,
     image: [
