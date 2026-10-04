@@ -269,7 +269,7 @@ export default function AboutPage({ url, file }) {
             <h2 className="section-title">Aone Deep Cleaning — Hands-On in Every Gurgaon Home</h2>
           </div>
           <div style={{ display: 'flex', gap: 24, alignItems: 'center', flexWrap: 'wrap', marginTop: 32, maxWidth: 800, marginInline: 'auto' }} className="fade-up">
-            <img src={asset(file, '/images/cleaning-1.webp')} alt="Aone Deep Cleaning team in Gurgaon — police-verified lead specialists" width="180" height="180" style={{ borderRadius: '50%', width: 140, height: 140, objectFit: 'cover', border: '3px solid var(--primary)' }} loading="lazy" />
+            <img src={asset(file, '/images/aone-old/cleaning/about1.jpg')} alt="Aone Deep Cleaning team in Gurgaon — police-verified lead specialists" width="180" height="180" style={{ borderRadius: '50%', width: 140, height: 140, objectFit: 'cover', border: '3px solid var(--primary)' }} loading="lazy" />
             <div style={{ flex: 1, minWidth: 260 }}>
               <h3 style={{ fontFamily: 'Syne', fontWeight: 800, marginBottom: 8 }}>Aone Deep Cleaning — Founder & Lead Specialist</h3>
               <p style={{ color: 'var(--muted)', lineHeight: 1.7, marginBottom: 12 }}>10+ years cleaning Gurgaon homes from DLF Phase 5 to Sector 92. Police-verified, owner-present on every 3 BHK+ job, 148 verified Google reviews. Trained in descaling, extraction and food-safe degreasing. <a href={pageLink(file, '/blog/best-deep-cleaning-services-gurgaon.html')} style={{ color: 'var(--primary)', fontWeight: 700 }}>See how we compare →</a></p>

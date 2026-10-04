@@ -185,7 +185,7 @@ export default function ResidentialPage({ url, file }) {
                     aria-label="Watch residential deep-cleaning reel on Instagram"
                   >
                     <img
-                      src={asset(file, '/images/full-home-deep-cleaning.webp')}
+                      src={asset(file, '/images/aone-old/home-deep-cleaning.jpg')}
                       alt="Residential deep-cleaning job in Gurgaon — watch on Instagram"
                       loading="lazy"
                       decoding="async"

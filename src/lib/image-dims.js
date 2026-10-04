@@ -21,6 +21,14 @@ export const IMAGE_DIMS = {
   '/images/office-deep-cleaning.webp': [800, 534],
   '/images/sofa-shampoo-cleaning.webp': [500, 334],
   '/images/og-cover.jpg': [1200, 630],
+  '/images/aone-old/kitchen-cleaning.jpg': [534, 625],
+  '/images/aone-old/bathroom-cleaning.jpg': [534, 625],
+  '/images/aone-old/sofa-cleaning.jpg': [534, 625],
+  '/images/aone-old/carpet-cleaning.jpg': [534, 625],
+  '/images/aone-old/home-deep-cleaning.jpg': [534, 625],
+  '/images/aone-old/floor-polishing.jpg': [534, 625],
+  '/images/aone-old/cleaning/about1.jpg': [1188, 980],
+  '/images/aone-old/cleaning/deepcleaning1.jpg': [534, 625],
 };
 
 export function imageDims(src) {
