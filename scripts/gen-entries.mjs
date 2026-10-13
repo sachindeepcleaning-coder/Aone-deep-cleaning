@@ -31,6 +31,12 @@ const gtm = `<!-- Google Tag Manager -->
 
 const gtmNoscript = `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`;
 
+// Once-per-session repeat guard for thank-you.html. Must run BEFORE the GTM
+// snippet: on a repeat view in the same tab session it pushes
+// {thankyou_repeat:true} so a GTM exception (to be added) can skip the
+// conversion; first visit only sets the flag and changes nothing.
+const tyGuard = `<script>try{window.dataLayer=window.dataLayer||[];if(window.sessionStorage&&sessionStorage.getItem('ty_seen')){window.dataLayer.push({thankyou_repeat:true});}else if(window.sessionStorage){sessionStorage.setItem('ty_seen','1');}}catch(_){}</script>`;
+
 const clarity = `<!-- Microsoft Clarity -->
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -154,11 +160,12 @@ ${noindex}  <meta name="geo.region" content="IN-HR" />
   <meta name="twitter:title" content="${p.title}" />
   <meta name="twitter:description" content="${p.description}" />
   <meta name="twitter:image" content="${ogImage}" />
-${preload}  ${gtm}
+${preload}  ${p.file === 'thank-you' ? tyGuard + '\n  ' + gtm : gtm}
   ${clarity}
   <link rel="preload" as="font" type="font/woff2" crossorigin href="${p.file.includes('/') ? '..' : '.'}/fonts/poppins-400.woff2" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="${p.file.includes('/') ? '..' : '.'}/fonts/poppins-700.woff2" />
   <link rel="stylesheet" href="/src/styles/global.css" />
+  <script src="/tracking.js" defer></script>
 </head>
 <body>
   ${gtmNoscript}

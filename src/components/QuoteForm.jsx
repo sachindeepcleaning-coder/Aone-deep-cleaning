@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { NETLIFY_FORM_NAME, FORMSPREE_ID, PHONE, PHONE_TEL, waMsg } from '../lib/site.js';
 import { track, whatsappClick, thankYouPath } from '../lib/landing.js';
 
@@ -12,13 +12,6 @@ export default function QuoteForm() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const formRef = useRef(null);
-
-  useEffect(() => {
-    if (typeof window.gtag === 'undefined') {
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function () { window.dataLayer.push(arguments); };
-    }
-  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
