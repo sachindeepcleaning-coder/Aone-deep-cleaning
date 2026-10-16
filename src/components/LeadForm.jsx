@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { FORMSPREE_ID } from '../lib/site.js';
-import { track } from '../lib/landing.js';
+import { PHONE, waMsg } from '../lib/site.js';
+import { sendLead } from '../lib/sendLead.js';
+import { track, whatsappClick } from '../lib/landing.js';
 
-// Simple lead form posting to Formspree, then redirecting to thank-you.html.
+// Simple lead form posting to Web3Forms, then redirecting to thank-you.html.
 export default function LeadForm({ formName = 'lead', source = 'Website', compact = false }) {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
@@ -12,27 +13,23 @@ export default function LeadForm({ formName = 'lead', source = 'Website', compac
     setStatus('sending');
     setError('');
     const data = new FormData(e.target);
-    try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' },
-      });
-      if (res.ok) {
-        track('generate_lead', { event_category: 'Lead', event_label: 'Lead Form' });
-        window.setTimeout(() => { window.location.href = '/thank-you.html'; }, 250);
-        return;
-      }
-      const body = await res.json().catch(() => ({}));
-      throw new Error(body?.errors?.[0]?.message || 'Something went wrong. Please try again or call us.');
-    } catch (err) {
-      setStatus('idle');
-      setError(err.message);
+    const ok = await sendLead({
+      name: String(data.get('name') || '').trim(),
+      phone: String(data.get('phone') || '').trim(),
+      source,
+      fields: { message: String(data.get('message') || '').trim() },
+    });
+    if (ok) {
+      track('generate_lead', { event_category: 'Lead', event_label: 'Lead Form' });
+      window.setTimeout(() => { window.location.href = '/thank-you.html'; }, 250);
+      return;
     }
+    setStatus('idle');
+    setError(`❌ Couldn't send your request. Please call ${PHONE} or`);
   };
 
   return (
-    <form className="lead-form" onSubmit={onSubmit} data-formspree-id={FORMSPREE_ID}>
+    <form className="lead-form" onSubmit={onSubmit}>
       <input type="hidden" name="form-name" value={formName} />
       <input type="hidden" name="source" value={source} />
       <div className={compact ? 'hero-form-row' : ''}>
@@ -59,7 +56,14 @@ export default function LeadForm({ formName = 'lead', source = 'Website', compac
       <button type="submit" className="btn btn-secondary btn-block" disabled={status === 'sending'}>
         {status === 'sending' ? 'Sending…' : 'Get Free Quote'}
       </button>
-      {error && <p className="form-error">{error}</p>}
+      {error && (
+        <p className="form-error">
+          {error}{' '}
+          <a href={waMsg('Hi, my quote request on your website did not go through. Please call me back.')} target="_blank" rel="noopener" onClick={whatsappClick}>
+            WhatsApp us →
+          </a>
+        </p>
+      )}
       <p className="lead-note">We’ll call you back to confirm your booking.</p>
     </form>
   );

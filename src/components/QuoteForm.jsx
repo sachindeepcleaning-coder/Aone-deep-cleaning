@@ -1,14 +1,15 @@
 import { useState, useRef } from 'react';
-import { NETLIFY_FORM_NAME, FORMSPREE_ID, PHONE, PHONE_TEL, waMsg } from '../lib/site.js';
+import { NETLIFY_FORM_NAME, PHONE, waMsg } from '../lib/site.js';
+import { sendLead } from '../lib/sendLead.js';
 import { track, whatsappClick, thankYouPath } from '../lib/landing.js';
 
 // Hero quote form card.
-// Primary: Netlify Forms (works when deployed to Netlify).
-// Fallback: Formspree (works on Vercel / Cloudflare Pages / GitHub Pages).
+// Lead delivery: Web3Forms via sendLead (works on GitHub Pages).
 // On success it shows the confirmation state + WhatsApp nudge popup.
 export default function QuoteForm() {
   const [status, setStatus] = useState('idle'); // idle | sending | success
   const [error, setError] = useState('');
+  const [errorWa, setErrorWa] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const formRef = useRef(null);
@@ -16,48 +17,25 @@ export default function QuoteForm() {
   const onSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setErrorWa(false);
     const n = name.trim();
     const p = phone.trim();
     if (n.length < 2) { setError('❌ Please enter your full name.'); return; }
     if (!/^[6-9][0-9]{9}$/.test(p)) { setError('❌ Enter a valid 10-digit Indian mobile number.'); return; }
     setStatus('sending');
 
-    const success = () => {
+    const ok = await sendLead({ name: n, phone: p, source: 'Quote Form' });
+    if (ok) {
       setStatus('success');
       track('generate_lead', { event_category: 'Lead', event_label: 'Quote Form' });
       // Give GTM a beat to read the dataLayer, then redirect to the thank-you
       // page so the "GA4 Form submission" tag (page path /thank-you.html) fires.
       window.setTimeout(() => { window.location.href = thankYouPath(); }, 250);
-    };
-
-    try {
-      // 1) Try Netlify Forms first (host-native; no-op on non-Netlify hosts).
-      const fd = new FormData();
-      fd.append('form-name', NETLIFY_FORM_NAME);
-      fd.append('name', n);
-      fd.append('phone', p);
-      const res = await fetch('/', { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
-      if (res.ok) { success(); return; }
-      throw new Error('Netlify failed');
-    } catch (netlifyErr) {
-      // 2) Fallback: Formspree — works on Vercel / Cloudflare Pages / GitHub Pages.
-      try {
-        const fs = new FormData();
-        fs.append('form-name', 'lead-quote');
-        fs.append('name', n);
-        fs.append('phone', p);
-        const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-          method: 'POST',
-          body: fs,
-          headers: { Accept: 'application/json' },
-        });
-        if (res.ok) { success(); return; }
-        throw new Error('Formspree failed');
-      } catch (formspreeErr) {
-        setStatus('idle');
-        setError('❌ Something went wrong. Please call ' + PHONE);
-      }
+      return;
     }
+    setStatus('idle');
+    setError(`❌ Couldn't send your request. Please call ${PHONE} or`);
+    setErrorWa(true);
   };
 
   if (status === 'success') {
@@ -91,7 +69,19 @@ export default function QuoteForm() {
         We call you back in <span className="cb-time" id="callbackTime">under 3 min</span> · No spam, no commitment
       </div>
 
-      {error && <div className="error-msg" style={{ display: 'block' }}>{error}</div>}
+      {error && (
+        <div className="error-msg" style={{ display: 'block' }}>
+          {error}
+          {errorWa && (
+            <>
+              {' '}
+              <a href={waMsg('Hi! The quote form on your website failed to send. Please call me back.')} target="_blank" rel="noopener" onClick={whatsappClick}>
+                WhatsApp us →
+              </a>
+            </>
+          )}
+        </div>
+      )}
 
       <form
         ref={formRef}

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { FORMSPREE_ID } from '../lib/site.js';
-import { track } from '../lib/landing.js';
+import { PHONE, waMsg } from '../lib/site.js';
+import { sendLead } from '../lib/sendLead.js';
+import { track, whatsappClick } from '../lib/landing.js';
 
 const STEPS = [{ title: 'Your Details' }, { title: 'Service' }, { title: 'Schedule' }];
 const STORAGE_KEY = 'sdc_lead';
 
-// Multi-step quote form: progress bar, localStorage draft, Formspree submit.
+// Multi-step quote form: progress bar, localStorage draft, Web3Forms submit.
 export default function MultiStepForm() {
   const [step, setStep] = useState(0);
   const [data, setData] = useState({ name: '', phone: '', service: '', date: '', message: '' });
@@ -33,27 +34,20 @@ export default function MultiStepForm() {
     e.preventDefault();
     setStatus('sending');
     setError('');
-    const fd = new FormData();
-    fd.append('form-name', 'lead-multistep');
-    Object.entries(data).forEach(([k, v]) => fd.append(k, v));
-    try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method: 'POST',
-        body: fd,
-        headers: { Accept: 'application/json' },
-      });
-      if (res.ok) {
-        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
-        track('generate_lead', { event_category: 'Lead', event_label: 'Multi-Step Form' });
-        window.setTimeout(() => { window.location.href = '/thank-you.html'; }, 250);
-        return;
-      }
-      const b = await res.json().catch(() => ({}));
-      throw new Error(b?.errors?.[0]?.message || 'Something went wrong. Please try again.');
-    } catch (err) {
-      setStatus('idle');
-      setError(err.message);
+    const ok = await sendLead({
+      name: data.name,
+      phone: data.phone,
+      source: 'Multi-Step Form',
+      fields: { service: data.service, date: data.date, message: data.message },
+    });
+    if (ok) {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      track('generate_lead', { event_category: 'Lead', event_label: 'Multi-Step Form' });
+      window.setTimeout(() => { window.location.href = '/thank-you.html'; }, 250);
+      return;
     }
+    setStatus('idle');
+    setError(`❌ Couldn't send your request. Please call ${PHONE} or`);
   };
 
   return (
@@ -114,7 +108,14 @@ export default function MultiStepForm() {
           </button>
         )}
       </div>
-      {error && <p className="form-error">{error}</p>}
+      {error && (
+        <p className="form-error">
+          {error}{' '}
+          <a href={waMsg('Hi, my booking request on your website did not go through. Please call me back.')} target="_blank" rel="noopener" onClick={whatsappClick}>
+            WhatsApp us →
+          </a>
+        </p>
+      )}
     </form>
   );
 }
