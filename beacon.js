@@ -1,11 +1,15 @@
 /**
- * click-guard first-party beacon (v4) — LOGS ONLY. Nothing is blocked.
+ * click-guard first-party beacon (v5) — LOGS ONLY. Nothing is blocked.
  *
  * Same behaviour as the GTM Custom HTML beacon, but served as a same-origin
  * file from the <head> of every page, so it:
  *   - attaches its click listeners at ~0 ms (no GTM race: very fast call /
  *     WhatsApp / form clicks are captured too),
  *   - is not blocked by Brave Shields / uBlock the way GTM's domain is.
+ *
+ * Since v5 it also starts a visit when a visitor lands WITHOUT an ad click
+ * (organic/direct/search), so the dashboard can show both categories. Bot
+ * user agents are filtered server-side for those.
  *
  * Consent hook (optional): when a consent banner is added later, set
  *   window.__cgvRequireConsent = true   (before this script runs)
@@ -29,7 +33,10 @@
   var WORKER_URL = "https://visit-log.sachindeepcleaning.workers.dev";
 
   var KEY = "cgv";                 /* sessionStorage key, tab-scoped only */
-  var TTL = 6 * 60 * 60 * 1000;    /* follow the ad visitor for 6 hours     */
+  var TTL = 6 * 60 * 60 * 1000;    /* follow the visitor for 6 hours       */
+
+  // Automation guard: agent-driven browsers ("webdriver") are never logged.
+  try { if (navigator.webdriver === true) return; } catch (e) { /* never break the page */ }
 
   // Consent hook: a site with a banner sets __cgvRequireConsent = true and
   // flips __cgvConsent to true only after the visitor agrees.
@@ -79,31 +86,43 @@
   var hasGclid = false;
   try { hasGclid = /[?&]gclid=/.test(window.location.search); } catch (e) {}
 
-  // Landing from an ad: new visit id. Any other page in this tab: only keep
-  // following the visitor when this tab already has an ad visit (else stop).
-  var id = "";
-  var depth = 1;
-  if (hasGclid) {
+  function newId() {
     try {
-      id = crypto.randomUUID();
+      return crypto.randomUUID();
     } catch (e) {
       // Fallback (very old browsers): still random enough for a session key.
-      id = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
         var r = (Math.random() * 16) | 0;
         var v = c === "x" ? r : (r & 0x3) | 0x8;
         return v.toString(16);
       });
     }
+  }
+
+  // Landing (ad or organic): new visit id. Any other page in this tab: only
+  // keep following the visitor when this tab already has a visit (else stop).
+  var id = "";
+  var depth = 1;
+  var isLanding = false;
+  if (hasGclid) {
+    id = newId();
     writeState(id, 1);
+    isLanding = true;
   } else {
     var st = readState();
-    if (!st) return;
-    id = st.id;
-    depth = (typeof st.n === "number" && st.n >= 1 ? st.n : 1) + 1;
-    writeState(id, depth);
-    // Depth ping: tells the worker how many pages this tab has now seen.
-    // The worker keeps the highest/last value within the 6h window.
-    send("/c", { id: id, k: "depth", n: Math.min(depth, 50) });
+    if (st) {
+      id = st.id;
+      depth = (typeof st.n === "number" && st.n >= 1 ? st.n : 1) + 1;
+      writeState(id, depth);
+      // Depth ping: tells the worker how many pages this tab has now seen.
+      // The worker keeps the highest/last value within the 6h window.
+      send("/c", { id: id, k: "depth", n: Math.min(depth, 50) });
+    } else {
+      // Organic: no ad click, but a fresh tab session — a new visit starts.
+      id = newId();
+      writeState(id, 1);
+      isLanding = true;
+    }
   }
 
   // Timezone in its own try/catch, so a failure here can never stop /v
@@ -134,23 +153,26 @@
   }
 
   // ---- Visit start (/v) — landing page only. Pathname only; gclid value is
-  // NEVER read or sent; the rest of the query string never leaves the browser. ----
-  if (hasGclid) {
-    send("/v", {
+  // NEVER read or sent; the rest of the query string never leaves the browser.
+  // g:1 marks an ad click; o:1 marks an organic/direct landing. ----
+  if (isLanding) {
+    var payload = {
       id: id,
       p: location.pathname.slice(0, 200),
-      g: 1,
       sw: screen.width || 0,
       sh: screen.height || 0,
       lang: (navigator.language || "").slice(0, 35),
       tz: getTimezone(),
       kw: readParam("kw"),
       ca: parseInt(readParam("cmp"), 10) || 0,
-    });
+    };
+    if (hasGclid) payload.g = 1;
+    else payload.o = 1;
+    send("/v", payload);
   }
 
   // ---- Conversions (/c): call, WhatsApp, form — sent the moment they happen,
-  // on any page of this tab, and attributed to the ad visit. ----
+  // on any page of this tab, and attributed to the tab's visit (ad or organic). ----
   var convSent = {};
   function conv(k) {
     if (convSent[k]) return;
@@ -189,8 +211,8 @@
     true
   );
 
-  // Follower pages (no gclid): conversions + depth only — no dwell/scroll bookkeeping.
-  if (!hasGclid) return;
+  // Follower pages (no new visit): conversions + depth only — no dwell/scroll bookkeeping.
+  if (!isLanding) return;
 
   // ---- Max scroll (0-100) ----
   var maxScroll = 0;
