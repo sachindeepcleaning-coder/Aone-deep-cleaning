@@ -1,5 +1,5 @@
 /**
- * click-guard first-party beacon (v6) — LOGS ONLY. Nothing is blocked.
+ * click-guard first-party beacon (v7) — LOGS ONLY. Nothing is blocked.
  *
  * Same behaviour as the GTM Custom HTML beacon, but served as a same-origin
  * file from the <head> of every page, so it:
@@ -15,14 +15,21 @@
  * site's domain (e.g. "google.com"), never the full referring URL, and never
  * for same-site navigation. Empty means direct/bookmark/app.
  *
+ * Since v7 it follows the whole walk: every page path of the tab (in order,
+ * query strings stripped, capped at 50), the exit page, form fields being
+ * filled (form-start), and email / maps / Instagram link clicks. It also reads
+ * utm_source tags (campaign data) and — for booked-lead matching with Google
+ * Ads offline conversions — the gclid click token on ad landings.
+ *
  * Consent hook (optional): when a consent banner is added later, set
  *   window.__cgvRequireConsent = true   (before this script runs)
  * and set   window.__cgvConsent = true    (only after the visitor agrees).
  * With no banner on the site, nothing changes.
  *
- * Privacy model (unchanged): no cookies, no localStorage; one sessionStorage
- * entry ("cgv") scoped to this tab; only gclid presence (never its value) and
- * the two ValueTrack params kw / cmp are read; all other URL params ignored.
+ * Privacy model: no cookies, no localStorage; one sessionStorage
+ * entry ("cgv") scoped to this tab; the read URL params are the two ValueTrack
+ * params kw / cmp, utm_source, and (ad landings only) the gclid click token —
+ * everything else in the URL is ignored and never sent.
  *
  * Install: upload this file to each site's web root as /beacon.js and add to
  * every page's <head>:
@@ -118,9 +125,11 @@
       id = st.id;
       depth = (typeof st.n === "number" && st.n >= 1 ? st.n : 1) + 1;
       writeState(id, depth);
-      // Depth ping: tells the worker how many pages this tab has now seen.
-      // The worker keeps the highest/last value within the 6h window.
-      send("/c", { id: id, k: "depth", n: Math.min(depth, 50) });
+      // Depth ping: tells the worker how many pages this tab has now seen,
+      // plus this page's path (query string stripped) so the dashboard can
+      // show the walk in order. The worker keeps the highest/last value
+      // within the 6h window.
+      send("/c", { id: id, k: "depth", n: Math.min(depth, 50), p: location.pathname.slice(0, 200) });
     } else {
       // Organic: no ad click, but a fresh tab session — a new visit starts.
       id = newId();
@@ -191,6 +200,8 @@
       kw: readParam("kw"),
       ca: parseInt(readParam("cmp"), 10) || 0,
       r: refHost(),
+      us: readParam("utm_source").slice(0, 60),
+      gl: hasGclid ? readParam("gclid").slice(0, 64) : "",
     };
     if (hasGclid) payload.g = 1;
     else payload.o = 1;
@@ -224,6 +235,24 @@
               conv("wa");
               break;
             }
+            if (href.indexOf("mailto:") === 0) {
+              acted = 1;
+              conv("mail");
+              break;
+            }
+            if (
+              href.indexOf("maps.google.") !== -1 ||
+              (href.indexOf("google.") !== -1 && href.indexOf("/maps") !== -1) ||
+              href.indexOf("maps.app.goo.gl") !== -1 ||
+              href.indexOf("goo.gl/maps") !== -1
+            ) {
+              conv("map");
+              break;
+            }
+            if (href.indexOf("instagram.com/") !== -1) {
+              conv("ig");
+              break;
+            }
           }
           el = el.parentNode;
         }
@@ -234,6 +263,26 @@
   document.addEventListener(
     "submit",
     function () { try { conv("form"); } catch (e) {} },
+    true
+  );
+
+  // Form-start: the moment a visitor types into a form field (before any
+  // submit) — shows abandonment (started but never submitted). Once per page.
+  var fstartSent = false;
+  document.addEventListener(
+    "focusin",
+    function (ev) {
+      try {
+        if (fstartSent) return;
+        var t = ev.target;
+        var tag = t && t.tagName ? String(t.tagName).toUpperCase() : "";
+        if (tag !== "INPUT" && tag !== "TEXTAREA" && tag !== "SELECT") return;
+        var ty = String(t.type || "").toLowerCase();
+        if (ty === "button" || ty === "submit" || ty === "checkbox" || ty === "radio" || ty === "file") return;
+        fstartSent = true;
+        send("/c", { id: id, k: "fstart" });
+      } catch (e) {}
+    },
     true
   );
 
@@ -269,6 +318,7 @@
       d: Date.now() - start,
       s: maxScroll,
       a: acted,
+      p: location.pathname.slice(0, 200),
     });
   }
   window.addEventListener("pagehide", end);
