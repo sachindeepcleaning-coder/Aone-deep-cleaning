@@ -1,5 +1,5 @@
 /**
- * click-guard first-party beacon (v5) — LOGS ONLY. Nothing is blocked.
+ * click-guard first-party beacon (v6) — LOGS ONLY. Nothing is blocked.
  *
  * Same behaviour as the GTM Custom HTML beacon, but served as a same-origin
  * file from the <head> of every page, so it:
@@ -10,6 +10,10 @@
  * Since v5 it also starts a visit when a visitor lands WITHOUT an ad click
  * (organic/direct/search), so the dashboard can show both categories. Bot
  * user agents are filtered server-side for those.
+ *
+ * Since v6 it also reports WHERE the visitor came from — only the referring
+ * site's domain (e.g. "google.com"), never the full referring URL, and never
+ * for same-site navigation. Empty means direct/bookmark/app.
  *
  * Consent hook (optional): when a consent banner is added later, set
  *   window.__cgvRequireConsent = true   (before this script runs)
@@ -152,6 +156,27 @@
     }
   }
 
+  // Reads the referring site's HOST only (e.g. "google.com"). The full
+  // referring URL — including any query string — never leaves the browser.
+  // Same-site navigation is treated as no referrer.
+  function refHost() {
+    var raw = "";
+    try {
+      raw = document.referrer || "";
+    } catch (e) {
+      return "";
+    }
+    if (!raw) return "";
+    try {
+      var u = new URL(raw);
+      var host = (u.hostname || "").toLowerCase().slice(0, 80);
+      if (!host || host === (location.hostname || "").toLowerCase()) return "";
+      return host;
+    } catch (e) {
+      return "";
+    }
+  }
+
   // ---- Visit start (/v) — landing page only. Pathname only; gclid value is
   // NEVER read or sent; the rest of the query string never leaves the browser.
   // g:1 marks an ad click; o:1 marks an organic/direct landing. ----
@@ -165,6 +190,7 @@
       tz: getTimezone(),
       kw: readParam("kw"),
       ca: parseInt(readParam("cmp"), 10) || 0,
+      r: refHost(),
     };
     if (hasGclid) payload.g = 1;
     else payload.o = 1;
