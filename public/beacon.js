@@ -1,5 +1,5 @@
 /**
- * click-guard first-party beacon (v9) — LOGS ONLY. Nothing is blocked.
+ * click-guard first-party beacon (v10) — LOGS ONLY. Nothing is blocked.
  *
  * Same behaviour as the GTM Custom HTML beacon, but served as a same-origin
  * file from the <head> of every page, so it:
@@ -52,6 +52,7 @@
 
   /* ============ EASY VARIABLE: change this if the Worker URL changes ============ */
   var WORKER_URL = "https://visit-log.sachindeepcleaning.workers.dev";
+  var BEACON_VERSION = 10;
 
   var KEY = "cgv";                 /* sessionStorage key, tab-scoped only */
   var TTL = 6 * 60 * 60 * 1000;    /* follow the visitor for 6 hours       */
@@ -67,6 +68,7 @@
 
   function send(path, obj) {
     try {
+      obj.bv = BEACON_VERSION;
       var ok = navigator.sendBeacon(
         WORKER_URL + path,
         new Blob([JSON.stringify(obj)], { type: "text/plain" })
