@@ -166,6 +166,7 @@ ${preload}  ${p.file === 'thank-you' ? tyGuard + '\n  ' + gtm : gtm}
   <link rel="preload" as="font" type="font/woff2" crossorigin href="${p.file.includes('/') ? '..' : '.'}/fonts/poppins-700.woff2" />
   <link rel="stylesheet" href="/src/styles/global.css" />
   <script src="/tracking.js" defer></script>
+<script src="/beacon.js" defer></script>
 </head>
 <body>
   ${gtmNoscript}

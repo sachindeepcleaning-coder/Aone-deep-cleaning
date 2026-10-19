@@ -37,11 +37,13 @@ const input = Object.fromEntries(
 );
 
 export default defineConfig({
-  // Relative base so built asset URLs (./assets/...) resolve correctly whether
-  // the site is served from a GitHub Pages subpath (/Balaji-Deep-Cleaning/),
-  // a custom domain, or locally. Without this, absolute /assets/ paths 404 on
-  // the subpath and React never loads → blank screen.
-  base: './',
+  // Absolute base so built asset URLs (/assets/...) resolve at ANY path depth.
+  // The site serves from the custom-domain root (aonedeepcleaning.shop, CNAME
+  // in public/). This matters for GitHub Pages 404 handling: unknown paths at
+  // any depth (e.g. /blog/whatever.html) serve the root 404.html — with a
+  // relative base (./assets/...) the browser resolved those against the nested
+  // path and the 404 page rendered unstyled.
+  base: '/',
   plugins: [react()],
   build: {
     outDir: 'dist',
