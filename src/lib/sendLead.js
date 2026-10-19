@@ -12,6 +12,21 @@ const ENDPOINT = 'https://api.web3forms.com/submit';
 const TIMEOUT_MS = 10000;
 const GATEWAY_TIMEOUT_MS = 6000;
 
+// Ad attribution injected by beacon.js as hidden inputs at submit time
+// (cg_gclid, cg_utm_*, cg_landing_page). Read here so every form gets it
+// without per-form changes. Marketing tags only — never visitor data.
+const ATTR_INPUTS = ['cg_gclid', 'cg_utm_source', 'cg_utm_medium', 'cg_utm_campaign', 'cg_utm_term', 'cg_utm_content', 'cg_landing_page'];
+function collectAttribution() {
+  const out = {};
+  try {
+    document.querySelectorAll('input[data-cg-added]').forEach((el) => {
+      const n = String(el.name || '');
+      if (ATTR_INPUTS.includes(n) && !out[n] && el.value) out[n] = String(el.value);
+    });
+  } catch (_) { /* never break a lead */ }
+  return out;
+}
+
 export async function sendLead({ name, phone, source = 'Website', page, fields } = {}) {
   const resolvedPage = page || (typeof window !== 'undefined' ? window.location.href : '');
   // Gateway "message": fold every extra fields entry (the Worker only
@@ -36,6 +51,11 @@ export async function sendLead({ name, phone, source = 'Website', page, fields }
       extraLines.push(`${toLabel(k)}: ${val}`);
     }
   }
+  const attr = collectAttribution();
+  if (attr.cg_gclid) extraLines.push(`Ad click ID: ${attr.cg_gclid}`);
+  const utmLine = ['cg_utm_source', 'cg_utm_medium', 'cg_utm_campaign'].map((k) => attr[k]).filter(Boolean).join(' / ');
+  if (utmLine) extraLines.push(`Campaign: ${utmLine}`);
+  if (attr.cg_landing_page) extraLines.push(`Landing page: ${attr.cg_landing_page}`);
   const userMessage = fields && typeof fields.message === 'string' ? clean(fields.message) : '';
   if (userMessage) extraLines.push(userMessage);
   const gatewayMessage = extraLines.join('\n').slice(0, GATEWAY_MESSAGE_LIMIT).trim();
@@ -57,6 +77,13 @@ export async function sendLead({ name, phone, source = 'Website', page, fields }
           source,
           page: resolvedPage,
           ...(gatewayMessage ? { message: gatewayMessage } : {}),
+          ...(attr.cg_gclid ? { gclid: attr.cg_gclid } : {}),
+          ...(attr.cg_utm_source ? { utmSource: attr.cg_utm_source } : {}),
+          ...(attr.cg_utm_medium ? { utmMedium: attr.cg_utm_medium } : {}),
+          ...(attr.cg_utm_campaign ? { utmCampaign: attr.cg_utm_campaign } : {}),
+          ...(attr.cg_utm_term ? { utmTerm: attr.cg_utm_term } : {}),
+          ...(attr.cg_utm_content ? { utmContent: attr.cg_utm_content } : {}),
+          ...(attr.cg_landing_page ? { landingPage: attr.cg_landing_page } : {}),
           botcheck: '',
         }),
         ...(gwCtrl ? { signal: gwCtrl.signal } : {}),
@@ -89,6 +116,9 @@ export async function sendLead({ name, phone, source = 'Website', page, fields }
         source,
         page: page || (typeof window !== 'undefined' ? window.location.href : ''),
         botcheck: '', // honeypot — must stay empty; free plan has no domain restriction
+        ...(attr.cg_gclid ? { 'Ad Click ID': attr.cg_gclid } : {}),
+        ...(utmLine ? { Campaign: utmLine } : {}),
+        ...(attr.cg_landing_page ? { 'Landing Page': attr.cg_landing_page } : {}),
         ...(fields || {}),
       }),
       ...(ctrl ? { signal: ctrl.signal } : {}),

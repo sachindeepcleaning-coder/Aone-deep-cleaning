@@ -1,5 +1,5 @@
 /**
- * click-guard first-party beacon (v8) — LOGS ONLY. Nothing is blocked.
+ * click-guard first-party beacon (v9) — LOGS ONLY. Nothing is blocked.
  *
  * Same behaviour as the GTM Custom HTML beacon, but served as a same-origin
  * file from the <head> of every page, so it:
@@ -21,15 +21,25 @@
  * utm_source tags (campaign data) and — for booked-lead matching with Google
  * Ads offline conversions — the gclid click token on ad landings.
  *
+ * Since v9 it also records:
+ *   - full campaign attribution: utm_medium/campaign/term/content plus
+ *     adgroupid / creative / matchtype / network / placement,
+ *   - per-page engagement: visible time + max scroll for every page in the walk,
+ *   - which CTA/button was clicked and the host of outbound links,
+ *   - how many distinct form fields were focused (abandonment depth; never values),
+ *   - SPA route changes (pushState / replaceState / popstate),
+ *   - hidden cg_gclid / cg_utm_* / cg_landing_page / cg_page inputs added to a
+ *     form at submit time so the lead platform can match the enquiry to the ad click.
+ *
  * Consent hook (optional): when a consent banner is added later, set
  *   window.__cgvRequireConsent = true   (before this script runs)
  * and set   window.__cgvConsent = true    (only after the visitor agrees).
  * With no banner on the site, nothing changes.
  *
  * Privacy model: no cookies, no localStorage; one sessionStorage
- * entry ("cgv") scoped to this tab; the read URL params are the two ValueTrack
- * params kw / cmp, utm_source, and (ad landings only) the gclid click token —
- * everything else in the URL is ignored and never sent.
+ * entry ("cgv") scoped to this tab; only marketing tags, page paths,
+ * on-page labels and timings are sent — never form field values,
+ * never full referring URLs, never outbound URLs (host only).
  *
  * Install: upload this file to each site's web root as /beacon.js and add to
  * every page's <head>:
@@ -88,9 +98,21 @@
       return st;
     } catch (e) { return null; }
   }
-  function writeState(id, n) {
+  function writeState(id, n, extra) {
     try {
-      sessionStorage.setItem(KEY, JSON.stringify({ id: id, exp: Date.now() + TTL, n: n || 1 }));
+      var cur = {};
+      try { cur = JSON.parse(sessionStorage.getItem(KEY) || "{}") || {}; } catch (e) {}
+      var st = { id: id, exp: Date.now() + TTL, n: n || 1 };
+      var k;
+      for (k in cur) {
+        if (k !== "id" && k !== "exp" && k !== "n") st[k] = cur[k];
+      }
+      if (extra) {
+        for (k in extra) {
+          if (extra[k] !== "" && extra[k] !== null && extra[k] !== undefined) st[k] = extra[k];
+        }
+      }
+      sessionStorage.setItem(KEY, JSON.stringify(st));
     } catch (e) {}
   }
 
@@ -110,47 +132,8 @@
     }
   }
 
-  // Landing (ad or organic): new visit id. Any other page in this tab: only
-  // keep following the visitor when this tab already has a visit (else stop).
-  var id = "";
-  var depth = 1;
-  var isLanding = false;
-  if (hasGclid) {
-    id = newId();
-    writeState(id, 1);
-    isLanding = true;
-  } else {
-    var st = readState();
-    if (st) {
-      id = st.id;
-      depth = (typeof st.n === "number" && st.n >= 1 ? st.n : 1) + 1;
-      writeState(id, depth);
-      // Depth ping: tells the worker how many pages this tab has now seen,
-      // plus this page's path (query string stripped) so the dashboard can
-      // show the walk in order. The worker keeps the highest/last value
-      // within the 6h window.
-      send("/c", { id: id, k: "depth", n: Math.min(depth, 50), p: location.pathname.slice(0, 200) });
-    } else {
-      // Organic: no ad click, but a fresh tab session — a new visit starts.
-      id = newId();
-      writeState(id, 1);
-      isLanding = true;
-    }
-  }
-
-  // Timezone in its own try/catch, so a failure here can never stop /v
-  // from being sent (it just records "" for tz).
-  function getTimezone() {
-    try {
-      return (Intl.DateTimeFormat().resolvedOptions().timeZone || "").slice(0, 100);
-    } catch (e) {
-      return "";
-    }
-  }
-
-  // Reads ONLY the two ValueTrack params the ads' final URL suffix appends:
-  // kw={keyword} and cmp={campaignid}. Everything else in the query string
-  // (including the gclid value) is never read.
+  // Reads ONLY known marketing parameters. Everything else in the query string
+  // (including the gclid value except the documented token) is never read.
   function readParam(name) {
     try {
       var m = new RegExp("[?&]" + name + "=([^&]*)").exec(window.location.search);
@@ -163,6 +146,21 @@
     } catch (e) {
       return "";
     }
+  }
+
+  function attrNow() {
+    return {
+      us: readParam("utm_source").slice(0, 60),
+      um: readParam("utm_medium").slice(0, 60),
+      uc: readParam("utm_campaign").slice(0, 120),
+      ut: readParam("utm_term").slice(0, 120),
+      un: readParam("utm_content").slice(0, 120),
+      ag: readParam("adgroupid").slice(0, 40),
+      cr: readParam("creative").slice(0, 40),
+      mt: readParam("matchtype").slice(0, 20),
+      nw: readParam("network").slice(0, 20),
+      pl: readParam("placement").slice(0, 120)
+    };
   }
 
   // Reads the referring site's HOST only (e.g. "google.com"). The full
@@ -186,13 +184,63 @@
     }
   }
 
-  // ---- Visit start (/v) — landing page only. Pathname only; gclid value is
-  // NEVER read or sent; the rest of the query string never leaves the browser.
-  // g:1 marks an ad click; o:1 marks an organic/direct landing. ----
+  var gclid = hasGclid ? readParam("gclid").slice(0, 64) : "";
+  var landingPath = location.pathname.slice(0, 200);
+  var attr = attrNow();
+
+  // Landing (ad or organic): new visit id. Any other page in this tab: only
+  // keep following the visitor when this tab already has a visit (else stop).
+  var id = "";
+  var depth = 1;
+  var isLanding = false;
+  var state = null;
+  if (hasGclid) {
+    id = newId();
+    writeState(id, 1, {
+      gl: gclid, us: attr.us, um: attr.um, uc: attr.uc, ut: attr.ut,
+      un: attr.un, ag: attr.ag, cr: attr.cr, mt: attr.mt, nw: attr.nw,
+      pl: attr.pl, lp: landingPath
+    });
+    isLanding = true;
+  } else {
+    state = readState();
+    if (state) {
+      id = state.id;
+      depth = (typeof state.n === "number" && state.n >= 1 ? state.n : 1) + 1;
+      writeState(id, depth);
+      // Depth ping: tells the worker how many pages this tab has now seen,
+      // plus this page's path (query string stripped) so the dashboard can
+      // show the walk in order. The worker keeps the highest/last value
+      // within the 6h window.
+      send("/c", { id: id, k: "depth", n: Math.min(depth, 50), p: landingPath });
+    } else {
+      // Organic: no ad click, but a fresh tab session — a new visit starts.
+      id = newId();
+      writeState(id, 1, {
+        us: attr.us, um: attr.um, uc: attr.uc, ut: attr.ut,
+        un: attr.un, ag: attr.ag, cr: attr.cr, mt: attr.mt, nw: attr.nw,
+        pl: attr.pl, lp: landingPath
+      });
+      isLanding = true;
+    }
+  }
+
+  // Timezone in its own try/catch, so a failure here can never stop /v
+  // from being sent (it just records "" for tz).
+  function getTimezone() {
+    try {
+      return (Intl.DateTimeFormat().resolvedOptions().timeZone || "").slice(0, 100);
+    } catch (e) {
+      return "";
+    }
+  }
+
+  // ---- Visit start (/v) — landing page only. Pathname only. Marketing tags
+  // are campaign data; no form values, PII or full URLs leave the browser. ----
   if (isLanding) {
     var payload = {
       id: id,
-      p: location.pathname.slice(0, 200),
+      p: landingPath,
       sw: screen.width || 0,
       sh: screen.height || 0,
       lang: (navigator.language || "").slice(0, 35),
@@ -200,12 +248,59 @@
       kw: readParam("kw"),
       ca: parseInt(readParam("cmp"), 10) || 0,
       r: refHost(),
-      us: readParam("utm_source").slice(0, 60),
-      gl: hasGclid ? readParam("gclid").slice(0, 64) : "",
+      us: attr.us,
+      um: attr.um,
+      uc: attr.uc,
+      ut: attr.ut,
+      un: attr.un,
+      ag: attr.ag,
+      cr: attr.cr,
+      mt: attr.mt,
+      nw: attr.nw,
+      pl: attr.pl,
+      gl: gclid,
     };
     if (hasGclid) payload.g = 1;
     else payload.o = 1;
     send("/v", payload);
+  }
+
+  // ---- Page view state (every page): visible time, max scroll, form depth. ----
+  var pageStart = Date.now();
+  var maxScroll = 0;
+  var fieldKeys = {};
+  var fieldCount = 0;
+  var fstartSent = false;
+  var pageSent = false;
+  var ctaSent = {};
+
+  function onScroll() {
+    try {
+      var h = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight
+      );
+      var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+      var top = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var pct = h > vh ? Math.round(((top + vh) / h) * 100) : 100;
+      if (pct > maxScroll) maxScroll = Math.min(100, Math.max(0, pct));
+    } catch (e) {}
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  function trackField(t) {
+    try {
+      var tag = t && t.tagName ? String(t.tagName).toUpperCase() : "";
+      if (tag !== "INPUT" && tag !== "TEXTAREA" && tag !== "SELECT") return;
+      var ty = String(t.type || "").toLowerCase();
+      if (ty === "button" || ty === "submit" || ty === "checkbox" || ty === "radio" || ty === "file") return;
+      var key = (t.name || t.id || t.getAttribute("autocomplete") || "") + "|" + tag + "|" + ty;
+      if (!fieldKeys[key]) {
+        fieldKeys[key] = 1;
+        fieldCount = Math.min(20, Object.keys(fieldKeys).length);
+      }
+    } catch (e) {}
   }
 
   // ---- Conversions (/c): call, WhatsApp, form, mail — sent the moment they
@@ -214,14 +309,46 @@
   function conv(k) {
     if (convSent[k]) return;
     convSent[k] = 1;
-    send("/c", { id: id, k: k });
+    send("/c", { id: id, k: k, ff: fieldCount });
   }
+
   var acted = 0;
+  // Which CTA/button was clicked (site-owned label) and the outbound host.
+  function ctaFor(el) {
+    var node = el && el.closest ? el.closest("[data-cg-label],a,button") : null;
+    if (!node) return null;
+    var label = node.getAttribute("data-cg-label");
+    if (!label) label = String(node.textContent || "").replace(/\s+/g, " ").trim();
+    if (!label) label = node.getAttribute("aria-label") || node.id || "";
+    label = String(label).slice(0, 80);
+    if (!label) return null;
+    var host = "";
+    try {
+      var href = node.href ? String(node.href) : "";
+      if (href) {
+        var u = new URL(href);
+        if ((u.protocol === "http:" || u.protocol === "https:") &&
+            u.hostname && u.hostname !== location.hostname) {
+          host = u.hostname.slice(0, 80);
+        }
+      }
+    } catch (e) {}
+    return { l: label, h: host };
+  }
+
   document.addEventListener(
     "click",
     function (ev) {
       try {
         var el = ev.target;
+        var c = ctaFor(el);
+        if (c) {
+          var ck = c.l + "|" + c.h;
+          if (!ctaSent[ck]) {
+            ctaSent[ck] = 1;
+            send("/c", { id: id, k: "cta", l: c.l, h: c.h, p: location.pathname.slice(0, 200) });
+          }
+        }
         while (el && el !== document.body) {
           if (el.href) {
             var href = String(el.href).toLowerCase();
@@ -241,7 +368,6 @@
               break;
             }
             if (href.indexOf("mailto:") === 0) {
-              acted = 1;
               conv("mail");
               break;
             }
@@ -268,19 +394,58 @@
     },
     true
   );
+
+  // Add attribution hidden fields to a form at submit time (capture phase runs
+  // before the site's handlers read FormData). Values are marketing tags and
+  // page paths only; the visitor's name/phone/message are never touched.
+  function injectFormAttribution(form) {
+    try {
+      if (!form || !form.appendChild) return;
+      var st = readState() || {};
+      var vals = {
+        cg_gclid: st.gl || gclid,
+        cg_utm_source: st.us || attr.us,
+        cg_utm_medium: st.um || attr.um,
+        cg_utm_campaign: st.uc || attr.uc,
+        cg_utm_term: st.ut || attr.ut,
+        cg_utm_content: st.un || attr.un,
+        cg_landing_page: st.lp || landingPath,
+        cg_page: location.pathname.slice(0, 200)
+      };
+      for (var name in vals) {
+        var v = vals[name];
+        if (!v) continue;
+        try {
+          if (form.querySelector('input[name="' + name + '"]')) continue;
+        } catch (e) {}
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = name;
+        input.value = String(v).slice(0, 200);
+        input.setAttribute("data-cg-added", "1");
+        form.appendChild(input);
+      }
+    } catch (e) {}
+  }
+
   document.addEventListener(
     "submit",
-    function () { try { conv("form"); } catch (e) {} },
+    function (ev) {
+      try {
+        injectFormAttribution(ev.target);
+        conv("form");
+      } catch (e) {}
+    },
     true
   );
 
   // Form-start: the moment a visitor types into a form field (before any
   // submit) — shows abandonment (started but never submitted). Once per page.
-  var fstartSent = false;
   document.addEventListener(
     "focusin",
     function (ev) {
       try {
+        trackField(ev.target);
         if (fstartSent) return;
         var t = ev.target;
         var tag = t && t.tagName ? String(t.tagName).toUpperCase() : "";
@@ -288,49 +453,83 @@
         var ty = String(t.type || "").toLowerCase();
         if (ty === "button" || ty === "submit" || ty === "checkbox" || ty === "radio" || ty === "file") return;
         fstartSent = true;
-        send("/c", { id: id, k: "fstart" });
+        send("/c", { id: id, k: "fstart", ff: fieldCount });
       } catch (e) {}
     },
     true
   );
 
-  // Follower pages (no new visit): conversions + depth only — no dwell/scroll bookkeeping.
-  if (!isLanding) return;
-
-  // ---- Max scroll (0-100) ----
-  var maxScroll = 0;
-  function onScroll() {
-    try {
-      var h = Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight
-      );
-      var vh = window.innerHeight || document.documentElement.clientHeight || 0;
-      var top = window.pageYOffset || document.documentElement.scrollTop || 0;
-      var pct = h > vh ? Math.round(((top + vh) / h) * 100) : 100;
-      if (pct > maxScroll) maxScroll = Math.min(100, Math.max(0, pct));
-    } catch (e) {}
+  // ---- Page end: engagement for every page (walk + per-page time/scroll). ----
+  function endPage() {
+    if (pageSent) return;
+    pageSent = true;
+    try { onScroll(); } catch (e) {}
+    send("/c", {
+      id: id,
+      k: "page",
+      p: location.pathname.slice(0, 200),
+      d: Date.now() - pageStart,
+      s: maxScroll,
+      ff: fieldCount
+    });
   }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
 
-  // ---- Visit end (/e): once, on pagehide or tab hidden ----
-  var start = Date.now();
-  var sent = false;
-  function end() {
-    if (sent) return;
-    sent = true;
+  // ---- Visit end (/e): landing page only, once. ----
+  var ended = false;
+  function endVisit() {
+    if (ended || !isLanding) return;
+    ended = true;
     try { onScroll(); } catch (e) {}
     send("/e", {
       id: id,
-      d: Date.now() - start,
+      d: Date.now() - pageStart,
       s: maxScroll,
       a: acted,
       p: location.pathname.slice(0, 200),
+      ff: fieldCount
     });
   }
-  window.addEventListener("pagehide", end);
+
+  function onHide() {
+    endPage();
+    endVisit();
+  }
+  window.addEventListener("pagehide", onHide);
   document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "hidden") end();
+    if (document.visibilityState === "hidden") onHide();
   });
+
+  // ---- SPA route changes: count the new view, send its depth/page ping, and
+  // reset per-view timers. Works with pushState, replaceState and back/forward. ----
+  function routeChange() {
+    try {
+      if (!id) return;
+      endPage();
+      pageStart = Date.now();
+      maxScroll = 0;
+      pageSent = false;
+      fieldKeys = {};
+      fieldCount = 0;
+      fstartSent = false;
+      ctaSent = {};
+      depth = Math.min(50, (depth || 1) + 1);
+      writeState(id, depth);
+      send("/c", { id: id, k: "depth", n: depth, p: location.pathname.slice(0, 200), ff: 0 });
+    } catch (e) {}
+  }
+  try {
+    var pushState = history.pushState;
+    var replaceState = history.replaceState;
+    history.pushState = function () {
+      var r = pushState.apply(this, arguments);
+      setTimeout(routeChange, 0);
+      return r;
+    };
+    history.replaceState = function () {
+      var r = replaceState.apply(this, arguments);
+      setTimeout(routeChange, 0);
+      return r;
+    };
+  } catch (e) {}
+  window.addEventListener("popstate", routeChange);
 })();
