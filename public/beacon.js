@@ -1,5 +1,5 @@
 /**
- * click-guard first-party beacon (v7) — LOGS ONLY. Nothing is blocked.
+ * click-guard first-party beacon (v8) — LOGS ONLY. Nothing is blocked.
  *
  * Same behaviour as the GTM Custom HTML beacon, but served as a same-origin
  * file from the <head> of every page, so it:
@@ -208,8 +208,8 @@
     send("/v", payload);
   }
 
-  // ---- Conversions (/c): call, WhatsApp, form — sent the moment they happen,
-  // on any page of this tab, and attributed to the tab's visit (ad or organic). ----
+  // ---- Conversions (/c): call, WhatsApp, form, mail — sent the moment they
+  // happen, on any page of this tab, attributed to the tab's visit. ----
   var convSent = {};
   function conv(k) {
     if (convSent[k]) return;
@@ -224,13 +224,18 @@
         var el = ev.target;
         while (el && el !== document.body) {
           if (el.href) {
-            var href = String(el.href);
+            var href = String(el.href).toLowerCase();
             if (href.indexOf("tel:") === 0) {
               acted = 1;
               conv("call");
               break;
             }
-            if (href.indexOf("https://wa.me/") === 0 || href.indexOf("https://api.whatsapp.com/") === 0) {
+            if (
+              href.indexOf("wa.me/") !== -1 ||
+              href.indexOf("api.whatsapp.com/") !== -1 ||
+              href.indexOf("web.whatsapp.com/") !== -1 ||
+              href.indexOf("whatsapp://") === 0
+            ) {
               acted = 1;
               conv("wa");
               break;
@@ -244,12 +249,15 @@
               href.indexOf("maps.google.") !== -1 ||
               (href.indexOf("google.") !== -1 && href.indexOf("/maps") !== -1) ||
               href.indexOf("maps.app.goo.gl") !== -1 ||
-              href.indexOf("goo.gl/maps") !== -1
+              href.indexOf("goo.gl/maps") !== -1 ||
+              href.indexOf("apple.com/maps") !== -1 ||
+              href.indexOf("bing.com/maps") !== -1 ||
+              href.indexOf("openstreetmap.org") !== -1
             ) {
               conv("map");
               break;
             }
-            if (href.indexOf("instagram.com/") !== -1) {
+            if (href.indexOf("instagram.com/") !== -1 || href.indexOf("instagr.am/") !== -1) {
               conv("ig");
               break;
             }
