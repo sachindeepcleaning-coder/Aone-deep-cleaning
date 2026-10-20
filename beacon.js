@@ -1,5 +1,5 @@
 /**
- * click-guard first-party beacon (v9) — LOGS ONLY. Nothing is blocked.
+ * click-guard first-party beacon (v11) — LOGS ONLY. Nothing is blocked.
  *
  * Same behaviour as the GTM Custom HTML beacon, but served as a same-origin
  * file from the <head> of every page, so it:
@@ -31,6 +31,14 @@
  *   - hidden cg_gclid / cg_utm_* / cg_landing_page / cg_page inputs added to a
  *     form at submit time so the lead platform can match the enquiry to the ad click.
  *
+ * Since v10 it also reports its own version on every request so the dashboard
+ * can warn when a site serves a stale beacon.
+ *
+ * Since v11 conversions are sent twice (sendBeacon + one delayed fetch retry
+ * while the page stays visible) so a lost beacon can no longer lose a lead;
+ * hot leads (converted or form-started tabs) ping every 45s to stay alive
+ * server-side; bfcache restores resume the same visit instead of going quiet.
+ *
  * Consent hook (optional): when a consent banner is added later, set
  *   window.__cgvRequireConsent = true   (before this script runs)
  * and set   window.__cgvConsent = true    (only after the visitor agrees).
@@ -52,9 +60,11 @@
 
   /* ============ EASY VARIABLE: change this if the Worker URL changes ============ */
   var WORKER_URL = "https://visit-log.sachindeepcleaning.workers.dev";
+  var BEACON_VERSION = 11;
 
   var KEY = "cgv";                 /* sessionStorage key, tab-scoped only */
   var TTL = 6 * 60 * 60 * 1000;    /* follow the visitor for 6 hours       */
+  var HEARTBEAT_MS = 45 * 1000;    /* liveness ping interval for hot leads */
 
   // Automation guard: agent-driven browsers ("webdriver") are never logged.
   try { if (navigator.webdriver === true) return; } catch (e) { /* never break the page */ }
@@ -67,6 +77,7 @@
 
   function send(path, obj) {
     try {
+      obj.bv = BEACON_VERSION;
       var ok = navigator.sendBeacon(
         WORKER_URL + path,
         new Blob([JSON.stringify(obj)], { type: "text/plain" })
@@ -83,6 +94,29 @@
         }).catch(function () {});
       }
     } catch (e) { /* never break the page */ }
+  }
+
+  // Reliable conversion delivery: sendBeacon has no ack, so conversions
+  // (call/wa/form/mail) get one delayed fetch retry while the page is still
+  // visible. Non-conversion pings stay fire-and-forget to protect quotas.
+  function sendConversion(obj) {
+    send("/c", obj);
+    try {
+      setTimeout(function () {
+        try {
+          if (document.visibilityState !== "visible") return;
+          obj.bv = BEACON_VERSION;
+          fetch(WORKER_URL + "/c", {
+            method: "POST",
+            body: JSON.stringify(obj),
+            headers: { "Content-Type": "text/plain" },
+            keepalive: true,
+            mode: "cors",
+            credentials: "omit",
+          }).catch(function () {});
+        } catch (e) {}
+      }, 1500);
+    } catch (e) {}
   }
 
   function readState() {
@@ -306,11 +340,17 @@
   // ---- Conversions (/c): call, WhatsApp, form, mail — sent the moment they
   // happen, on any page of this tab, attributed to the tab's visit. ----
   var convSent = {};
+  var hotLead = false;
   function conv(k) {
     if (convSent[k]) return;
     convSent[k] = 1;
-    send("/c", { id: id, k: k, ff: fieldCount });
+    hotLead = true;
+    sendConversion({ id: id, k: k, ff: fieldCount });
   }
+
+  // Hot-lead heartbeat: once the tab converted or started a form, ping every
+  // 45s so the worker knows the visitor is still there (prevents the dead-
+  // browser sweep from emailing while they read). Stops on pagehide.
 
   var acted = 0;
   // Which CTA/button was clicked (site-owned label) and the outbound host.
@@ -453,6 +493,7 @@
         var ty = String(t.type || "").toLowerCase();
         if (ty === "button" || ty === "submit" || ty === "checkbox" || ty === "radio" || ty === "file") return;
         fstartSent = true;
+        hotLead = true;
         send("/c", { id: id, k: "fstart", ff: fieldCount });
       } catch (e) {}
     },
@@ -493,10 +534,40 @@
   function onHide() {
     endPage();
     endVisit();
+    try { hotLead = false; } catch (e) {}
   }
   window.addEventListener("pagehide", onHide);
   document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") onHide();
+  });
+
+  // Heartbeat loop: fires only for hot leads (converted or form-started).
+  // Cheap (one tiny ping per 45s) and keeps the visit alive server-side.
+  try {
+    setInterval(function () {
+      try {
+        if (!hotLead) return;
+        if (!id) return;
+        if (document.visibilityState !== "visible") return;
+        send("/c", { id: id, k: "ping" });
+      } catch (e) {}
+    }, HEARTBEAT_MS);
+  } catch (e) {}
+
+  // bfcache restore (back/forward): the page was frozen, not closed — endPage
+  // already fired, so reset per-view timers and continue the same visit.
+  window.addEventListener("pageshow", function (ev) {
+    try {
+      if (ev && ev.persisted) {
+        pageStart = Date.now();
+        maxScroll = 0;
+        pageSent = false;
+        fieldKeys = {};
+        fieldCount = 0;
+        fstartSent = false;
+        ctaSent = {};
+      }
+    } catch (e) {}
   });
 
   // ---- SPA route changes: count the new view, send its depth/page ping, and
