@@ -1,5 +1,5 @@
 /**
- * click-guard first-party beacon (v11) — LOGS ONLY. Nothing is blocked.
+ * click-guard first-party beacon (v12) — LOGS ONLY. Nothing is blocked.
  *
  * Same behaviour as the GTM Custom HTML beacon, but served as a same-origin
  * file from the <head> of every page, so it:
@@ -39,6 +39,12 @@
  * hot leads (converted or form-started tabs) ping every 45s to stay alive
  * server-side; bfcache restores resume the same visit instead of going quiet.
  *
+ * Since v12 it tells the server when the SITE refused the form: a submit
+ * whose validation fails moves the focus back to the invalid field, and that
+ * focusin means no lead was created on the site. The worker then undoes the
+ * conversion (no email, no CRM lead) and the visitor's corrected re-submit
+ * is still recorded.
+ *
  * Consent hook (optional): when a consent banner is added later, set
  *   window.__cgvRequireConsent = true   (before this script runs)
  * and set   window.__cgvConsent = true    (only after the visitor agrees).
@@ -60,7 +66,7 @@
 
   /* ============ EASY VARIABLE: change this if the Worker URL changes ============ */
   var WORKER_URL = "https://visit-log.sachindeepcleaning.workers.dev";
-  var BEACON_VERSION = 11;
+  var BEACON_VERSION = 12;
 
   var KEY = "cgv";                 /* sessionStorage key, tab-scoped only */
   var TTL = 6 * 60 * 60 * 1000;    /* follow the visitor for 6 hours       */
@@ -105,6 +111,9 @@
       setTimeout(function () {
         try {
           if (document.visibilityState !== "visible") return;
+          // v12: the site refused this submit — the retry must not resurrect
+          // the conversion that the rejection is undoing.
+          if (obj.k === "form" && formRejected) return;
           obj.bv = BEACON_VERSION;
           fetch(WORKER_URL + "/c", {
             method: "POST",
@@ -341,10 +350,19 @@
   // happen, on any page of this tab, attributed to the tab's visit. ----
   var convSent = {};
   var hotLead = false;
+  // v12 — rejected submit detection. A site validates the form on the submit
+  // event; when it refuses the input it moves the focus back to the invalid
+  // field. A focusin that lands inside the form just submitted therefore
+  // means the submit was REJECTED: the site created no lead, so click-guard
+  // must undo the conversion it recorded (the worker does that on "formrej").
+  var lastSubmitForm = null;
+  var lastSubmitAt = 0;
+  var formRejected = false;
   function conv(k) {
     if (convSent[k]) return;
     convSent[k] = 1;
     hotLead = true;
+    if (k === "form") formRejected = false;
     sendConversion({ id: id, k: k, ff: fieldCount });
   }
 
@@ -473,6 +491,13 @@
     function (ev) {
       try {
         injectFormAttribution(ev.target);
+        // v12: remember the form so the focusin handler can tell a rejected
+        // submit from a good one.
+        try {
+          lastSubmitForm =
+            ev.target && ev.target.tagName === "FORM" ? ev.target : null;
+          lastSubmitAt = Date.now();
+        } catch (e) {}
         conv("form");
       } catch (e) {}
     },
@@ -486,6 +511,26 @@
     function (ev) {
       try {
         trackField(ev.target);
+        // v12 — the site refused the submit: it moved the focus back into
+        // the form it just rejected, so NO lead exists. Tell the worker to
+        // undo the conversion, and re-arm the form latch so the visitor's
+        // corrected re-submit is still recorded.
+        if (lastSubmitForm && Date.now() - lastSubmitAt <= 2000) {
+          var rejected = false;
+          try {
+            rejected = !!(
+              ev.target &&
+              lastSubmitForm.contains &&
+              lastSubmitForm.contains(ev.target)
+            );
+          } catch (e) {}
+          if (rejected) {
+            lastSubmitForm = null;
+            convSent.form = 0;
+            formRejected = true;
+            send("/c", { id: id, k: "formrej" });
+          }
+        }
         if (fstartSent) return;
         var t = ev.target;
         var tag = t && t.tagName ? String(t.tagName).toUpperCase() : "";
