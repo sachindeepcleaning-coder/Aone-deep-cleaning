@@ -1,4 +1,5 @@
 import { WEB3FORMS_KEY, GATEWAY_URL, SITE_KEY } from './site.js';
+import { normalizePhone } from './phone.js';
 
 // Shared lead sender for all Aone forms (gateway-first, Web3Forms fallback).
 // Returns true ONLY on confirmed delivery
@@ -29,6 +30,11 @@ function collectAttribution() {
 
 export async function sendLead({ name, phone, source = 'Website', page, fields } = {}) {
   const resolvedPage = page || (typeof window !== 'undefined' ? window.location.href : '');
+  // Canonicalise the number HERE as well, so no lead can ever leave this
+  // function with a raw "+91 98739-15215" / "09873915215" value: the gateway
+  // validates /^[6-9][0-9]{9}$/, the Sheet stores the number the owner reads
+  // back, and both must get the same 10 digits.
+  const leadPhone = normalizePhone(phone);
   // Gateway "message": fold every extra fields entry (the Worker only
   // accepts site/name/phone/source/page/message/botcheck, so service, date,
   // etc. would otherwise be dropped) into "Label: value" lines, then append
@@ -73,7 +79,7 @@ export async function sendLead({ name, phone, source = 'Website', page, fields }
         body: JSON.stringify({
           site: SITE_KEY,
           name: name || '',
-          phone: phone || '',
+          phone: leadPhone,
           source,
           page: resolvedPage,
           ...(gatewayMessage ? { message: gatewayMessage } : {}),
@@ -101,6 +107,12 @@ export async function sendLead({ name, phone, source = 'Website', page, fields }
 
   // ---- 2. Fallback: existing Web3Forms call, unchanged. ----
   // Reached ONLY when the gateway did not confirm delivery.
+  // The payload spreads `fields` LAST, so a `phone` (or `access_key`) key
+  // inside it would silently override the normalised number / the API key —
+  // strip both before spreading.
+  const extraFields = { ...(fields || {}) };
+  delete extraFields.phone;
+  delete extraFields.access_key;
   const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
   const timer = ctrl ? setTimeout(() => ctrl.abort(), TIMEOUT_MS) : null;
   try {
@@ -112,14 +124,14 @@ export async function sendLead({ name, phone, source = 'Website', page, fields }
         subject: 'New lead - Aone Deep Cleaning',
         from_name: 'Aone Website',
         name: name || '',
-        phone: phone || '',
+        phone: leadPhone,
         source,
         page: page || (typeof window !== 'undefined' ? window.location.href : ''),
         botcheck: '', // honeypot — must stay empty; free plan has no domain restriction
         ...(attr.cg_gclid ? { 'Ad Click ID': attr.cg_gclid } : {}),
         ...(utmLine ? { Campaign: utmLine } : {}),
         ...(attr.cg_landing_page ? { 'Landing Page': attr.cg_landing_page } : {}),
-        ...(fields || {}),
+        ...extraFields,
       }),
       ...(ctrl ? { signal: ctrl.signal } : {}),
     });

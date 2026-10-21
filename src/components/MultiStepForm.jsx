@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { PHONE, waMsg } from '../lib/site.js';
 import { sendLead } from '../lib/sendLead.js';
 import { track, whatsappClick } from '../lib/landing.js';
+import { normalizePhone, isValidPhone } from '../lib/phone.js';
+import { focusField, notifyRejected } from '../lib/form-reject.js';
 
 const STEPS = [{ title: 'Your Details' }, { title: 'Service' }, { title: 'Schedule' }];
 const STORAGE_KEY = 'sdc_lead';
@@ -12,6 +14,8 @@ export default function MultiStepForm() {
   const [data, setData] = useState({ name: '', phone: '', service: '', date: '', message: '' });
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
+  const nameRef = useRef(null);
+  const phoneRef = useRef(null);
 
   useEffect(() => {
     try {
@@ -30,13 +34,40 @@ export default function MultiStepForm() {
   const next = () => setStep((s) => Math.min(s + 1, STEPS.length - 1));
   const prev = () => setStep((s) => Math.max(s - 1, 0));
 
+  // The name/phone fields live on step 0 and are unmounted while the visitor
+  // is on the last step, so a refused submit has to walk them back to step 0
+  // before the focus can be moved into the field. That focus jump is the
+  // signal click-guard's beacon (v12) reads to see that the SITE refused the
+  // submit, so the conversion is undone instead of faking a lead.
+  const backToDetails = (field) => {
+    setStep(0);
+    setTimeout(() => {
+      focusField(field === 'phone' ? phoneRef.current : nameRef.current);
+    }, 0);
+  };
+
   const submit = async (e) => {
     e.preventDefault();
-    setStatus('sending');
     setError('');
+    const n = String(data.name || '').trim();
+    // Normalise ONCE, at submit — never while typing.
+    const p = normalizePhone(data.phone);
+    if (n.length < 2) {
+      setError('❌ Please enter your full name.');
+      notifyRejected();
+      backToDetails('name');
+      return;
+    }
+    if (!isValidPhone(p)) {
+      setError('❌ Enter a valid 10-digit mobile number (it starts with 6-9).');
+      notifyRejected();
+      backToDetails('phone');
+      return;
+    }
+    setStatus('sending');
     const ok = await sendLead({
-      name: data.name,
-      phone: data.phone,
+      name: n,
+      phone: p,
       source: 'Multi-Step Form',
       fields: { service: data.service, date: data.date, message: data.message },
     });
@@ -48,6 +79,10 @@ export default function MultiStepForm() {
     }
     setStatus('idle');
     setError(`❌ Couldn't send your request. Please call ${PHONE} or`);
+    // The send failed, so no lead exists on the site either — click-guard
+    // must not count this as a conversion.
+    notifyRejected();
+    backToDetails('phone');
   };
 
   return (
@@ -64,14 +99,24 @@ export default function MultiStepForm() {
       {step === 0 && (
         <>
           <label>Your Name *</label>
-          <input value={data.name} onChange={(e) => set('name', e.target.value)} required />
+          <input value={data.name} onChange={(e) => set('name', e.target.value)} required ref={nameRef} />
           <label>Phone *</label>
+          {/* No `pattern`: the old one ("[0-9+ ]{8,15}") made the BROWSER
+              refuse a hyphenated number ("98739-15215") or a "+91 98739 15215"
+              outright, so the visitor could not submit at all and the lead was
+              lost. Every format is accepted here and normalised at submit.
+              The maxLength counts CHARACTERS, so it must stay wide enough
+              for "+91 98739-15215" — a tighter cap would cut a valid number
+              into a different, valid-looking one. */}
           <input
             type="tel"
             value={data.phone}
             onChange={(e) => set('phone', e.target.value)}
-            pattern="[0-9+ ]{8,15}"
+            inputMode="numeric"
+            maxLength="20"
+            autoComplete="tel"
             required
+            ref={phoneRef}
           />
         </>
       )}

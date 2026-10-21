@@ -6,7 +6,7 @@ import FaqSection from '../components/FaqSection.jsx';
 import FinalCta from '../components/FinalCta.jsx';
 import ReviewsSection from '../components/ReviewsSection.jsx';
 import { JsonLd, localBusinessSchema, serviceSchema, faqSchema, breadcrumbSchema } from '../lib/schema.jsx';
-import { SITE_URL, PHONE, pageUrl, waMsg, AREAS } from '../lib/site.js';
+import { SITE_URL, PHONE, pageUrl, waMsg, AREAS, asset } from '../lib/site.js';
 import { CHECKLIST, WHY_US, REVIEWS } from '../lib/landing.js';
 import { phoneCallClick, whatsappClick } from '../lib/landing.js';
 
