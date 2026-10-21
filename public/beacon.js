@@ -1,5 +1,5 @@
 /**
- * click-guard first-party beacon (v12) — LOGS ONLY. Nothing is blocked.
+ * click-guard first-party beacon (v13) — LOGS ONLY. Nothing is blocked.
  *
  * Same behaviour as the GTM Custom HTML beacon, but served as a same-origin
  * file from the <head> of every page, so it:
@@ -45,6 +45,12 @@
  * conversion (no email, no CRM lead) and the visitor's corrected re-submit
  * is still recorded.
  *
+ * Since v13 the SITE can say so directly: a site whose own form code knows
+ * the submit never became a lead (its gateway call failed, Firestore
+ * rejected it) calls window.cgFormRejected() and click-guard undoes the
+ * conversion. The focus-jump heuristic above stays the fallback for sites
+ * that never call the hook.
+ *
  * Consent hook (optional): when a consent banner is added later, set
  *   window.__cgvRequireConsent = true   (before this script runs)
  * and set   window.__cgvConsent = true    (only after the visitor agrees).
@@ -66,7 +72,7 @@
 
   /* ============ EASY VARIABLE: change this if the Worker URL changes ============ */
   var WORKER_URL = "https://visit-log.sachindeepcleaning.workers.dev";
-  var BEACON_VERSION = 12;
+  var BEACON_VERSION = 13;
 
   var KEY = "cgv";                 /* sessionStorage key, tab-scoped only */
   var TTL = 6 * 60 * 60 * 1000;    /* follow the visitor for 6 hours       */
@@ -544,6 +550,39 @@
     },
     true
   );
+
+  // v13 — the SITE itself says the submit never became a lead. The focusin
+  // heuristic above only catches a VALIDATION refusal (the site moves the
+  // focus back into the form it just rejected). A site whose own request to
+  // the lead gateway / Firestore comes back with an error learns about it
+  // seconds later, long after the focus jump, so such a site calls
+  // window.cgFormRejected() and click-guard undoes the conversion the same
+  // way. This is the DIRECT channel; the focus jump stays the fallback for
+  // every site that never calls the hook.
+  // Safe by construction: with no pending submit, before any form
+  // conversion, or twice for the same refusal, it does nothing at all.
+  function reportFormRejected() {
+    try {
+      // A submit is pending (the site just sent one) AND a form conversion
+      // was recorded for it — only then is there something to undo.
+      if (!lastSubmitForm) return;
+      if (!convSent.form) return;
+      // Exactly like the focusin path above, so the two never report the
+      // same refusal twice (the worker clears the conversion, and a late
+      // second report could wipe a good, later conversion).
+      lastSubmitForm = null;  // the focusin heuristic must not report it too
+      convSent.form = 0;      // re-arm: the corrected re-submit is recorded
+      formRejected = true;    // the delayed retry must not resurrect it
+      send("/c", { id: id, k: "formrej" });
+    } catch (e) { /* never break the site */ }
+  }
+  try {
+    // The site-facing hook. Both names are the same function: the site code
+    // may prefer the plain one, the __cgv_ prefix matches the other
+    // click-guard globals.
+    window.cgFormRejected = reportFormRejected;
+    window.__cgvFormRejected = reportFormRejected;
+  } catch (e) {}
 
   // ---- Page end: engagement for every page (walk + per-page time/scroll). ----
   function endPage() {
