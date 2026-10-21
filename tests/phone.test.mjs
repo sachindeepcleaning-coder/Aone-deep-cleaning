@@ -136,3 +136,40 @@ test('sendLead canonicalises the number it sends', () => {
     'a raw phone inside `fields` must not override the normalised one'
   );
 });
+
+// ---- The one canonical normalisation matrix (shared by all three .shop
+// sites) ---------------------------------------------------------------
+// A known prefix is stripped ONLY when exactly 10 digits remain. Anything
+// we do not recognise is left untouched, so it fails validation loudly
+// instead of silently becoming a different — valid, wrong — number.
+
+test('every known prefix resolves to the same canonical 10 digits', () => {
+  const expected = '9873915215';
+  for (const input of [
+    '9873915215',
+    '09873915215',
+    '919873915215',
+    '+91 98739-15215',
+    '98739 15215',
+    '091 98739 15215',
+    '9109873915215',
+    '0091 98739 15215',
+    '00919873915215',
+  ]) {
+    assert.equal(normalizePhone(input), expected, `normalizePhone(${JSON.stringify(input)})`);
+    assert.equal(isValidPhone(input), true, `isValidPhone(${JSON.stringify(input)})`);
+  }
+});
+
+test('an unrecognised number is left untouched, never reshaped', () => {
+  for (const input of ['9198765432109', '9876543210987', '919873915215432', '12345', '98739152155']) {
+    assert.equal(normalizePhone(input), input, `normalizePhone(${JSON.stringify(input)})`);
+    assert.equal(isValidPhone(input), false, `isValidPhone(${JSON.stringify(input)})`);
+  }
+});
+
+test('normalisation is idempotent', () => {
+  assert.equal(normalizePhone(normalizePhone('00919873915215')), '9873915215');
+  assert.equal(normalizePhone(normalizePhone('9198765432109')), '9198765432109');
+  assert.equal(normalizePhone(normalizePhone('09873915215')), '9873915215');
+});
