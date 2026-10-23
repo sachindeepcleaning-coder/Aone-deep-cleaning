@@ -6,15 +6,14 @@
 # never commit built artefacts to main. This script enforces that contract.
 #
 # Usage:  ./scripts/sync-gh-pages.sh
-# Effect: runs `gen` -> `build` -> clones the remote gh-pages fresh into a scratch
-#         dir -> copies dist/ over -> commits and force-pushes to the real remote.
+# Effect: runs `gen` -> `build` -> chains a single deploy commit onto the current
+#         gh-pages tip (no clone) and pushes it. Git dedupes unchanged files, so
+#         only what changed is uploaded (~MBs), not the 170 MB site.
 #         Always run from the repo root on the main branch.
 
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SCRATCH="/tmp/opencode/ghp"
-REMOTE="https://github.com/sachindeepcleaning-coder/Aone-deep-cleaning.git"
 
 cd "$REPO_ROOT"
 
@@ -46,36 +45,49 @@ npm run gen
 echo "==> npm run build"
 npm run build
 
-# 5. Clone the REMOTE gh-pages branch fresh into a scratch dir.
-echo "==> cloning remote gh-pages into $SCRATCH"
-rm -rf "$SCRATCH"
-git clone -b gh-pages --single-branch "$REMOTE" "$SCRATCH" >/dev/null
+# 5. Fetch the CURRENT gh-pages ref (commits+trees only — no blobs). We only
+#    need its tip hash to chain our deploy commit onto it; downloading the
+#    ~170 MB of deployed videos/blobs is pure waste on every deploy.
+echo "==> fetching gh-pages ref (blob:none)"
+git fetch origin gh-pages --filter=blob:none >/dev/null
 
-# 6. Wipe and replace with fresh dist/ (preserve .git — the old
-# `rm -rf ./* ./.??*` glob matched ./.git and broke the scratch clone).
-cd "$SCRATCH"
-find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
-touch .nojekyll
-cp -r "$REPO_ROOT/dist/." .
+# 6. Assemble the new gh-pages tree WITHOUT a clone. The fresh dist/ is copied
+#    into a scratch worktree, hashed into THIS repo's object store, and turned
+#    into a commit whose parent is the current gh-pages tip.
+#
+#    Because the parent commit already contains the unchanged video/image
+#    blobs, `git push` uploads ONLY the files that actually changed (~MBs),
+#    not the 170 MB site. The previous approach cloned the branch fresh on
+#    every deploy — after 26 snapshot commits that clone (and its bandwidth)
+#    grew until deploys stalled entirely.
+echo "==> assembling deploy commit"
+SCRATCH_WORK="/tmp/opencode/ghp-work"
+rm -rf "$SCRATCH_WORK" /tmp/opencode/ghp-index
+mkdir -p "$SCRATCH_WORK"
+cp -r "$REPO_ROOT/dist/." "$SCRATCH_WORK/"
+touch "$SCRATCH_WORK/.nojekyll"
 
-# 7. Restore deploy-only files that vite does NOT emit.
-git checkout origin/gh-pages -- .nojekyll
-
-# 8. Commit + force-push to the real remote.
+export GIT_DIR="$REPO_ROOT/.git"
+export GIT_WORK_TREE="$SCRATCH_WORK"
+export GIT_INDEX_FILE=/tmp/opencode/ghp-index
+git read-tree --empty
 git add -A
-git config user.name "${GIT_USER_NAME:-vegeta}"
-git config user.email "${GIT_USER_EMAIL:-vegeta@localhost}"
-if git diff --cached --quiet; then
-  echo "==> no changes to deploy (build identical to current gh-pages). skipping push."
-  exit 0
-fi
-git commit -m "Deploy fresh build: $(git -C "$REPO_ROOT" log -1 --pretty=%s origin/main)"
+DEPLOY_TREE="$(git write-tree)"
+DEPLOY_PARENT="$(git rev-parse refs/remotes/origin/gh-pages)"
+DEPLOY_MSG="Deploy fresh build: $(git log -1 --pretty=%s origin/main)"
+DEPLOY_COMMIT="$(git commit-tree "$DEPLOY_TREE" -p "$DEPLOY_PARENT" -m "$DEPLOY_MSG")"
+unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE
+rm -rf "$SCRATCH_WORK" /tmp/opencode/ghp-index
 
+# 7. Push the single new commit. Force is NOT needed (we're fast-forwarding
+#    from the current gh-pages tip), but keep it for the edge case where the
+#    remote moved between fetch and push — a force makes the deploy idempotent.
 echo "==> pushing to origin/gh-pages"
-git push --force origin gh-pages
+git push --force origin "$DEPLOY_COMMIT:refs/heads/gh-pages"
 
 echo
 echo "==> DONE. New gh-pages HEAD:"
-git log -1 --pretty="%h %ci  %s" origin/gh-pages
+git rev-parse refs/remotes/origin/gh-pages
+git ls-remote origin gh-pages
 echo
 echo "Verify live: curl -sI https://aonedeepcleaning.shop/ | grep -i last-modified"
