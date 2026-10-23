@@ -9,12 +9,12 @@
 :root,
 [data-theme='light'],
 [data-theme='dark'] {
-  --primary: #006df9;          /* old-Aone royal blue */
+  --primary: #0057cc;          /* AA royal blue: 6.0:1 on #f4f7fb, 6.5:1 on white */
   --primary-dark: #0057c9;
   --primary-darker: #06278a;
   --primary-soft: #e3efff;
   --accent: #ffb400;           /* old-Aone amber */
-  --accent-dark: #c78d00;
+  --accent-dark: #8a6200;              /* AA on white (5.5:1) — was 2.9:1 */
   --accent-soft: #fff6e0;
   --on-primary: #ffffff;
 
@@ -34,7 +34,7 @@
   --card-muted: #f6fafd;
   --dark: #1d2746;
   --text: #464646;
-  --muted: #757575;
+  --muted: #636363;              /* AA on #f4f7fb (5.6:1) */
   --border: #dcdcdc;
 
   --footer-bg: #1d2746;

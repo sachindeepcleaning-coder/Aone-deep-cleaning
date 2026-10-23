@@ -3,10 +3,10 @@
   "private": true,
   "version": "2.0.0",
   "type": "module",
-  "description": "Aone Deep Cleaning — production-grade marketing site (Vite + React MPA)",
+  "description": "Aone Deep Cleaning \u2014 production-grade marketing site (Vite + React MPA)",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/content-lint.mjs && node scripts/gen-sitemap.mjs && vite build && node scripts/prerender.mjs",
+    "build": "node scripts/content-lint.mjs && node scripts/gen-sitemap.mjs && vite build && node scripts/prerender.mjs && node scripts/minify-public-js.mjs && node scripts/inline-css.mjs",
     "preview": "vite preview",
     "gen": "node scripts/gen-entries.mjs",
     "test": "node --test \"tests/*.test.mjs\""

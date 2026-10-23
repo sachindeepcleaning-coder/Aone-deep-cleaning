@@ -63,7 +63,7 @@ export default function LocalReel({ file }) {
         <div className="sdc-reel-grid sdc-reel-single">
           <div className="sdc-reel-item">
             <span className="sdc-reel-kicker">Real Jobs · Gurgaon</span>
-            <div ref={wrapRef} className="sdc-reel" onClick={toggle} role="button" aria-label="Deep cleaning video — tap to pause">
+            <div ref={wrapRef} className="sdc-reel">
               <video
                 ref={videoRef}
                 src={visible ? CLIP : undefined}

@@ -43,19 +43,19 @@ export default function Footer({ file }) {
           </p>
         </div>
         <div className="footer-col">
-          <h4>Services</h4>
+          <h3>Services</h3>
           {SERVICE_LINKS.map(([label, href]) => (
             <a key={href} href={pageLink(file, href)}>{label}</a>
           ))}
         </div>
         <div className="footer-col">
-          <h4>BHK Packages</h4>
+          <h3>BHK Packages</h3>
           {BHK_LINKS.map(([label, href]) => (
             <a key={href} href={pageLink(file, href)}>{label}</a>
           ))}
         </div>
         <div className="footer-col">
-          <h4>Company</h4>
+          <h3>Company</h3>
           <a href={pageLink(file, '/about.html')}>About Us</a>
           <a href={pageLink(file, '/blog.html')}>Blog &amp; Guides</a>
           <a href={pageLink(file, '/blog/deep-cleaning-cost-gurgaon-2026.html')}>Deep Cleaning Cost Guide</a>

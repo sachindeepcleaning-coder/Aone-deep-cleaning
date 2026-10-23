@@ -37,13 +37,16 @@ const gtmNoscript = `<noscript><iframe src="https://www.googletagmanager.com/ns.
 // conversion; first visit only sets the flag and changes nothing.
 const tyGuard = `<script>try{window.dataLayer=window.dataLayer||[];if(window.sessionStorage&&sessionStorage.getItem('ty_seen')){window.dataLayer.push({thankyou_repeat:true});}else if(window.sessionStorage){sessionStorage.setItem('ty_seen','1');}}catch(_){}</script>`;
 
-const clarity = `<!-- Microsoft Clarity -->
+// Microsoft Clarity — deferred to first user interaction (same as GTM), so
+// the initial load carries no third-party requests or cookies. Session
+// recordings are masked so typed names/phone numbers never hit the heatmap.
+const clarity = `<!-- Microsoft Clarity (on-interaction: must not cost INP) -->
 <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "${CLARITY_ID}");
+window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
+window.clarity('set', 'mask', 'input, textarea, select');
+</script>
+<script type="text/javascript">
+(function(){function load(){if(window.__clarityLoaded)return;window.__clarityLoaded=true;(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "${CLARITY_ID}");}function arm(){var evs=['scroll','click','touchstart','keydown'];evs.forEach(function(e){window.addEventListener(e,load,{once:true,passive:true});});setTimeout(load,10000);}if(document.readyState==='complete'||document.readyState==='interactive'){arm();}else{window.addEventListener('DOMContentLoaded',arm,{once:true});}})();
 </script>
 <!-- End Microsoft Clarity -->`;
 
