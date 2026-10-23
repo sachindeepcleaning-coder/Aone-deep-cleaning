@@ -165,7 +165,17 @@ video { height: auto; }
 }
 
 /* ---------- Hero (template slider look, static) ---------- */
-.hero { position: relative; overflow: hidden; background-color: #000d26; }
+.hero {
+  position: relative; overflow: hidden; background-color: #000d26;
+  /* LCP image: 640w for phones, full 1188w above — absolute URLs so every
+     page shares one cached copy. The matching fetchpriority=high preload is
+     in the head (gen-entries). */
+  background-image: url('/images/aone-old/cleaning/about1-640w.webp');
+  background-size: cover; background-position: center;
+}
+@media (min-width: 641px) {
+  .hero { background-image: url('/images/aone-old/cleaning/about1.webp'); }
+}
 .hero::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(135deg, rgba(0,13,38,.78) 0%, rgba(0,13,38,.55) 60%, rgba(0,168,240,.35) 100%);

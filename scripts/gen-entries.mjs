@@ -109,7 +109,7 @@ for (const p of pages) {
   const noindex = p.noindex ? '  <meta name="robots" content="noindex, nofollow" />\n' : '';
   const ogType = p.page === 'article' ? 'article' : 'website';
   const preload = p.page === 'service' && p.serviceKey && HERO_IMAGES[p.serviceKey]
-    ? `  <link rel="preload" as="image" href="${HERO_IMAGES[p.serviceKey]}" fetchpriority="high" />\n`
+    ? `  <link rel="preload" as="image" href="${HERO_IMAGES[p.serviceKey]}" fetchpriority="high" />`
     : '';
   // Page-specific OG image + alt + TRUE dimensions (2026-09-20 seo-images
   // audit: tags claimed 1200x630 for files as small as 390px — emit measured).
@@ -167,7 +167,8 @@ ${noindex}  <meta name="geo.region" content="IN-HR" />
   <meta name="twitter:title" content="${p.title}" />
   <meta name="twitter:description" content="${p.description}" />
   <meta name="twitter:image" content="${ogImage}" />
-${preload}  ${p.file === 'thank-you' ? tyGuard + '\n  ' + gtm : gtm}
+  <link rel="preload" as="image" imagesrcset="/images/aone-old/cleaning/about1-640w.webp 640w, /images/aone-old/cleaning/about1.webp 1188w" imagesizes="100vw" fetchpriority="high" />
+  ${preload}  ${p.file === 'thank-you' ? tyGuard + '\n  ' + gtm : gtm}
   ${clarity}
   <link rel="preload" as="font" type="font/woff2" crossorigin href="${p.file.includes('/') ? '..' : '.'}/fonts/poppins-400.woff2" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="${p.file.includes('/') ? '..' : '.'}/fonts/poppins-700.woff2" />

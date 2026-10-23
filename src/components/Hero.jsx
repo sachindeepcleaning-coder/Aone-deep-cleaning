@@ -1,5 +1,5 @@
 import QuoteForm from './QuoteForm.jsx';
-import { PHONE_TEL, asset } from '../lib/site.js';
+import { PHONE_TEL } from '../lib/site.js';
 import { phoneCallClick } from '../lib/landing.js';
 
 const PILLS = [
@@ -19,7 +19,7 @@ const STATS = [
 
 export default function Hero({ file }) {
   return (
-    <section className="hero" style={{ backgroundImage: `url("${asset(file, '/images/aone-old/cleaning/about1.jpg')}")` }}>
+    <section className="hero">
       <div className="hero-inner">
         <div className="hero-left">
           <div className="hero-eyebrow">
