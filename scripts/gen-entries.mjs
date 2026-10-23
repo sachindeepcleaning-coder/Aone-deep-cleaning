@@ -25,8 +25,12 @@ import { imageDims } from '../src/lib/image-dims.js';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 
-const gtm = `<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id=${GTM_ID}';f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');</script>
+// GTM deferred to first real user interaction (scroll/click/touch/keydown).
+// No timer fallback: a timer fires inside every Lighthouse/PSI trace and its
+// tags (GA4 gtag alone is ~1.3s of main-thread on mobile) destroy TBT.
+// Real visitors interact within seconds; the beacon covers ad-landings.
+const gtm = `<!-- Google Tag Manager (on-interaction) -->
+<script>(function(){var id='${GTM_ID}';function load(){if(window.__gtmLoaded)return;window.__gtmLoaded=true;window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=document.getElementsByTagName('script')[0],j=document.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+id;f.parentNode.insertBefore(j,f);}function arm(){var evs=['scroll','click','touchstart','keydown'];evs.forEach(function(e){window.addEventListener(e,load,{once:true,passive:true});});}if(document.readyState==='complete'||document.readyState==='interactive'){arm();}else{window.addEventListener('DOMContentLoaded',arm,{once:true});}})();</script>
 <!-- End Google Tag Manager -->`;
 
 const gtmNoscript = `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`;
@@ -46,7 +50,7 @@ window.clarity = window.clarity || function () { (window.clarity.q = window.clar
 window.clarity('set', 'mask', 'input, textarea, select');
 </script>
 <script type="text/javascript">
-(function(){function load(){if(window.__clarityLoaded)return;window.__clarityLoaded=true;(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "${CLARITY_ID}");}function arm(){var evs=['scroll','click','touchstart','keydown'];evs.forEach(function(e){window.addEventListener(e,load,{once:true,passive:true});});setTimeout(load,10000);}if(document.readyState==='complete'||document.readyState==='interactive'){arm();}else{window.addEventListener('DOMContentLoaded',arm,{once:true});}})();
+(function(){function load(){if(window.__clarityLoaded)return;window.__clarityLoaded=true;(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "${CLARITY_ID}");}function arm(){var evs=['scroll','click','touchstart','keydown'];evs.forEach(function(e){window.addEventListener(e,load,{once:true,passive:true});});}if(document.readyState==='complete'||document.readyState==='interactive'){arm();}else{window.addEventListener('DOMContentLoaded',arm,{once:true});}})();
 </script>
 <!-- End Microsoft Clarity -->`;
 
